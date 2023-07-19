@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -32,6 +34,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
+
+    #[ORM\OneToMany(mappedBy: 'transmitter', targetEntity: Operation::class)]
+    private Collection $operations;
+
+    public function __construct()
+    {
+        $this->operations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -111,6 +121,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Operation>
+     */
+    public function getOperations(): Collection
+    {
+        return $this->operations;
+    }
+
+    public function addOperation(Operation $operation): static
+    {
+        if (!$this->operations->contains($operation)) {
+            $this->operations->add($operation);
+            $operation->setTransmitter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOperation(Operation $operation): static
+    {
+        if ($this->operations->removeElement($operation)) {
+            // set the owning side to null (unless already changed)
+            if ($operation->getTransmitter() === $this) {
+                $operation->setTransmitter(null);
+            }
+        }
 
         return $this;
     }
