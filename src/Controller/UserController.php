@@ -15,5 +15,19 @@ class UserController extends AbstractController{
             'last_username' => 'samuel',
         ]);
     }
+
+    #[Route('/', name: 'app_default')]
+    public function indexGeneral(): Response
+    {
+        return $this->render('home/index.html.twig');
+    }
+
+    #[Route('/profile', name: 'user_profile')]
+    public function profile(): Response
+    {
+        return $this->render('user/new.html.twig', [
+            'last_username' => 'samuel',
+        ]);
+    }
 }
 

@@ -57,6 +57,11 @@ RUN apk add --no-cache --virtual .pgsql-deps postgresql-dev; \
 	apk del .pgsql-deps
 ###< doctrine/doctrine-bundle ###
 ###< recipes ###
+RUN apk add \
+            --no-cache \
+            nodejs \
+    		npm \
+            yarn
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 COPY --link docker/php/conf.d/app.ini $PHP_INI_DIR/conf.d/
