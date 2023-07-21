@@ -1,13 +1,11 @@
-{# templates/login/new.html.twig #}
 {% extends 'base.html.twig' %}
 
-{# ... #}
+{% block title %}New Operation{% endblock %}
 
 {% block body %}
-    <h1>Adding a new product</h1>
+    <h1>Create new Operation</h1>
 
-    {{ form_start(form) }}
-    {{ form_row(form.file) }}
-    {{ form_end(form) }}
+    {{ include('operation/_form.html.twig') }}
+
+    <a href="{{ path('app_operation_index') }}">back to list</a>
 {% endblock %}
-

@@ -48,6 +48,38 @@ class Operation
     #[ORM\JoinColumn(nullable: false)]
     private ?User $transmitter = null;
 
+    /**
+     * @param string|null $symbol
+     * @param int|null $position
+     * @param string|null $type
+     * @param int|null $lots
+     * @param \DateTimeInterface|null $openTime
+     * @param float|null $openPrice
+     * @param \DateTimeInterface|null $closeTime
+     * @param float|null $closePrice
+     * @param int|null $profit
+     * @param int|null $netProfit
+     * @param User|null $transmitter
+     */
+    public function __construct(?string $symbol, ?int $position,
+                                ?string $type, ?int $lots,
+                                ?\DateTimeInterface $openTime, ?float $openPrice,
+                                ?\DateTimeInterface $closeTime, ?float $closePrice,
+                                ?int $profit, ?int $netProfit, ?User $transmitter)
+    {
+        $this->symbol = $symbol;
+        $this->position = $position;
+        $this->type = $type;
+        $this->lots = $lots;
+        $this->openTime = $openTime;
+        $this->openPrice = $openPrice;
+        $this->closeTime = $closeTime;
+        $this->closePrice = $closePrice;
+        $this->profit = $profit;
+        $this->netProfit = $netProfit;
+        $this->transmitter = $transmitter;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

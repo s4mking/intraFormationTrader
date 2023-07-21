@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Operation index{% endblock %}
+
+{% block body %}
+    <h1>Operation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Symbol</th>
+                <th>Position</th>
+                <th>Type</th>
+                <th>Lots</th>
+                <th>OpenTime</th>
+                <th>OpenPrice</th>
+                <th>CloseTime</th>
+                <th>ClosePrice</th>
+                <th>Profit</th>
+                <th>NetProfit</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for operation in operations %}
+            <tr>
+                <td>{{ operation.id }}</td>
+                <td>{{ operation.symbol }}</td>
+                <td>{{ operation.position }}</td>
+                <td>{{ operation.type }}</td>
+                <td>{{ operation.lots }}</td>
+                <td>{{ operation.openTime ? operation.openTime|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ operation.openPrice }}</td>
+                <td>{{ operation.closeTime ? operation.closeTime|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ operation.closePrice }}</td>
+                <td>{{ operation.profit }}</td>
+                <td>{{ operation.netProfit }}</td>
+                <td>
+                    <a href="{{ path('app_operation_show', {'id': operation.id}) }}">show</a>
+                    <a href="{{ path('app_operation_edit', {'id': operation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_operation_new') }}">Create new</a>
+{% endblock %}

@@ -11,7 +11,7 @@ class UserController extends AbstractController{
     #[Route('/home', name: 'app_home')]
     public function index(): Response
     {
-        return $this->render('user/new.html.twig', [
+        return $this->render('user/testSammmmmm.html.twig', [
             'last_username' => 'samuel',
         ]);
     }
@@ -25,7 +25,7 @@ class UserController extends AbstractController{
     #[Route('/profile', name: 'user_profile')]
     public function profile(): Response
     {
-        return $this->render('user/new.html.twig', [
+        return $this->render('user/testSammmmmm.html.twig', [
             'last_username' => 'samuel',
         ]);
     }

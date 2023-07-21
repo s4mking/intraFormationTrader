@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Operation{% endblock %}
+
+{% block body %}
+    <h1>Operation</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ operation.id }}</td>
+            </tr>
+            <tr>
+                <th>Symbol</th>
+                <td>{{ operation.symbol }}</td>
+            </tr>
+            <tr>
+                <th>Position</th>
+                <td>{{ operation.position }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ operation.type }}</td>
+            </tr>
+            <tr>
+                <th>Lots</th>
+                <td>{{ operation.lots }}</td>
+            </tr>
+            <tr>
+                <th>OpenTime</th>
+                <td>{{ operation.openTime ? operation.openTime|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>OpenPrice</th>
+                <td>{{ operation.openPrice }}</td>
+            </tr>
+            <tr>
+                <th>CloseTime</th>
+                <td>{{ operation.closeTime ? operation.closeTime|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>ClosePrice</th>
+                <td>{{ operation.closePrice }}</td>
+            </tr>
+            <tr>
+                <th>Profit</th>
+                <td>{{ operation.profit }}</td>
+            </tr>
+            <tr>
+                <th>NetProfit</th>
+                <td>{{ operation.netProfit }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_operation_index') }}">back to list</a>
+
+    <a href="{{ path('app_operation_edit', {'id': operation.id}) }}">edit</a>
+
+    {{ include('operation/_delete_form.html.twig') }}
+{% endblock %}
