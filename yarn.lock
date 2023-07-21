@@ -3781,7 +3781,7 @@ sass-loader@^13.3.2:
 
 sass@^1.64.0:
   version "1.64.0"
-  resolved "https://registry.npmjs.org/sass/-/sass-1.64.0.tgz"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.64.0.tgz#9ca8d0acb1a704b86b7f1197dc310f568fb34638"
   integrity sha512-m7YtAGmQta9uANIUJwXesAJMSncqH+3INc8kdVXs6eV6GUC8Qu2IYKQSN8PRLgiQfpca697G94klm2leYMxSHw==
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
