@@ -8,11 +8,13 @@ dependencies:
 
 runtime:
     extensions:
-        #- apcu
-        #- ctype
-        #- iconv
-        #- mbstring
+        - apcu
+        - ctype
+        - iconv
+        - mbstring
         - pdo_pgsql
+        - sodium
+        - xsl
 
 
 variables:
