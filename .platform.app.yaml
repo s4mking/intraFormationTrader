@@ -1,0 +1,27 @@
+name: app
+
+type: php:8.2
+
+build:
+    flavor: none
+
+# Static website usually don't require much ressources. See
+# https://symfony.com/doc/current/cloud/cookbooks/resources_allocation.html
+# for more information
+size: XS
+resources:
+    base_memory: 64
+    memory_ratio: 128
+
+web:
+    commands:
+        start: sleep
+    locations:
+        "/":
+            root: "public"
+            index:
+                - "index.html"
+            scripts: false
+            expires: 10m
+
+disk: 256
