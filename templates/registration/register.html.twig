@@ -1,6 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('login') }}
+{% endblock %}
+{% block title %}Inscription{% endblock %}
 
 {% block body %}
     {% for flash_error in app.flashes('verify_email_error') %}
@@ -8,14 +12,12 @@
     {% endfor %}
 
     {{ form_errors(registrationForm) }}
-    <h1 class="h3 mb-3 font-weight-normal">Register</h1>
-    {{ form_start(registrationForm) }}
+    <h1 class="h3 mb-3 font-weight-normal">Inscription</h1>
+    {{ form_start(registrationForm, {'attr': {'class': 'form-signin'}}) }}
     {{ form_row(registrationForm.email) }}
     {{ form_row(registrationForm.plainPassword, {
         label: 'Password'
     }) }}
-    {{ form_row(registrationForm.agreeTerms) }}
-
-    <button type="submit" class="btn">Register</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" >Inscription</button>
     {{ form_end(registrationForm) }}
 {% endblock %}
