@@ -2,28 +2,60 @@ name: app
 
 type: php:8.2
 
+dependencies:
+    php:
+        composer/composer: "^2"
+
+runtime:
+    extensions:
+        - apcu
+        - blackfire
+        - ctype
+        - iconv
+        - mbstring
+        - pdo_pgsql
+        - sodium
+        - xsl
+
+
+variables:
+    php:
+        opcache.preload: config/preload.php
 build:
     flavor: none
 
-# Static website usually don't require much ressources. See
-# https://symfony.com/doc/current/cloud/cookbooks/resources_allocation.html
-# for more information
-size: XS
-resources:
-    base_memory: 64
-    memory_ratio: 128
+disk: 1024
 
 web:
-    commands:
-        start: sleep
     locations:
         "/":
             root: "public"
-            index:
-                - "index.php"
-            scripts: false
-            expires: 10m
+            expires: 1h
+            passthru: "/index.php"
 
-disk: 256
+mounts:
+    "/var": { source: local, source_path: var }
 
 
+relationships:
+    database: "database:postgresql"
+
+hooks:
+    build: |
+        set -x -e
+
+        curl -fs https://get.symfony.com/cloud/configurator | bash
+        
+        NODE_VERSION=18 symfony-build
+
+    deploy: |
+        set -x -e
+
+        symfony-deploy
+
+crons:
+    security-check:
+        # Check that no security issues have been found for PHP packages deployed in production
+        # See https://github.com/fabpot/local-php-security-checker
+        spec: '50 23 * * *'
+        cmd: if [ "$PLATFORM_ENVIRONMENT_TYPE" = "production" ]; then croncape php-security-checker; fi
