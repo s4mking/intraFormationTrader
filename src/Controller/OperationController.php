@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Operation;
+use App\Form\OperationFormType;
 use App\Form\OperationType;
 use App\Repository\OperationRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,9 +28,7 @@ class OperationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var UploadedFile $brochureFile */
-            $importedFile = $form->get('file')->getData();
-            $users = $form->get('user')->getData();
+            $users = $form->get('utilisateur')->getData();
             $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
             $reader->setDelimiter(';');
             $spreadsheet = $reader->load($form->get('file')->getData());
@@ -53,7 +52,7 @@ class OperationController extends AbstractController
                         $dateTimeClose,
                         floatval($row[6]),
                         intval($row[8]),
-                        intval($row[9]),
+                        floatval($row[9]),
                         $user
                     );
                     $entityManager->persist($operation);
@@ -91,6 +90,41 @@ class OperationController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    #[Route('/addcredit', name: 'app_credit')]
+    public function addCredit(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(OperationFormType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $number = $form->get('number')->getData();
+            $users = $form->get('utilisateur')->getData();
+            foreach ($users as $user){
+                    $now = new DateTime();
+                    $operation = new Operation(
+                        '',
+                        0,
+                        'Credit',
+                        0,
+                        $now,
+                        0,
+                        $now,
+                        0,
+                        $number,
+                        0,
+                        $user
+                    );
+                    $entityManager->persist($operation);
+                    $entityManager->flush();
+                }
+            }
+
+        return $this->render('operation/new.html.twig', [
+            'form' => $form,
+        ]);
+    }
+
     #[Route('/{id}', name: 'app_operation_show', methods: ['GET'])]
     public function show(Operation $operation): Response
     {

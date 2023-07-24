@@ -18,7 +18,7 @@ class CSVFormType extends AbstractType
         $builder
             // ...
             ->add('file', FileType::class, [
-                'label' => 'File (CSV file)',
+                'label' => 'Fichier CSV',
 
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
@@ -38,17 +38,17 @@ class CSVFormType extends AbstractType
                             'application/x-pdf',
                             'text/plain'
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid CSV file',
+                        'mimeTypesMessage' => 'Veuillez transférer un fichier CSV',
                     ])
                 ],
             ])
-            ->add('user', EntityType::class, [
+            ->add('utilisateur', EntityType::class, [
                 'class' => User::class,
                 'choice_label' => 'email',
                 'multiple' => true,
                 'expanded' => true,
             ])
-            ->add('save', SubmitType::class, ['label' => 'Upload File'])
+            ->add('save', SubmitType::class, ['label' => 'Transfert du fichier'])
             // ...
         ;
     }

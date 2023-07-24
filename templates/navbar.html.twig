@@ -13,14 +13,13 @@
                     <a class="nav-link" href="{{ path('app_import_csv') }}">Import CSV</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_credit') }}">Ajouter credit</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ path('app_operation_index') }}">Operations</a>
                 </li>
                 <li class="nav-item">
-                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                    <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
-                </li>
-                <li class="nav-item">
-                    {% else %}
+                    {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                     <a class="nav-link" href="{{ path('app_login') }}">Se connecter</a>
                 </li>
                 <li class="nav-item">
@@ -28,6 +27,9 @@
                     {% endif %}
                 </li>
             </ul>
+                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                    {% endif %}
         </div>
     </div>
 </nav>

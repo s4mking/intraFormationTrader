@@ -13,14 +13,15 @@
     {% endif %}
 
     <form class="form-signin" action="{{ path('app_login') }}" method="post">
-        <h1 class="h3 mb-3 font-weight-normal">Log in</h1>
-        <label for="username" class="sr-only">Email address</label>
-        <input type="email" name="_username" id="username" class="form-control" placeholder="Email address" value="{{ last_username }}" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="_password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
+        <label for="username" class="sr-only">Adresse email</label>
+        <input type="email" name="_username" id="username" class="form-control" placeholder="Adresse email" value="{{ last_username }}" required autofocus>
+        <label for="inputPassword" class="sr-only">Mot de passe</label>
+        <input type="password" name="_password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit">
-            Sign in
+            Connexion
         </button>
+            <a class="nav-link" href="{{ path('app_forgot_password_request') }}">Oubli de mot de passe</a>
     </form>
 
 

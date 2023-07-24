@@ -23,6 +23,13 @@ security:
                 default_target_path: app_default
             logout:
                 path: app_logout
+    access_control:
+        - { path: ^/logout, roles: ROLE_USER }
+        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/operation, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/$, roles: IS_AUTHENTICATED_FULLY }
+            
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
