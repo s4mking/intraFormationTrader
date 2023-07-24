@@ -20,8 +20,10 @@ web:
         "/":
             root: "public"
             index:
-                - "index.html"
+                - "index.php"
             scripts: false
             expires: 10m
 
 disk: 256
+
+
