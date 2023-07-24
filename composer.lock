@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "873aaf000d5921c977dadb4da529b4f9",
+    "content-hash": "fd7cdf08402c5b3a6606166ccb99d150",
     "packages": [
         {
             "name": "doctrine/cache",
@@ -7803,6 +7803,38 @@
                 "source": "https://github.com/SymfonyCasts/verify-email-bundle/tree/v1.13.0"
             },
             "time": "2023-01-04T12:46:15+00:00"
+        },
+        {
+            "name": "symfonycorp/platformsh-meta",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfonycorp/platformsh-meta.git",
+                "reference": "3e8559c75ed759921015cc7ebf5952c306afcaf8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfonycorp/platformsh-meta/zipball/3e8559c75ed759921015cc7ebf5952c306afcaf8",
+                "reference": "3e8559c75ed759921015cc7ebf5952c306afcaf8",
+                "shasum": ""
+            },
+            "type": "metapackage",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A meta package for platformsh projects",
+            "support": {
+                "issues": "https://github.com/symfonycorp/platformsh-meta/issues",
+                "source": "https://github.com/symfonycorp/platformsh-meta/tree/v1.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfonycorp/connect",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-10-20T16:38:02+00:00"
         },
         {
             "name": "twig/extra-bundle",
