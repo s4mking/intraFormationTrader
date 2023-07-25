@@ -24,7 +24,7 @@ class Operation
     private ?string $type = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $lots = null;
+    private ?float $lots = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $openTime = null;
@@ -39,10 +39,10 @@ class Operation
     private ?float $closePrice = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $profit = null;
+    private ?float $profit = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $netProfit = null;
+    private ?float $netProfit = null;
 
     #[ORM\ManyToOne(inversedBy: 'operations')]
     #[ORM\JoinColumn(nullable: false)]
@@ -52,20 +52,20 @@ class Operation
      * @param string|null $symbol
      * @param int|null $position
      * @param string|null $type
-     * @param int|null $lots
+     * @param float|null $lots
      * @param \DateTimeInterface|null $openTime
      * @param float|null $openPrice
      * @param \DateTimeInterface|null $closeTime
      * @param float|null $closePrice
-     * @param int|null $profit
-     * @param int|null $netProfit
+     * @param float|null $profit
+     * @param float|null $netProfit
      * @param User|null $transmitter
      */
     public function __construct(?string $symbol, ?int $position,
-                                ?string $type, ?int $lots,
+                                ?string $type, ?float $lots,
                                 ?\DateTimeInterface $openTime, ?float $openPrice,
                                 ?\DateTimeInterface $closeTime, ?float $closePrice,
-                                ?int $profit, ?int $netProfit, ?User $transmitter)
+                                ?float $profit, ?float $netProfit, ?User $transmitter)
     {
         $this->symbol = $symbol;
         $this->position = $position;
@@ -121,12 +121,12 @@ class Operation
         return $this;
     }
 
-    public function getLots(): ?int
+    public function getLots(): ?float
     {
         return $this->lots;
     }
 
-    public function setLots(?int $lots): static
+    public function setLots(?float $lots): static
     {
         $this->lots = $lots;
 
@@ -181,24 +181,24 @@ class Operation
         return $this;
     }
 
-    public function getProfit(): ?int
+    public function getProfit(): ?float
     {
         return $this->profit;
     }
 
-    public function setProfit(?int $profit): static
+    public function setProfit(?float $profit): static
     {
         $this->profit = $profit;
 
         return $this;
     }
 
-    public function getNetProfit(): ?int
+    public function getNetProfit(): ?float
     {
         return $this->netProfit;
     }
 
-    public function setNetProfit(?int $netProfit): static
+    public function setNetProfit(?float $netProfit): static
     {
         $this->netProfit = $netProfit;
 

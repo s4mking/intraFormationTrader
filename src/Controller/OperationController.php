@@ -36,28 +36,33 @@ class OperationController extends AbstractController
             $rows = $worksheet->toArray();
 //            $user = $this->getUser();
             foreach ($users as $user){
+                $sum=0;
                 foreach ($rows as $row) {
                     if ($row[0] == 'Symbol') {
                         continue;
                     }
-                    $dateTimeOpen = DateTime::createFromFormat('d.m.Y', '18.07.2023');
-                    $dateTimeClose = DateTime::createFromFormat('d.m.Y', $row[7]);
+                    $dateTimeOpen = DateTime::createFromFormat('d.m.Y H:i:s', $row[4]);
+                    $dateTimeClose = DateTime::createFromFormat('d.m.Y H:i:s', $row[6]);
                     $operation = new Operation(
                         $row[0],
                         $row[1],
                         $row[2],
-                        $row[3],
+                        floatval($row[3]),
                         $dateTimeOpen,
                         floatval($row[5]),
                         $dateTimeClose,
-                        floatval($row[6]),
-                        intval($row[8]),
+                        floatval($row[7]),
+                        floatval($row[8]),
                         floatval($row[9]),
                         $user
                     );
+                    $sum+=floatval($row[8]);
                     $entityManager->persist($operation);
-                    $entityManager->flush();
                 }
+                $actualBalance = $user->getAccountBalance();
+                $user->setAccountBalance($actualBalance+ $sum);
+                $entityManager->persist($user);
+                $entityManager->flush();
             }
 
 
@@ -115,6 +120,9 @@ class OperationController extends AbstractController
                         0,
                         $user
                     );
+                    $actualBalance = $user->getAccountBalance();
+                    $user->setAccountBalance($actualBalance+ $number);
+                    $entityManager->persist($user);
                     $entityManager->persist($operation);
                     $entityManager->flush();
                 }

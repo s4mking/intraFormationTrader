@@ -24,7 +24,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $email = null;
 
     #[ORM\Column(nullable: 'true')]
-    private ?int $accountBalance = 0;
+    private ?float $accountBalance = 0;
 
     #[ORM\Column]
     private array $roles = [];
@@ -159,17 +159,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return int|null
+     * @return float|null
      */
-    public function getAccountBalance(): ?int
+    public function getAccountBalance(): ?float
     {
         return $this->accountBalance;
     }
 
     /**
-     * @param int|null $accountBalance
+     * @param float|null $accountBalance
      */
-    public function setAccountBalance(?int $accountBalance): void
+    public function setAccountBalance(?float $accountBalance): void
     {
         $this->accountBalance = $accountBalance;
     }

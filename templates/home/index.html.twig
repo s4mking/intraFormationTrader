@@ -13,10 +13,129 @@
         <main>
             <div class="py-5 text-center mt-5">
                 <h2>Dasshboard</h2>
-                <p class="lead">Résumé de vos opérations</p>
+            </div>
+            <div class="row">
+
+                <div class="col-xl-3 col-md-6">
+                    <!-- card -->
+                    <div class="card card-animate">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1 overflow-hidden">
+                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Profil</p>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <h5 class="text-success fs-14 mb-0">
+                                        <i class="ri-arrow-right-up-line fs-13 align-middle"></i> +29.08 %
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-end justify-content-between mt-4">
+                                <div>
+                                    <h6 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value"> {{ user.email }}</span></h6>
+                                    <a href="" class="text-decoration-underline">See details</a>
+                                </div>
+                                <div class="avatar-sm flex-shrink-0">
+                                                        <span class="avatar-title bg-warning-subtle rounded fs-3">
+                                                            <i class="bx bx-user-circle text-warning"></i>
+                                                        </span>
+                                </div>
+                            </div>
+                        </div><!-- end card body -->
+                    </div><!-- end card -->
+                </div><!-- end col -->
+                <div class="col-xl-3 col-md-6">
+                    <!-- card -->
+                    <div class="card card-animate">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1 overflow-hidden">
+                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Total Earnings</p>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <h5 class="text-success fs-14 mb-0">
+                                        <i class="ri-arrow-right-up-line fs-13 align-middle"></i> +16.24 %
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-end justify-content-between mt-4">
+                                <div>
+                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span class="counter-value" data-target="559.25">559.25</span>k </h4>
+                                    <a href="" class="text-decoration-underline">View net earnings</a>
+                                </div>
+                                <div class="avatar-sm flex-shrink-0">
+                                                        <span class="avatar-title bg-success-subtle rounded fs-3">
+                                                            <i class="bx bx-dollar-circle text-success"></i>
+                                                        </span>
+                                </div>
+                            </div>
+                        </div><!-- end card body -->
+                    </div><!-- end card -->
+                </div><!-- end col -->
+
+                <div class="col-xl-3 col-md-6">
+                    <!-- card -->
+                    <div class="card card-animate">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1 overflow-hidden">
+                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Operations</p>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <h5 class="text-danger fs-14 mb-0">
+                                        <i class="ri-arrow-right-down-line fs-13 align-middle"></i> -3.57 %
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-end justify-content-between mt-4">
+                                <div>
+                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="36894">36,894</span></h4>
+                                    <a href="" class="text-decoration-underline">View all orders</a>
+                                </div>
+                                <div class="avatar-sm flex-shrink-0">
+                                                        <span class="avatar-title bg-info-subtle rounded fs-3">
+                                                            <i class="bx bx-shopping-bag text-info"></i>
+                                                        </span>
+                                </div>
+                            </div>
+                        </div><!-- end card body -->
+                    </div><!-- end card -->
+                </div><!-- end col -->
+
+
+
+                <div class="col-xl-3 col-md-6">
+                    <!-- card -->
+                    <div class="card card-animate">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1 overflow-hidden">
+                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Mon compte</p>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <h5 class="text-muted fs-14 mb-0">
+                                        +0.00 %
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-end justify-content-between mt-4">
+                                <div>
+                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span class="counter-value" data-target="165.89">{{ user.accountBalance}}</span> </h4>
+                                    <a href="" class="text-decoration-underline">Lien</a>
+                                </div>
+                                <div class="avatar-sm flex-shrink-0">
+                                                        <span class="avatar-title bg-primary-subtle rounded fs-3">
+                                                            <i class="bx bx-wallet text-primary"></i>
+                                                        </span>
+                                </div>
+                            </div>
+                        </div><!-- end card body -->
+                    </div><!-- end card -->
+                </div><!-- end col -->
             </div>
 
-            <div class="row g-3">
+
+            <div class="row g-4 mt-3">
                 <div class="col-md-5 col-lg-4 order-md-last">
                         <div class="h-50">
                             <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
@@ -42,15 +161,13 @@
 
                 </div>
                 <div class="col-md-9 col-lg-8">
-                    <div>
-                        <p>{{ user.email }}</p>
-                    </div>
+                    <div class="info-box card bg-aqua">
+
                     <table class="table table-hover">
                         <thead>
                         <tr class="table-active">
                             <th >Id</th>
                             <th>Symbol</th>
-                            <th>Position</th>
                             <th>Type</th>
                             <th>Lots</th>
                             <th>OpenTime</th>
@@ -83,7 +200,6 @@
 {#                            {% else%}#}
                             <td>{{ operation.symbol }}</td>
 {#                            {% endif %}#}
-                                <td>{{ operation.position }}</td>
                                 <td>{{ operation.type }}</td>
                                 <td>{{ operation.lots }}</td>
                                 <td>{{ operation.openTime ? operation.openTime|date('Y-m-d H:i:s') : '' }}</td>
@@ -101,6 +217,7 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
             </div>
         </main>
 

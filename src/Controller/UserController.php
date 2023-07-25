@@ -22,7 +22,7 @@ class UserController extends AbstractController{
     public function indexGeneral(OperationRepository $operationRepository): Response
     {
         $user = $this->getUser();
-        $operations = $operationRepository->findBy(['transmitter' => $user]);
+        $operations = $operationRepository->findBy(['transmitter' => $user],['closeTime' => 'DESC']);
         return $this->render('home/index.html.twig',
             [
                 'operations' => $operations,
