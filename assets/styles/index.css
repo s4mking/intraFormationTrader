@@ -1,0 +1,5 @@
+.container table tr td{
+    text-align: center;
+    vertical-align: middle;
+    border-collapse: collapse;
+}

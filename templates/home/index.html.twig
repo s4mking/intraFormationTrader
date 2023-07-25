@@ -13,7 +13,7 @@
         <main>
             <div class="py-5 text-center mt-5">
                 <h2>Dasshboard</h2>
-                <p class="lead">Votre dasshboard</p>
+                <p class="lead">Résumé de vos opérations</p>
             </div>
 
             <div class="row g-3">
@@ -41,12 +41,14 @@
                         </div>
 
                 </div>
-                <div class="col-md-7 col-lg-8">
-                    <h4 class="mb-3">Operations</h4>
-                    <table class="table">
+                <div class="col-md-9 col-lg-8">
+                    <div>
+                        <p>{{ user.email }}</p>
+                    </div>
+                    <table class="table table-hover">
                         <thead>
-                        <tr>
-                            <th>Id</th>
+                        <tr class="table-active">
+                            <th >Id</th>
                             <th>Symbol</th>
                             <th>Position</th>
                             <th>Type</th>
@@ -61,9 +63,26 @@
                         </thead>
                         <tbody>
                         {% for operation in operations %}
-                            <tr>
+                            {% if operation.type == 'Sell' %}
+                                <tr class="table-info">
+                            {% elseif operation.type == 'Buy' %}
+                                <tr class="table-warning">
+                            {% elseif operation.type == 'Credit' %}
+                                <tr class="table-success">
+                            {% endif %}
                                 <td>{{ operation.id }}</td>
-                                <td>{{ operation.symbol }}</td>
+
+{#                            {% if operation.symbol == 'USDJPY' %}#}
+{#                                <td><i class="fa-solid fa-dollar-sign"></i></td>#}
+{#                            {% elseif operation.symbol == 'EURUSD' %}#}
+{#                                <td><i class="fa-solid fa-euro-sign"></i></td>#}
+{#                            {% elseif operation.symbol == 'RIPPLE' %}#}
+{#                                <td><i class="fa-solid fa-ruble-sign"></i></td>#}
+{#                            {% elseif operation.symbol == 'GBPJPY' %}#}
+{#                                <td><i class="fa-solid fa-yen-sign"></i></td>#}
+{#                            {% else%}#}
+                            <td>{{ operation.symbol }}</td>
+{#                            {% endif %}#}
                                 <td>{{ operation.position }}</td>
                                 <td>{{ operation.type }}</td>
                                 <td>{{ operation.lots }}</td>

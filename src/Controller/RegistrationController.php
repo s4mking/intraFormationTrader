@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Form\RequestVerifyUserEmailFormType;
+use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -83,8 +85,36 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/verify/resend', name:'app_verify_resend_email')]
-    public function resendVerifyEmail(): Response
+    public function resendVerifyEmail(Request $request, UserRepository $userRepository): Response
     {
-        return $this->render('registration/resend_verify_email.html.twig');
+        if ($this->getUser()) {
+            return $this->redirectToRoute('app_home');
+        }
+
+        $form = $this->createForm(RequestVerifyUserEmailFormType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // generate a signed url and email it to the user
+            $user =  $userRepository->findOneByEmail($form->get('email')->getData());
+            if ($user) {
+                $this->emailVerifier->sendEmailConfirmation(
+                    'app_verify_email',
+                    $user,
+                    (new TemplatedEmail())
+                        ->from(new Address('email@example.com', 'Sender'))
+                        ->to($user->getEmail())
+                        ->subject('Validation Link')
+                        ->htmlTemplate('registration/confirmation_email.html.twig')
+                );
+                // do anything else you need here, like flash message
+                $this->addFlash('success', 'blabla.');
+                return $this->redirectToRoute('app_default');
+            } else {
+                $this->addFlash('error',  'Email inconnu.');
+            }
+        }
+        return $this->render('registration/request.html.twig', [
+            'requestForm' => $form->createView(),
+        ]);
     }
 }

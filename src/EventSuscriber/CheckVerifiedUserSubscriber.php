@@ -37,8 +37,9 @@ class CheckVerifiedUserSubscriber implements EventSubscriberInterface
         if (!$event->getException() instanceof AccountNotVerifiedAuthenticationException) {
             return;
         }
+        $extraParams['email'] = $_POST['_username'];
         $response = new RedirectResponse(
-            $this->router->generate('app_verify_resend_email')
+            $this->router->generate('app_verify_resend_email', $extraParams)
         );
 
         $event->setResponse($response);

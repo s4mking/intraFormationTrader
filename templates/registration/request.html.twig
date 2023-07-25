@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('login') }}
+{% endblock %}
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+    <h1 class="h3 mb-3 font-weight-normal">Inscription</h1>
+    {{ form_start(requestForm, {'attr': {'class': 'form-signin'}}) }}
+    {{ form_row(requestForm.email) }}
+    <button class="btn btn-lg btn-primary btn-block" type="submit" >Envoi</button>
+    {{ form_end(requestForm) }}
+{% endblock %}

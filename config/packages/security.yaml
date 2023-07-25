@@ -28,6 +28,7 @@ security:
         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/operation, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/admin, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/$, roles: IS_AUTHENTICATED_FULLY }
             
             # activate different ways to authenticate

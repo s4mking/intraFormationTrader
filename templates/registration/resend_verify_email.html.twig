@@ -1,15 +1,19 @@
 {% extends 'base.html.twig' %}
-{% block title %}Verify Email{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('login') }}
+{% endblock %}
+{% block title %}Vérifier votre Email{% endblock %}
 {% block body %}
     <div class="container">
         <div class="row">
             <div class="login-form bg-light mt-4 p-4">
-                <h1 class="h3 mb-3 font-weight-normal">Verify your Email</h1>
+                <h1 class="h3 mb-3 font-weight-normal">Vérifier votre Email</h1>
                 <p>
-                    A verification email was sent - please click it to enable your
-                    account before logging in.
+                    Un mail de vérification vous a été envoyé, veuillez cliquer sur le lien présent dans celui ci afin d'activer votre compte.
                 </p>
-                <a href="#" class="btn btn-primary">Re-send Email</a>
+                <a href="{{ path('app_verify_resend_email', {'email': email, 'resend': true }) }}" class="btn btn-primary">Réenvoyer l'email</a>
             </div>
         </div>
     </div>

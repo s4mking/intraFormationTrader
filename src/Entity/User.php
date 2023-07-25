@@ -23,6 +23,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
+    #[ORM\Column(nullable: 'true')]
+    private ?int $accountBalance = 0;
+
     #[ORM\Column]
     private array $roles = [];
 
@@ -153,5 +156,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getAccountBalance(): ?int
+    {
+        return $this->accountBalance;
+    }
+
+    /**
+     * @param int|null $accountBalance
+     */
+    public function setAccountBalance(?int $accountBalance): void
+    {
+        $this->accountBalance = $accountBalance;
     }
 }
