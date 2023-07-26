@@ -86,7 +86,7 @@ class OperationController extends AbstractController
                     $operation = new Operation(
                         '',
                         0,
-                        'Credit',
+                        $number > 0 ? 'Credit' : 'Retrait',
                         0,
                         $now,
                         0,

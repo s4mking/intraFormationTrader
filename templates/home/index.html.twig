@@ -169,13 +169,13 @@
                             <th >Id</th>
                             <th>Symbol</th>
                             <th>Type</th>
-                            <th>Lots</th>
+{#                            <th>Lots</th>#}
                             <th>OpenTime</th>
                             <th>OpenPrice</th>
                             <th>CloseTime</th>
                             <th>ClosePrice</th>
                             <th>Profit</th>
-                            <th>NetProfit</th>
+{#                            <th>NetProfit</th>#}
                         </tr>
                         </thead>
                         <tbody>
@@ -186,6 +186,8 @@
                                 <tr class="table-warning">
                             {% elseif operation.type == 'Credit' %}
                                 <tr class="table-success">
+                            {% elseif operation.type == 'Retrait' %}
+                                <tr class="table-danger">
                             {% endif %}
                                 <td>{{ operation.id }}</td>
 
@@ -200,14 +202,14 @@
 {#                            {% else%}#}
                             <td>{{ operation.symbol }}</td>
 {#                            {% endif %}#}
-                                <td>{{ operation.type }}</td>
-                                <td>{{ operation.lots }}</td>
+                                <td><b>{{ operation.type }}</b></td>
+                            {#    <td>{{ operation.lots }}</td>#}
                                 <td>{{ operation.openTime ? operation.openTime|date('Y-m-d H:i:s') : '' }}</td>
                                 <td>{{ operation.openPrice }}</td>
                                 <td>{{ operation.closeTime ? operation.closeTime|date('Y-m-d H:i:s') : '' }}</td>
                                 <td>{{ operation.closePrice }}</td>
                                 <td>{{ operation.profit }}</td>
-                                <td>{{ operation.netProfit }}</td>
+{#                                <td>{{ operation.netProfit }}</td>#}
                             </tr>
                         {% else %}
                             <tr>
