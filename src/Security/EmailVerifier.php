@@ -10,6 +10,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
+use function PHPUnit\Framework\throwException;
 
 class EmailVerifier
 {
@@ -37,7 +38,7 @@ class EmailVerifier
         try{
             $this->mailer->send($email);
         } catch (TransportExceptionInterface $e) {
-            echo($e);
+            throwException($e);
         }
     }
 
