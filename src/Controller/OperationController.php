@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Model\OperationFromCSVDTO;
 use App\Entity\Operation;
 use App\Form\OperationFormType;
 use App\Form\OperationType;
@@ -15,6 +16,7 @@ use App\Form\CSVFormType;
 use DateTime;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/operation')]
@@ -22,7 +24,7 @@ class OperationController extends AbstractController
 {
 
     #[Route('/importcsv', name: 'app_import_csv')]
-    public function importCSV(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response
+    public function importCSV(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager, SerializerInterface $serializer): Response
     {
         $form = $this->createForm(CSVFormType::class);
         $form->handleRequest($request);
@@ -34,29 +36,28 @@ class OperationController extends AbstractController
             $spreadsheet = $reader->load($form->get('file')->getData());
             $worksheet = $spreadsheet->getActiveSheet();
             $rows = $worksheet->toArray();
-//            $user = $this->getUser();
             foreach ($users as $user){
                 $sum=0;
                 foreach ($rows as $row) {
-                    if ($row[0] == 'Symbol') {
+
+                    if ($row[0] == 'Symbol' || is_null($row[8]) || is_null($row[0]) ) {
                         continue;
                     }
-                    $dateTimeOpen = DateTime::createFromFormat('d.m.Y H:i:s', $row[4]);
-                    $dateTimeClose = DateTime::createFromFormat('d.m.Y H:i:s', $row[6]);
+                    $operationDto = new OperationFromCSVDTO($row);
                     $operation = new Operation(
-                        $row[0],
-                        $row[1],
-                        $row[2],
-                        floatval($row[3]),
-                        $dateTimeOpen,
-                        floatval($row[5]),
-                        $dateTimeClose,
-                        floatval($row[7]),
-                        floatval($row[8]),
-                        floatval($row[9]),
+                        $operationDto->symbol,
+                        $operationDto->position,
+                        $operationDto->type,
+                        $operationDto->lots,
+                        $operationDto->openTime,
+                        $operationDto->openPrice,
+                        $operationDto->closeTime,
+                        $operationDto->closePrice,
+                        $operationDto->profit,
+                        $operationDto->netProfit,
                         $user
                     );
-                    $sum+=floatval($row[8]);
+                    $sum+=floatval($operationDto->profit);
                     $entityManager->persist($operation);
                 }
                 $actualBalance = $user->getAccountBalance();
@@ -64,31 +65,6 @@ class OperationController extends AbstractController
                 $entityManager->persist($user);
                 $entityManager->flush();
             }
-
-
-            // this condition is needed because the 'brochure' field is not required
-            // so the PDF file must be processed only when a file is uploaded
-           /* if ($importedFile) {
-                $originalFilename = pathinfo($importedFile->getClientOriginalName(), PATHINFO_FILENAME);
-                // this is needed to safely include the file name as part of the URL
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.csv';
-
-                // Move the file to the directory where brochures are stored
-                try {
-                    $importedFile->move(
-                        $this->getParameter('import_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                }
-
-                // updates the 'brochureFilename' property to store the PDF file name
-                // instead of its contents
-            }*/
-
-            // ... persist the $product variable or any other work
         }
 
         return $this->render('operation/new.html.twig', [
