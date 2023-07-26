@@ -27,6 +27,7 @@ security:
         - { path: ^/logout, roles: ROLE_USER }
         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^//verify/email$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/operation, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/admin, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/$, roles: IS_AUTHENTICATED_FULLY }
