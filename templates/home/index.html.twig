@@ -50,7 +50,7 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div class="flex-grow-1 overflow-hidden">
-                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Total Earnings</p>
+                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Semaine dernière </p>
                                 </div>
                                 <div class="flex-shrink-0">
                                     <h5 class="text-success fs-14 mb-0">
@@ -60,7 +60,7 @@
                             </div>
                             <div class="d-flex align-items-end justify-content-between mt-4">
                                 <div>
-                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span class="counter-value" data-target="559.25">559.25</span>k </h4>
+                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span class="counter-value" data-target={{ weeklySum }}>{{ weeklySum }}</span> </h4>
                                     <a href="" class="text-decoration-underline">View net earnings</a>
                                 </div>
                                 <div class="avatar-sm flex-shrink-0">
@@ -89,7 +89,7 @@
                             </div>
                             <div class="d-flex align-items-end justify-content-between mt-4">
                                 <div>
-                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="36894">36,894</span></h4>
+                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="{{ sumOperations }}">{{ sumOperations }}</span></h4>
                                     <a href="" class="text-decoration-underline">Voir toutes vos opérations</a>
                                 </div>
                                 <div class="avatar-sm flex-shrink-0">
@@ -213,7 +213,7 @@
                             </tr>
                         {% else %}
                             <tr>
-                                <td colspan="12">no records found</td>
+                                <td colspan="12">Aucune opération trouvée</td>
                             </tr>
                         {% endfor %}
                         </tbody>

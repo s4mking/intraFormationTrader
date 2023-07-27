@@ -9,6 +9,7 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ path('app_default') }}">Index</a>
                 </li>
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('app_import_csv') }}">Import CSV</a>
                 </li>
@@ -18,9 +19,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('admin') }}">Administration</a>
                 </li>
-                <li class="nav-item">
+              {#  <li class="nav-item">
                     <a class="nav-link" href="{{ path('app_operation_index') }}">Operations</a>
-                </li>
+                </li>#}
+                {% endif %}
                 <li class="nav-item">
                     {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                     <a class="nav-link" href="{{ path('app_login') }}">Se connecter</a>
