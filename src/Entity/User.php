@@ -173,4 +173,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->accountBalance = $accountBalance;
     }
+
+    public function __toString(): string
+    {
+        return $this->email;
+    }
 }

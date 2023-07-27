@@ -26,6 +26,7 @@ class OperationController extends AbstractController
     #[Route('/importcsv', name: 'app_import_csv')]
     public function importCSV(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager, SerializerInterface $serializer): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $form = $this->createForm(CSVFormType::class);
         $form->handleRequest($request);
 
@@ -75,6 +76,7 @@ class OperationController extends AbstractController
     #[Route('/addcredit', name: 'app_credit')]
     public function addCredit(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $form = $this->createForm(OperationFormType::class);
         $form->handleRequest($request);
 
