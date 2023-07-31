@@ -11,18 +11,31 @@
     {% if error %}
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
-
-    <form class="form-signin" action="{{ path('app_login') }}" method="post">
-        <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
-        <label for="username" class="sr-only">Adresse email</label>
-        <input type="email" name="_username" id="username" class="form-control" placeholder="Adresse email" value="{{ last_username }}" required autofocus>
-        <label for="inputPassword" class="sr-only">Mot de passe</label>
-        <input type="password" name="_password" id="inputPassword" class="form-control mt-2" placeholder="Mot de passe" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">
-            Connexion
-        </button>
-            <a class="nav-link" href="{{ path('app_forgot_password_request') }}">Oubli de mot de passe</a>
-    </form>
-
+    <div class="logo text-center">
+    <h1>Connexion</h1>
+    </div>
+    <div class="wrapper">
+        <div class="inner-warpper text-center">
+            <form action="" id="formvalidate">
+                <div class="input-group">
+                    <label for="username" class="sr-only palceholder">Adresse email</label>
+                    <input type="email" name="_username" id="username" class="form-control" placeholder="Adresse email" value="{{ last_username }}" required autofocus>
+                    <span class="lighting"></span>
+                </div>
+                <div class="input-group">
+                    <label for="inputPassword" class="sr-only palceholder">Mot de passe</label>
+                    <input type="password" name="_password" id="inputPassword" class="form-control mt-2" placeholder="Mot de passe" required>
+                    <span class="lighting"></span>
+                </div>
+                <button type="submit" id="login">Se connecter</button>
+                <div class="clearfix supporter">
+                    <a class="forgot pull-right" href="{{ path('app_forgot_password_request') }}">Mot de passe oublié?</a>
+                </div>
+            </form>
+        </div>
+        <div class="signup-wrapper text-center">
+            <p> <a href="{{ path('app_register') }}"> Pas de compte ? <span class="text-primary">Créer un compte</span></a></p>
+        </div>
+    </div>
 
 {% endblock %}
