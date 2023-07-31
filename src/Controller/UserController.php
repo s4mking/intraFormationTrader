@@ -22,17 +22,22 @@ class UserController extends AbstractController{
     public function indexGeneral(OperationRepository $operationRepository): Response
     {
         $user = $this->getUser();
-        $operations = $operationRepository->findBy(['transmitter' => $user],['closeTime' => 'DESC']);
+/*        $operations = $operationRepository->findBy(['transmitter' => $user],['closeTime' => 'DESC']);*/
+        $operations = $operationRepository->findOperationsForUser($user);
         $totalLastWeek = $operationRepository->findTotalLastWeek($user);
         $totalLastLast = $operationRepository->findTotalLastLastWeek($user);
         $sumOperations = $operationRepository->countOperations($user);
+        $totalSell = $operationRepository->findTotalSell($user);
+        $totalBuy = $operationRepository->findTotalBuy($user);
         return $this->render('home/index.html.twig',
             [
                 'operations' => $operations,
                 'user' => $user,
                 'weeklySum' => round($totalLastWeek['weekly_total'], 2),
                 'lastWeeklySum' => round($totalLastLast['weekly_total'], 2),
-                'sumOperations' => $sumOperations
+                'sumOperations' => $sumOperations,
+                'totalSell' => $totalSell['weekly_total'],
+                'totalBuy' => $totalBuy['weekly_total']
             ]);
     }
 

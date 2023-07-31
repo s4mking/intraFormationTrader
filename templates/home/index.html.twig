@@ -25,7 +25,7 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div class="flex-grow-1 overflow-hidden">
-                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Profil</p>
+                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Total Sells</p>
                                 </div>
                                 <div class="flex-shrink-0">
                                     <h5 class="text-success fs-14 mb-0">
@@ -35,7 +35,7 @@
                             </div>
                             <div class="d-flex align-items-end justify-content-between mt-4">
                                 <div>
-                                    <h5 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value"> {{ user.email }}</span></h5>
+                                    <h5 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value"> {{ totalSell }}</span></h5>
                                     <a href="" class="text-decoration-underline">See details</a>
                                 </div>
                                 <div class="avatar-sm flex-shrink-0">
@@ -169,7 +169,6 @@
                     <table class="table table-hover">
                         <thead>
                         <tr class="table-active">
-                            <th >Id</th>
                             <th>Symbol</th>
                             <th>Type</th>
 {#                            <th>Lots</th>#}
@@ -192,7 +191,6 @@
                             {% elseif operation.type == 'Retrait' %}
                                 <tr class="table-danger">
                             {% endif %}
-                                <td>{{ operation.id }}</td>
 
 {#                            {% if operation.symbol == 'USDJPY' %}#}
 {#                                <td><i class="fa-solid fa-dollar-sign"></i></td>#}

@@ -54,8 +54,11 @@ class OperationRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('o')
             ->select('COUNT(o.id)')
+            ->andWhere('o.type LIKE :buy OR o.type LIKE :sell')
             ->andWhere('o.transmitter = :user')
             ->setParameter('user', $user)
+            ->setParameter('buy', 'Buy')
+            ->setParameter('sell', 'Sell')
             ->getQuery()
             ->getSingleScalarResult()
             ;
@@ -73,6 +76,47 @@ class OperationRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
             ;
     }
+
+    public function findOperationsForUser(UserInterface $user): array
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.type LIKE :buy OR o.type LIKE :sell')
+            ->andWhere('o.transmitter = :user')
+            ->setParameter('user', $user)
+            ->setParameter('buy', 'Buy')
+            ->setParameter('sell', 'Sell')
+            ->getQuery()
+            ->execute()
+            ;
+    }
+
+    public function findTotalBuy(UserInterface $user): array
+    {
+        return $this->createQueryBuilder('o')
+            ->select('SUM(o.profit) AS weekly_total')
+            ->andWhere('o.type LIKE :buy')
+            ->andWhere('o.transmitter = :user')
+            ->setParameter('buy', 'Buy')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
+    public function findTotalSell(UserInterface $user): array
+    {
+        return $this->createQueryBuilder('o')
+            ->select('SUM(o.profit) AS weekly_total')
+            ->andWhere('o.type LIKE :sell')
+            ->andWhere('o.transmitter = :user')
+            ->setParameter('sell', 'Sell')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
+
 
 //    /**
 //     * @return Operation[] Returns an array of Operation objects
