@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\CustomStyle;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
@@ -16,7 +17,7 @@ class CustomStyleFormType extends AbstractType
     {
         $builder
             ->add('BackgroundImage', FileType::class, [
-                'label' => 'Fichier CSV',
+                'label' => 'Background Image',
 
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
@@ -40,7 +41,7 @@ class CustomStyleFormType extends AbstractType
                 ],
             ])
             ->add('LogoFile', FileType::class, [
-                'label' => 'Fichier CSV',
+                'label' => 'Logo File',
 
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
@@ -63,13 +64,9 @@ class CustomStyleFormType extends AbstractType
                     ])
                 ],
             ])
+            ->add('save', SubmitType::class, ['label' => 'Transfert des images'])
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-            'data_class' => CustomStyle::class,
-        ]);
-    }
+
 }

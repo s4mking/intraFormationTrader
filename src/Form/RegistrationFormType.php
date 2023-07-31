@@ -20,12 +20,18 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('email', EmailType::class, [
             'label_attr' => ['class' => 'sr-only palceholder', 'for'=>"email"],
+                'label' => false,
+                'attr' => [
+                    'placeholder' => 'Email'
+                ],
                 ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
+                'label' => false,
+                'attr' => ['autocomplete' => 'new-password',
+                    'placeholder' => 'Mot de passe'],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Entrez un mot de passe',

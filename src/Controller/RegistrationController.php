@@ -74,14 +74,14 @@ class RegistrationController extends AbstractController
 
         // Verify the user id exists and is not null
         if (null === $id) {
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_default');
         }
 
         $user = $userRepository->find($id);
 
         // Ensure the user exists in persistence
         if (null === $user) {
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_default');
         }
         // validate email confirmation link, sets User::isVerified=true and persists
         try {
@@ -102,7 +102,7 @@ class RegistrationController extends AbstractController
     public function resendVerifyEmail(Request $request, UserRepository $userRepository): Response
     {
         if ($this->getUser()) {
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_default');
         }
 
         $form = $this->createForm(RequestVerifyUserEmailFormType::class);

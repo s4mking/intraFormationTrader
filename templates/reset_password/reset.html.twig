@@ -1,12 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reset your password{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('login') }}
+{% endblock %}
+{% block title %}Inscription{% endblock %}
 
 {% block body %}
-    <h1>Reset your password</h1>
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
 
-    {{ form_start(resetForm) }}
-        {{ form_row(resetForm.plainPassword) }}
-        <button class="btn btn-primary">Reset password</button>
-    {{ form_end(resetForm) }}
+    {{ form_errors(resetForm) }}
+
+    <div class="logo text-center">
+        <h1>Réinitialisation</h1>
+    </div>
+    <div class="wrapper">
+        <div class="inner-warpper text-center">
+            {{ form_start(resetForm, {'attr': {'id': 'formvalidate'}}) }}
+            <div class="input-group">
+                <label></label>
+                {{ form_widget(resetForm.plainPassword, {
+                    id: 'inputPassword',
+                    class: 'form-control mt-2'
+                }) }}
+            </div>
+            <button type="submit" id="login">Réinitialiser votre mot de passe</button>
+            {{ form_end(resetForm) }}
+        </div>
+    </div>
 {% endblock %}

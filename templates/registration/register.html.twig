@@ -20,13 +20,11 @@
         <div class="inner-warpper text-center">
                 {{ form_start(registrationForm, {'attr': {'id': 'formvalidate'}}) }}
                 <div class="input-group">
-                    {{ form_label(registrationForm.email, 'Adresse email') }}
                     {{ form_widget(registrationForm.email, {'attr': {'id': 'username'}}) }}
                     <span class="lighting"></span>
                 </div>
                 <div class="input-group">
-                    <label for="registration_form__token" class="sr-only palceholder">Mot de passe</label>
-                    {{ form_label(registrationForm.plainPassword, 'Mot de passe') }}
+                   <label for="registration_form__token" class="sr-only palceholder">Mot de passe</label>
                     {{ form_widget(registrationForm.plainPassword, {
                         id: 'inputPassword',
                         class: 'form-control mt-2'

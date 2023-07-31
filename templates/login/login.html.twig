@@ -12,11 +12,11 @@
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
     <div class="logo text-center">
-    <h1>Connexion</h1>
+        <h1>Connexion</h1>
     </div>
     <div class="wrapper">
         <div class="inner-warpper text-center">
-            <form action="" id="formvalidate">
+            <form action="{{ path('app_login')}}" id="formvalidate" method="post">
                 <div class="input-group">
                     <label for="username" class="sr-only palceholder">Adresse email</label>
                     <input type="email" name="_username" id="username" class="form-control" placeholder="Adresse email" value="{{ last_username }}" required autofocus>

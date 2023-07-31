@@ -4,22 +4,33 @@
     {{ parent() }}
     {{ encore_entry_link_tags('login') }}
 {% endblock %}
-{% block title %}Réinitialiser votre mot de passe{% endblock %}
+{% block title %}Inscription{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('reset_password_error') %}
+    {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
-    <h1>Réinitialiser votre mot de passe</h1>
 
-    {{ form_start(requestForm, {'attr': {'class': 'form-signin'}}) }}
-        {{ form_row(requestForm.email) }}
-        <div>
-            <small>
-                Entrez votre adresse mail et un lien vous sera envoyé pour réinitialiser votre mot de passe.
-            </small>
+    {{ form_errors(requestForm) }}
+
+    <div class="logo text-center">
+        <h1>Réinitialisation</h1>
+    </div>
+    <div class="wrapper">
+        <div class="inner-warpper text-center">
+            {{ form_start(requestForm, {'attr': {'id': 'formvalidate'}}) }}
+            <div class="input-group">
+                {{ form_label(requestForm.email, 'Adresse email') }}
+                {{ form_widget(requestForm.email, {'attr': {'id': 'username'}}) }}
+                <span class="lighting"></span>
+            </div>
+            <div>
+                <small>
+                    Entrez votre adresse mail et un lien vous sera envoyé pour réinitialiser votre mot de passe.
+                </small>
+            </div>
+            <button type="submit" id="login">Envoyez le mail</button>
+            {{ form_end(requestForm) }}
         </div>
-
-        <button class="btn btn-primary">Envoyez le mail</button>
-    {{ form_end(requestForm) }}
+    </div>
 {% endblock %}
