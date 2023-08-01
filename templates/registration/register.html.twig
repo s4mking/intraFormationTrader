@@ -14,7 +14,8 @@
     {{ form_errors(registrationForm) }}
 
     <div class="logo text-center">
-        <h1>Inscription</h1>
+        <h1><i class="fa fa-user-plus" aria-hidden="true"></i>
+        </h1>
     </div>
     <div class="wrapper">
         <div class="inner-warpper text-center">
@@ -33,6 +34,9 @@
                 </div>
                 <button type="submit" id="login">Inscription</button>
             {{ form_end(registrationForm) }}
+        </div>
+        <div class="signup-wrapper text-center">
+            <p> <a href="{{ path('app_login') }}"> Déjà un compte ? <span class="text-primary">Se connecter</span></a></p>
         </div>
     </div>
 {% endblock %}

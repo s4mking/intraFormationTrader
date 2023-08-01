@@ -78,7 +78,7 @@ body {
 }
 /* close commented backslash hack */
 a {
-    color: #00A885;
+    color: rgba(0, 134, 168, 0.69);
 }
 a:hover,
 a:focus {
@@ -93,15 +93,17 @@ input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 1000px white inset !important;
 }
 .logo h1 {
-    color: #00A885;
+    color: #008CBA;
     margin-bottom: -12px;
+    font-size: 10rem;
+    text-align: center;
 }
 /*input[type="checkbox"] {
     width: auto;
 }*/
 button {
     cursor: pointer;
-    background: #00A885;
+    background: #008CBA;
     width: 100%;
     border: 0;
     padding: 10px 15px;

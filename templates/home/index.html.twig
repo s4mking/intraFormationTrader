@@ -140,7 +140,7 @@
 
             <div class="row g-4 mt-3">
                 <div class="col-md-5 col-lg-4 order-md-last">
-                        <div class="h-50">
+                        <div class="vh-100">
                             <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
                             <script type="text/javascript">
                                 new TradingView.widget(
@@ -209,7 +209,11 @@
                                 <td>{{ operation.openPrice }}</td>
                                 <td>{{ operation.closeTime ? operation.closeTime|date('Y-m-d H:i:s') : '' }}</td>
                                 <td>{{ operation.closePrice }}</td>
-                                <td>{{ operation.profit }}</td>
+                                {% if operation.profit < 0 %}
+                                   <td class="bg-danger">{{ operation.profit }}</td>
+                                {% else %}
+                                     <td class="bg-success">{{ operation.profit }}</td>
+                                 {% endif %}
 {#                                <td>{{ operation.netProfit }}</td>#}
                             </tr>
                         {% else %}
