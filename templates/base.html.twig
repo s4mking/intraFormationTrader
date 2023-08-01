@@ -2,10 +2,11 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Nom du site{% endblock %}</title>
         <link rel="icon" type="image/jpg" href="{{ asset('favicon.ico') }}">
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
+            {{ encore_entry_link_tags('index') }}
         {% endblock %}
 
         {% block javascripts %}
@@ -17,8 +18,15 @@
             {{ message }}
         </div>
     {% endfor %}
-    {% include 'navbar.html.twig' %}
-        {% block body %}{% endblock %}
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        {% include 'navbar.html.twig' %}
+    {% endif %}
+    <div class="container">
+        {% block body %}
+
+    </div>
+
+        {% endblock %}
     </body>
 </html>
 

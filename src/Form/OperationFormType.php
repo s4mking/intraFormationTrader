@@ -28,7 +28,7 @@ class OperationFormType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
             ])
-            ->add('save', SubmitType::class, ['label' => 'Sauvegarder'])
+            ->add('save', SubmitType::class, ['label' => 'Ajouter ce montant'])
             // ...
         ;
     }
