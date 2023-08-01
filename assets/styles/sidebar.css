@@ -11,7 +11,7 @@
     height: 100%;
     width: 15%;
     background: #11101d;
-    padding: 3%;
+    padding: 3% 1%;
     z-index: 99;
     top:0;
 }
@@ -121,4 +121,9 @@
     color: #11101d;
     font-size: 40px;
     text-align: center;
+}
+
+.container{
+    position: relative;
+    left:8%;
 }
