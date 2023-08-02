@@ -35,17 +35,17 @@ class CustomStyleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $customStyle = new CustomStyle();
 
-            $importedFile = $form->get('BackgroundImage')->getData();
+            $importedFile = $form->get('Logo')->getData();
             if ($importedFile) {
                 $originalFilename = pathinfo($importedFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
                 $safeFilename = $slugger->slug($originalFilename);
-                $backgroundImageName = $safeFilename . '-' . uniqid() . '.jpg';
+                $backgroundImageName = 'logo.png';
 
                 // Move the file to the directory where brochures are stored
                 try {
                     $importedFile->move(
-                        $this->getParameter('import_directory'),
+                        $this->getParameter('import_logo'),
                         $backgroundImageName
                     );
                 } catch (FileException $e) {
@@ -53,27 +53,19 @@ class CustomStyleController extends AbstractController
                 }
                 $customStyle->setBackgroundImage($backgroundImageName);
             }
-            $importedLogo = $form->get('LogoFile')->getData();
+            $importedLogo = $form->get('LogoConnection')->getData();
             if ($importedLogo) {
-                $originalFilename = pathinfo($importedLogo->getClientOriginalName(), PATHINFO_FILENAME);
-                // this is needed to safely include the file name as part of the URL
-                $safeFilename = $slugger->slug($originalFilename);
-                $logoImageName = $safeFilename . '-' . uniqid() . '.jpg';
-
                 // Move the file to the directory where brochures are stored
                 try {
                     $importedLogo->move(
-                        $this->getParameter('import_directory'),
-                        $logoImageName
+                        $this->getParameter('import_logo'),
+                        'logoconnect.png'
                     );
                 } catch (FileException $e) {
                     // ... handle exception if something happens during file upload
                 }
-                $customStyle->setLogoFile($logoImageName);
             }
 
-            $entityManager->persist($customStyle);
-            $entityManager->flush();
         }
 
         return $this->render('customstyles/new.html.twig', [

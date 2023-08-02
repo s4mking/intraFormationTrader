@@ -16,7 +16,7 @@ class CustomStyleFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('BackgroundImage', FileType::class, [
+            ->add('Logo', FileType::class, [
                 'label' => 'Background Image',
 
                 // unmapped means that this field is not associated to any entity property
@@ -40,7 +40,7 @@ class CustomStyleFormType extends AbstractType
                     ])
                 ],
             ])
-            ->add('LogoFile', FileType::class, [
+            ->add('LogoConnection', FileType::class, [
                 'label' => 'Logo File',
 
                 // unmapped means that this field is not associated to any entity property

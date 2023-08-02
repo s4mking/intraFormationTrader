@@ -136,3 +136,9 @@
 .menu-items li.logout{
     margin-top:10%;
 }
+
+.logoimg{
+    display:flex;
+    justify-content: center;
+    margin-bottom: 5vh;
+}
