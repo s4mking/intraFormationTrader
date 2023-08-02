@@ -17,7 +17,7 @@ class CustomStyleFormType extends AbstractType
     {
         $builder
             ->add('Logo', FileType::class, [
-                'label' => 'Background Image',
+                'label' => 'Logo SideMenu',
 
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
@@ -32,16 +32,14 @@ class CustomStyleFormType extends AbstractType
                     new File([
                         'maxSize' => '10024k',
                         'mimeTypes' => [
-                            'image/jpeg',
                             'image/png',
-                            'image/svg+xml',
                         ],
-                        'mimeTypesMessage' => 'Veuillez transférer une image',
+                        'mimeTypesMessage' => 'Veuillez transférer une image PNG',
                     ])
                 ],
             ])
             ->add('LogoConnection', FileType::class, [
-                'label' => 'Logo File',
+                'label' => 'Logo Connection',
 
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
@@ -56,11 +54,9 @@ class CustomStyleFormType extends AbstractType
                     new File([
                         'maxSize' => '10024k',
                         'mimeTypes' => [
-                            'image/jpeg',
                             'image/png',
-                            'image/svg+xml',
                         ],
-                        'mimeTypesMessage' => 'Veuillez transférer une image',
+                        'mimeTypesMessage' => 'Veuillez transférer une image PNG',
                     ])
                 ],
             ])

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Operation;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -23,6 +24,16 @@ class OperationRepository extends ServiceEntityRepository
         parent::__construct($registry, Operation::class);
     }
 
+    public function paginate($dql, $page = 1, $limit = 25)
+    {
+        $paginator = new Paginator($dql);
+
+        $paginator->getQuery()
+            ->setFirstResult($limit * ($page - 1)) // Offset
+            ->setMaxResults($limit); // Limit
+
+        return $paginator;
+    }
     public function findAveragesLastWeek(UserInterface $user): array
    {
        return $this->createQueryBuilder('o')
@@ -68,26 +79,30 @@ class OperationRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('o')
             ->select('SUM(o.profit) AS weekly_total')
+            ->andWhere('o.type LIKE :buy OR o.type LIKE :sell')
             ->andWhere('o.closeTime >= :end')
             ->andWhere('o.transmitter = :user')
             ->setParameter('end', new \DateTime('-7 days'))
             ->setParameter('user', $user)
+            ->setParameter('buy', 'Buy')
+            ->setParameter('sell', 'Sell')
             ->getQuery()
             ->getOneOrNullResult()
             ;
     }
 
-    public function findOperationsForUser(UserInterface $user): array
+    public function findOperationsForUser(UserInterface $user, $currentPage = 1):Paginator
     {
-        return $this->createQueryBuilder('o')
+        $query = $this->createQueryBuilder('o')
             ->andWhere('o.type LIKE :buy OR o.type LIKE :sell')
             ->andWhere('o.transmitter = :user')
             ->setParameter('user', $user)
             ->setParameter('buy', 'Buy')
             ->setParameter('sell', 'Sell')
             ->getQuery()
-            ->execute()
             ;
+
+        return $this->paginate($query, $currentPage);
     }
 
     public function findTotalBuy(UserInterface $user): array

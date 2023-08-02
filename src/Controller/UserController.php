@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\OperationRepository;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,11 +20,18 @@ class UserController extends AbstractController{
     }
 
     #[Route('/', name: 'app_default')]
-    public function indexGeneral(OperationRepository $operationRepository): Response
+    public function indexGeneral(OperationRepository $operationRepository, Request $request): Response
     {
         $user = $this->getUser();
 /*        $operations = $operationRepository->findBy(['transmitter' => $user],['closeTime' => 'DESC']);*/
-        $operations = $operationRepository->findOperationsForUser($user);
+
+        $page = $request->query->get('page') ? $request->query->get('page') : 1;
+        $operations = $operationRepository->findOperationsForUser($user, $page);
+        $totalPosts = $operations->count();
+        $limit = 25;
+        $maxPages = ceil($totalPosts / $limit);
+        $thisPage = $page;
+
         $totalLastWeek = $operationRepository->findTotalLastWeek($user);
         $totalLastLast = $operationRepository->findTotalLastLastWeek($user);
         $sumOperations = $operationRepository->countOperations($user);
@@ -37,7 +45,9 @@ class UserController extends AbstractController{
                 'lastWeeklySum' => round($totalLastLast['weekly_total'], 2),
                 'sumOperations' => $sumOperations,
                 'totalSell' => $totalSell['weekly_total'],
-                'totalBuy' => $totalBuy['weekly_total']
+                'totalBuy' => $totalBuy['weekly_total'],
+                'maxPages' => $maxPages,
+                'thisPage' => $thisPage
             ]);
     }
 

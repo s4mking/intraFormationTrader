@@ -14,31 +14,23 @@
 #}
 
         <main>
-            <div class="py-5 text-center mt-5">
-{#
-                <h2>Dasshboard</h2>
-#}
+            <div class="py-4 text-center mt-1">
             </div>
             <div class="row">
 
                 <div class="col-xl-3 col-md-6">
                     <!-- card -->
-                    <div class="card card-animate">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="flex-grow-1 overflow-hidden">
-                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Total Sells</p>
-                                </div>
-                                <div class="flex-shrink-0">
-                                    <h5 class="text-success fs-14 mb-0">
-                                        <i class="ri-arrow-right-up-line fs-13 align-middle"></i> +29.08 %
-                                    </h5>
-                                </div>
+                    <div class="card card-animate ">
+                        <div class="d-flex align-items-center card-header">
+                            <div class="flex-grow-1 overflow-hidden">
+                                <p class="text-uppercase fw-medium text-center text-muted text-truncate mb-0">Total Vente</p>
                             </div>
-                            <div class="d-flex align-items-end justify-content-between mt-4">
+                        </div>
+                        <div class="card-body">
+
+                            <div class="mt-4">
                                 <div>
-                                    <h5 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value"> {{ totalSell }}</span></h5>
-                                    <a href="" class="text-decoration-underline">See details</a>
+                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4 text-center"><span class="counter-value"> {{ totalSell }}</span></h4>
                                 </div>
                                 <div class="avatar-sm flex-shrink-0">
                                                         <span class="avatar-title bg-warning-subtle rounded fs-3">
@@ -52,21 +44,16 @@
                 <div class="col-xl-3 col-md-6">
                     <!-- card -->
                     <div class="card card-animate">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="flex-grow-1 overflow-hidden">
-                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Semaine dernière </p>
-                                </div>
-                                <div class="flex-shrink-0">
-                                    <h5 class="text-success fs-14 mb-0">
-                                        <i class="ri-arrow-right-up-line fs-13 align-middle"></i> +16.24 %
-                                    </h5>
-                                </div>
+                        <div class="d-flex align-items-center card-header">
+                            <div class="flex-grow-1 overflow-hidden">
+                                <p class="text-uppercase fw-medium text-muted text-truncate text-center mb-0"> Gain Semaine dernière </p>
                             </div>
-                            <div class="d-flex align-items-end justify-content-between mt-4">
+                        </div>
+                        <div class="card-body">
+
+                            <div class="mt-4">
                                 <div>
-                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span class="counter-value" data-target={{ weeklySum }}>{{ weeklySum }}</span> </h4>
-                                    <a href="" class="text-decoration-underline">View net earnings</a>
+                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4 text-center"><span class="counter-value" data-target={{ weeklySum }}>{{ weeklySum }} €</span> </h4>
                                 </div>
                                 <div class="avatar-sm flex-shrink-0">
                                                         <span class="avatar-title bg-success-subtle rounded fs-3">
@@ -81,21 +68,17 @@
                 <div class="col-xl-3 col-md-6">
                     <!-- card -->
                     <div class="card card-animate">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="flex-grow-1 overflow-hidden">
-                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Operations</p>
-                                </div>
-                                <div class="flex-shrink-0">
-                                    <h5 class="text-danger fs-14 mb-0">
-                                        <i class="ri-arrow-right-down-line fs-13 align-middle"></i> -3.57 %
-                                    </h5>
-                                </div>
+                        <div class="d-flex align-items-center card-header">
+                            <div class="flex-grow-1 overflow-hidden">
+                                <p class="text-uppercase fw-medium text-muted text-center text-truncate mb-0">Total Achat</p>
                             </div>
-                            <div class="d-flex align-items-end justify-content-between mt-4">
+
+                        </div>
+                        <div class="card-body">
+
+                            <div class="mt-4">
                                 <div>
-                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value" data-target="{{ sumOperations }}">{{ sumOperations }}</span></h4>
-                                    <a href="" class="text-decoration-underline">Voir toutes vos opérations</a>
+                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4 text-center"><span class="counter-value" data-target="{{ sumOperations }}">{{ totalBuy }}</span></h4>
                                 </div>
                                 <div class="avatar-sm flex-shrink-0">
                                                         <span class="avatar-title bg-info-subtle rounded fs-3">
@@ -112,27 +95,15 @@
                 <div class="col-xl-3 col-md-6">
                     <!-- card -->
                     <div class="card card-animate">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="flex-grow-1 overflow-hidden">
-                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Mon compte</p>
-                                </div>
-                                <div class="flex-shrink-0">
-                                    <h5 class="text-muted fs-14 mb-0">
-                                        +0.00 %
-                                    </h5>
-                                </div>
+                        <div class="d-flex align-items-center card-header">
+                            <div class="flex-grow-1 overflow-hidden">
+                                <p class="text-uppercase fw-medium text-muted text-truncate mb-0 text-center"> Solde</p>
                             </div>
-                            <div class="d-flex align-items-end justify-content-between mt-4">
-                                <div>
-                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span class="counter-value" data-target="165.89">{{ user.accountBalance}}</span> </h4>
-                                    <a href="" class="text-decoration-underline">Lien</a>
-                                </div>
-                                <div class="avatar-sm flex-shrink-0">
-                                                        <span class="avatar-title bg-primary-subtle rounded fs-3">
-                                                            <i class="bx bx-wallet text-primary"></i>
-                                                        </span>
-                                </div>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="mt-4 align-items-center">
+                                    <h4 class="fs-22 fw-semibold text-center ff-secondary mb-4 "> {{ user.accountBalance}} € </h4>
                             </div>
                         </div><!-- end card body -->
                     </div><!-- end card -->
@@ -225,6 +196,26 @@
                         {% endfor %}
                         </tbody>
                     </table>
+                        {% if maxPages > 1 %}
+                            <ul class="pagination pagination-sm">
+                                {# `«` arrow  #}
+                                <li {{ thisPage == 1 ? 'class="disabled"' }}>
+                                    <a href="{{ path('app_default', {page: thisPage-1 < 1 ? 1 : thisPage-1}) }}">«</a>
+                                </li>
+
+                                {# Render each page number #}
+                                {% for i in 1..maxPages %}
+                                    <li {{ thisPage == i ? 'class="active"' }}>
+                                        <a href="{{ path('app_default', {page: i}) }}">{{ i }}</a>
+                                    </li>
+                                {% endfor %}
+
+                                {# `»` arrow #}
+                                <li {{ thisPage == maxPages ? 'class="disabled"' }}>
+                                    <a href="{{ path('app_default', {page: thisPage+1 <= maxPages ? thisPage+1 : thisPage}) }}">»</a>
+                                </li>
+                            </ul>
+                        {% endif %}
                 </div>
             </div>
             </div>
