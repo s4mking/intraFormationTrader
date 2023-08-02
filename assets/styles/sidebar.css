@@ -127,3 +127,12 @@
     position: relative;
     left:8%;
 }
+
+.menu-items i{
+    font-size:1rem;
+    margin-right:4%;
+}
+
+.menu-items li.logout{
+    margin-top:10%;
+}

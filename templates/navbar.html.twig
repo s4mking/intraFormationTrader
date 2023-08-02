@@ -49,28 +49,33 @@
 {% endblock %}
 
 <nav class="sidebar">
-    <a href="#" class="logo">Intra</a>
+    <a href="#" class="logo">Espace Membre</a>
 
     <div class="menu-content">
         <ul class="menu-items">
             <li class="item">
-                <a aria-current="page" href="{{ path('app_default') }}">Accueil</a>
+
+                <a aria-current="page" href="{{ path('app_default') }}"> <i class="fa fa-home" aria-hidden="true"></i> Accueil</a>
             </li>
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
             <li class="item">
-                <a class="nav-link" href="{{ path('app_import_csv') }}">Importer CSV</a>
+                <a class="nav-link" href="{{ path('app_import_csv') }}"><i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                     Importer CSV</a>
             </li>
             <li class="item">
-                <a class="nav-link" href="{{ path('app_import_images') }}">Importer Images</a>
+                <a class="nav-link" href="{{ path('app_import_images') }}"><i class="fa fa-upload" aria-hidden="true"></i> Importer Images</a>
             </li>
             <li class="item">
-                <a class="nav-link" href="{{ path('app_credit') }}">Ajouter credit</a>
+                <a class="nav-link" href="{{ path('app_credit') }}"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                     Ajouter credit</a>
             </li>
             <li class="item">
-                <a class="nav-link" href="{{ path('admin') }}">Administration</a>
+                <a class="nav-link" href="{{ path('admin') }}"><i class="fa fa-wrench" aria-hidden="true"></i>
+                     Administration</a>
             </li>
               <li class="item">
-                    <a class="nav-link" href="{{ path('app_operation_index') }}">Operations</a>
+                    <a class="nav-link" href="{{ path('app_operation_index') }}"><i class="fa fa-exchange" aria-hidden="true"></i>
+                         Operations</a>
                 </li>
             {% endif %}
 <li class="item">
@@ -82,8 +87,9 @@
     {% endif %}
 </li>
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <li class="item">
-                    <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                <li class="item logout">
+                    <a class="nav-link" href="{{ path('app_logout') }}"> <i class="fa fa-sign-out" aria-hidden="true"></i>
+                        Déconnexion</a>
 
                 </li>
             {% endif %}
