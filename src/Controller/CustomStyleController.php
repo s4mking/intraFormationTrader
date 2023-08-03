@@ -49,18 +49,28 @@ class CustomStyleController extends AbstractController
                         $backgroundImageName
                     );
                 } catch (FileException $e) {
-                    dump($e);
                     // ... handle exception if something happens during file upload
                 }
                 $customStyle->setBackgroundImage($backgroundImageName);
             }
-            $importedLogo = $form->get('LogoConnection')->getData();
+                $importedLogo = $form->get('LogoConnection')->getData();
             if ($importedLogo) {
                 // Move the file to the directory where brochures are stored
                 try {
                     $importedLogo->move(
                         $this->getParameter('import_logo'),
                         'logoconnect.png'
+                    );
+                } catch (FileException $e) {
+                }
+            }
+            $importedFavicon = $form->get('Favicon')->getData();
+            if ($importedFavicon) {
+                // Move the file to the directory where brochures are stored
+                try {
+                    $importedFavicon->move(
+                        $this->getParameter('import_logo'),
+                        'favicon.ico'
                     );
                 } catch (FileException $e) {
                     dump($e);
