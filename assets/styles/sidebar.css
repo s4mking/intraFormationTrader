@@ -17,7 +17,7 @@
 }
 .logo {
     font-size: 25px;
-    padding: 0 15px;
+    padding: 7px 5px;
 }
 .sidebar a {
     color: #fff;
@@ -28,7 +28,9 @@
     height: 100%;
     width: 100%;
     margin-top: 40px;
+    /*
     overflow-y: scroll;
+    */
 }
 .menu-content::-webkit-scrollbar {
     display: none;
@@ -38,6 +40,7 @@
     width: 100%;
     list-style: none;
     transition: all 0.4s ease;
+    margin-top: 3vh;
 }
 .submenu-active .menu-items {
     transform: translateX(-56%);
