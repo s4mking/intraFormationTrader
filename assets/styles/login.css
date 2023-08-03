@@ -260,6 +260,20 @@ span.validate-tooltip {
     padding: 10px;
     color: #fff;
 }
+
+.titlelogin h3{
+    background-color: #008cba;
+}
+
+.container_login .titlelogin{
+    background-image: url("../../public/images/imageville.jpeg");
+}
+
+.titlelogin form{
+    background-color: white;
+    padding:30px;
+}
+
 @media (max-width: 480px) {
     .direction {
         position: static;
