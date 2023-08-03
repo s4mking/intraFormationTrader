@@ -49,6 +49,7 @@ class CustomStyleController extends AbstractController
                         $backgroundImageName
                     );
                 } catch (FileException $e) {
+                    dump($e);
                     // ... handle exception if something happens during file upload
                 }
                 $customStyle->setBackgroundImage($backgroundImageName);
@@ -62,7 +63,7 @@ class CustomStyleController extends AbstractController
                         'logoconnect.png'
                     );
                 } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
+                    dump($e);
                 }
             }
 
