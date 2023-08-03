@@ -45,7 +45,7 @@ class CustomStyleController extends AbstractController
                 // Move the file to the directory where brochures are stored
                 try {
                     $importedFile->move(
-                        $this->getParameter('import_public'),
+                        $this->getParameter('import_logo'),
                         $backgroundImageName
                     );
                 } catch (FileException $e) {
@@ -59,7 +59,7 @@ class CustomStyleController extends AbstractController
                 // Move the file to the directory where brochures are stored
                 try {
                     $importedLogo->move(
-                        $this->getParameter('import_public'),
+                        $this->getParameter('import_logo'),
                         'logoconnect.png'
                     );
                 } catch (FileException $e) {
