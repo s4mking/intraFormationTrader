@@ -54,9 +54,9 @@ class CustomStyleFormType extends AbstractType
                     new File([
                         'maxSize' => '10024k',
                         'mimeTypes' => [
-                            'image/png',
+                            'image/jpeg',
                         ],
-                        'mimeTypesMessage' => 'Veuillez transférer une image PNG',
+                        'mimeTypesMessage' => 'Veuillez transférer une image JPG',
                     ])
                 ],
             ])
