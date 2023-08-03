@@ -59,7 +59,7 @@ class CustomStyleController extends AbstractController
                 try {
                     $importedLogo->move(
                         $this->getParameter('import_logo'),
-                        'imageville.jpg'
+                        'imageville.jpeg'
                     );
                 } catch (FileException $e) {
                 }

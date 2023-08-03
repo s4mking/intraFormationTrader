@@ -266,7 +266,7 @@ span.validate-tooltip {
 }
 
 .container_login .loginbackground{
-    background-image: url("../../public/images/imageville.jpeg");
+    /*background-image: url("../../public/images/imageville.jpeg");*/
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
