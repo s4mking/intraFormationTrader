@@ -4,3 +4,7 @@
     vertical-align: middle;
     border-collapse: collapse;
 }
+.pagination li{
+    font-size:1.5rem;
+    font-weight: bold;
+}

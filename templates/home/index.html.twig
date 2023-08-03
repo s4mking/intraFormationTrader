@@ -197,18 +197,21 @@
                         </tbody>
                     </table>
                         {% if maxPages > 1 %}
-                            <ul class="pagination pagination-sm">
+                            <ul class="pagination pagination-sm d-flex justify-content-around">
                                 {# `«` arrow  #}
                                 <li {{ thisPage == 1 ? 'class="disabled"' }}>
                                     <a href="{{ path('app_default', {page: thisPage-1 < 1 ? 1 : thisPage-1}) }}">«</a>
                                 </li>
 
                                 {# Render each page number #}
-                                {% for i in 1..maxPages %}
-                                    <li {{ thisPage == i ? 'class="active"' }}>
-                                        <a href="{{ path('app_default', {page: i}) }}">{{ i }}</a>
-                                    </li>
-                                {% endfor %}
+                                <div class="middle d-flex">
+                                    {% for i in 1..maxPages %}
+                                        <li {{ thisPage == i ? 'class="active"' }} class="mx-2">
+                                            <a href="{{ path('app_default', {page: i}) }}">{{ i }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </div>
+
 
                                 {# `»` arrow #}
                                 <li {{ thisPage == maxPages ? 'class="disabled"' }}>
