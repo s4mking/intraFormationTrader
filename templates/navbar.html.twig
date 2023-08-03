@@ -63,7 +63,7 @@
 
                 <a aria-current="page" href="{{ path('app_default') }}"> <i class="fa fa-home" aria-hidden="true"></i> Accueil</a>
             </li>
-            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            {% if is_granted('ROLE_ADMIN') %}
             <li class="item">
                 <a class="nav-link" href="{{ path('app_import_csv') }}"><i class="fa fa-cloud-upload" aria-hidden="true"></i>
                      Importer CSV</a>
