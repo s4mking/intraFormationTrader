@@ -189,14 +189,14 @@ span.validate-tooltip {
     margin-top: 0;
 }
 .wrapper {
-    width: 320px;
+    width: 30vw;
     background: #fff;
     margin: 20px auto;
     min-height: 200px;
     border: 1px solid #f3f3f3;
 }
 .wrapper .inner-warpper {
-    padding: 50px 30px 60px;
+    padding: 20vh 30px 20vh;
     box-shadow: 1px 1.732px 10px 0px rgba(0, 0, 0, 0.063);
 }
 .wrapper .title {
@@ -271,7 +271,7 @@ span.validate-tooltip {
 
 .titlelogin form{
     background-color: white;
-    padding:30px;
+    padding:10%;
 }
 
 @media (max-width: 480px) {
@@ -293,11 +293,11 @@ span.validate-tooltip {
         justify-content: center;
         align-items: center;
         height:50vh;
-        width:50vw;
+        width:75vw;
     }
 
     .wrapper{
-        width:50vw;
+        width:75vw;
         height:50vh;
     }
 
