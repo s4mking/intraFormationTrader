@@ -145,3 +145,14 @@
     justify-content: center;
     margin-bottom: 5vh;
 }
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .sidebar{
+        width:25%;
+    }
+
+    .container{
+        position: relative;
+        left: 14%;
+    }
+}

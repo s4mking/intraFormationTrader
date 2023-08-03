@@ -8,3 +8,19 @@
     font-size:1.5rem;
     font-weight: bold;
 }
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .coursbourse .tableaubourse{
+        width:100%;
+    }
+    .coursbourse .tableaubourse .table{
+        height:35vh!important;
+    }
+    .sidebar{
+        width:25%;
+    }
+
+    .tableauuser{
+        width:95%;
+    }
+}
