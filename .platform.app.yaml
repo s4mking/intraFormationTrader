@@ -34,7 +34,7 @@ web:
 
 mounts:
     "/var": { source: local, source_path: var }
-    "/public": { source: local, source_path: public }
+    "/public/images": { source: local, source_path: "public/images" }
 
 
 relationships:
