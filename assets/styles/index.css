@@ -9,7 +9,7 @@
     font-weight: bold;
 }
 
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+@media only screen and (min-device-width : 320px) and (max-device-width : 780px) {
     .coursbourse .tableaubourse{
         width:100%;
     }
@@ -23,4 +23,5 @@
     .tableauuser{
         width:95%;
     }
+
 }
