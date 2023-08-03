@@ -265,8 +265,11 @@ span.validate-tooltip {
     background-color: #008cba;
 }
 
-.container_login .titlelogin{
+.container_login .loginbackground{
     background-image: url("../../public/images/imageville.jpeg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
 }
 
 .titlelogin form{
