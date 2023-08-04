@@ -48,6 +48,7 @@ class CustomStyleController extends AbstractController
                         $this->getParameter('import_logo'),
                         $backgroundImageName
                     );
+                    $this->addFlash('success', 'Votre logo a été modifié veuillez raffraichir le site.');
                 } catch (FileException $e) {
                     // ... handle exception if something happens during file upload
                 }
@@ -61,6 +62,7 @@ class CustomStyleController extends AbstractController
                         $this->getParameter('import_logo'),
                         'imageville.jpeg'
                     );
+                    $this->addFlash('success', 'Votre image de login a été modifié veuillez raffraichir le site.');
                 } catch (FileException $e) {
                 }
             }
@@ -72,6 +74,7 @@ class CustomStyleController extends AbstractController
                         $this->getParameter('import_logo'),
                         'favicon.ico'
                     );
+                    $this->addFlash('success', 'Votre favicon a été modifié veuillez raffraichir le site.');
                 } catch (FileException $e) {
                     dump($e);
                 }
