@@ -12,6 +12,10 @@
     text-decoration: none;
 }
 
+.card .card-body{
+    background-color: #a3c2e0;
+}
+
 @media only screen and (min-device-width : 320px) and (max-device-width : 780px) {
     .coursbourse .tableaubourse{
         width:100%;
@@ -26,5 +30,6 @@
     .tableauuser{
         width:95%;
     }
+
 
 }
