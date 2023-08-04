@@ -263,6 +263,8 @@ span.validate-tooltip {
 
 .titlelogin h3{
     background-color: #008cba;
+    margin-bottom:0;
+    padding-bottom: 10px;
 }
 
 .container_login .loginbackground{

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Import d'images{% endblock %}
+{% block title %}Importer vos images{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('login') }}
@@ -8,7 +8,7 @@
 {% block body %}
 
     {{ form_start(form, {'attr': {'class': 'form-signin'}}) }}
-    <h3>Import Images</h3>
+    <h3>Importer vos images</h3>
 
     {{ form_widget(form) }}
     {{ form_end(form) }}

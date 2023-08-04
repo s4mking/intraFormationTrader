@@ -8,6 +8,9 @@
     font-size:1.5rem;
     font-weight: bold;
 }
+.pagination li a{
+    text-decoration: none;
+}
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 780px) {
     .coursbourse .tableaubourse{

@@ -55,7 +55,7 @@ class RegistrationController extends AbstractController
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
             // do anything else you need here, like send an email
-
+            $this->addFlash('success', 'Votre compté a été créé veuillez vérifier vos mails.');
             return $this->redirectToRoute('app_default');
         }
 
@@ -121,7 +121,7 @@ class RegistrationController extends AbstractController
                         ->htmlTemplate('registration/confirmation_email.html.twig')
                 );
                 // do anything else you need here, like flash message
-                $this->addFlash('success', 'blabla.');
+                $this->addFlash('success', 'Un mail vous a été renvoyé.');
                 return $this->redirectToRoute('app_default');
             } else {
                 $this->addFlash('error', 'Email inconnu.');

@@ -4,7 +4,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    {{ encore_entry_link_tags('index') }}
+    {{ encore_entry_link_tags('login') }}
 {% endblock %}
 
 {% block body %}
@@ -12,7 +12,7 @@
     <div class="inner-warpper text-center">
     <p>
         Si un compte existe avec le mail que vous avez rentré nous venons  de vous envoyer un mail pour réinitialiser votre mot de passe.
-        Ce lien expirera dans 1 heure}.
+        Ce lien expirera dans 1 heure.
     </p>
     <p>Si vous n'avez pas reçu de mail vérifiez dans vos spams ou <a href="{{ path('app_forgot_password_request') }}">essayez encore</a>.</p>
 </div>
