@@ -63,6 +63,16 @@
 
                 <a aria-current="page" href="{{ path('app_default') }}"> <i class="fa fa-home" aria-hidden="true"></i> Accueil</a>
             </li>
+            <li class="item">
+                <a class="nav-link" href="{{ path('app_user_portefeuille') }}"><i class="fa fa-file-invoice" aria-hidden="true"></i>
+                    Mon portefeuille</a>
+            </li>
+            <li class="item">
+                <a class="nav-link" href="{{ path('app_user_trading') }}"><i class="fa fa-money-bill-trend-up" aria-hidden="true"></i> Trading</a>
+            </li>
+            <li class="item">
+                <a class="nav-link" href="{{ path('edit_profile') }}"><i class="fa fa-user-tie" aria-hidden="true"></i> Mon profil</a>
+            </li>
             {% if is_granted('ROLE_ADMIN') %}
             <li class="item">
                 <a class="nav-link" href="{{ path('app_import_csv') }}"><i class="fa fa-cloud-upload" aria-hidden="true"></i>

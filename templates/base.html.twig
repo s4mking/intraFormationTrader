@@ -19,7 +19,7 @@
         </div>
     {% endfor %}
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-        {% include 'navbar.html.twig' %}
+            {% include 'navbar.html.twig' %}
     {% endif %}
     <div class="container">
         {% block body %}
@@ -27,6 +27,9 @@
     </div>
 
         {% endblock %}
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        {% include 'footer.html.twig' %}
+    {% endif %}
     </body>
 </html>
 
