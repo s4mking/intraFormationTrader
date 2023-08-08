@@ -15,7 +15,8 @@ class AccountTypeFormType extends AbstractType
         $builder
             ->add('oldPassword', PasswordType::class, array(
 
-                'mapped' => false
+                'mapped' => false,
+                'label' => 'Ancien mot de passe',
 
             ))
             ->add('password', RepeatedType::class, array(
@@ -35,6 +36,8 @@ class AccountTypeFormType extends AbstractType
                 ),
 
                 'required' => true,
+                'first_options'  => ['label' => 'Mot de passe'],
+                'second_options' => ['label' => 'Répétez votre mot de passe'],
 
             ))
             ->add('submit', SubmitType::class, array(
