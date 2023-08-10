@@ -279,6 +279,57 @@ span.validate-tooltip {
     padding:10%;
 }
 
+.tabs {
+    width: 100%;
+}
+.tab-nav {
+    display: flex;
+    background: #f0f0f0;
+}
+.nav-item {
+    display: block;
+    padding: 16px;
+    cursor: pointer;
+}
+.nav-item.selected {
+    font-weight: bold;
+    background: #fff;
+}
+.tab {
+    display: none;
+    padding: 16px;
+}
+.tab.selected {
+    display: block;
+}
+.tab-pag {
+    padding: 0 16px;
+    display: flex;
+    justify-content: flex-end;
+}
+.pag-item {
+    display: block;
+    padding: 12px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 8px;
+}
+.pag-item:last-child {
+    margin-right: 0;
+}
+.pag-item.hidden {
+    display: none;
+}
+.pag-item-submit {
+    flex: 0 1 180px;
+    font-size: 1rem;
+    color: #fff;
+    border-color: #696969;
+    background: #696969;
+}
+
+
 @media (max-width: 480px) {
     .direction {
         position: static;

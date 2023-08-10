@@ -48,6 +48,9 @@ class Operation
     #[ORM\JoinColumn(nullable: false)]
     private ?User $transmitter = null;
 
+    #[ORM\Column(type: 'boolean', options: ["default" => true])]
+    private $isVerified = true;
+
     /**
      * @param string|null $symbol
      * @param int|null $position
@@ -215,5 +218,21 @@ class Operation
         $this->transmitter = $transmitter;
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    /**
+     * @param bool $isVerified
+     */
+    public function setIsVerified(bool $isVerified): void
+    {
+        $this->isVerified = $isVerified;
     }
 }

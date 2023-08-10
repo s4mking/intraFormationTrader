@@ -12,7 +12,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 
-class OperationFormType extends AbstractType
+class OperationUserFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -26,13 +26,7 @@ class OperationFormType extends AbstractType
                 'label' => 'Retrait',
                 'required' => false,
             ])
-            ->add('utilisateur', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'email',
-                'multiple' => true,
-                'expanded' => true,
-            ])
-            ->add('save', SubmitType::class, ['label' => 'Effectuer la transaction'])
+            ->add('save', SubmitType::class, ['label' => 'Effectuer la demande'])
             // ...
         ;
     }

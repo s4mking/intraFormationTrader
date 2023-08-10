@@ -46,7 +46,8 @@ class AccountTypeFormType extends AbstractType
 
                     'class' => 'btn btn-primary btn-block'
 
-                )
+                ),
+                'label' => 'Modifier',
 
             ));
     }

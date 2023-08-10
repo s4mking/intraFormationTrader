@@ -13,7 +13,7 @@
 
 
     {{ form_start(form, {'attr': {'class': 'form-signin'}}) }}
-    <h3>Créditer les comptes</h3>
+    <h3>Demande de transaction</h3>
 
         <div class="tabs" id="tabbedForm">
             <nav class="tab-nav"></nav>
@@ -23,7 +23,6 @@
             <div class="tab" data-name="Crédit">
                 {{ form_row(form.credit) }}
             </div>
-            {{ form_row(form.utilisateur) }}
         </div>
         {{ form_end(form) }}
 {% endblock %}

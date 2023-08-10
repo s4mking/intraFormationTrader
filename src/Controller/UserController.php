@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Operation;
 use App\Form\AccountType;
 use App\Form\AccountTypeFormType;
 use App\Form\OperationFormType;
+use App\Form\OperationUserFormType;
 use App\Repository\OperationRepository;
+use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormError;
@@ -15,6 +18,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 
 class UserController extends AbstractController{
@@ -127,14 +131,6 @@ class UserController extends AbstractController{
             ]);
     }
 
-    #[Route('/profile', name: 'user_profile')]
-    public function profile(): Response
-    {
-        return $this->render('user/testSammmmmm.html.twig', [
-            'last_username' => 'samuel',
-        ]);
-    }
-
     /**
      * @param Request $request
      * @param UserPasswordHasherInterface $passwordHasher
@@ -178,6 +174,55 @@ class UserController extends AbstractController{
             'user' => $user
         ]);
 
+    }
+
+    #[Route('/profile', name: 'get_profile')]
+    public function getProfile(): Response
+    {
+
+        $user = $this->getUser();
+
+        return $this->render('user/view.html.twig', [
+            'user' => $user
+        ]);
+
+    }
+
+    #[Route('/requesttransaction', name: 'app_request_transaction')]
+    public function addCredit(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(OperationUserFormType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $retrait = $form->get('retrait')->getData();
+            $credit = $form->get('credit')->getData();
+            if(isset($retrait) || isset($credit)){
+                $user = $this->getUser();
+                $now = new DateTime();
+                $operation = new Operation(
+                    '',
+                    0,
+                     'Credit',
+                    0,
+                    $now,
+                    0,
+                    $now,
+                    0,
+                    $retrait,
+                    0,
+                    $user
+                );
+                $operation->setIsVerified(false);
+                $entityManager->persist($operation);
+                $entityManager->flush();
+            }
+
+            }
+
+        return $this->render('operation/request_transaction.html.twig', [
+            'form' => $form,
+        ]);
     }
 
 }
