@@ -30,11 +30,13 @@ var tabs = function(id) {
 
     // Create pag
     this.pag.list = this.createPagList();
-    this.renderPagList();
+    //this.renderPagList();
 
     // Set selected
-
+    tabs = document.querySelectorAll(".container .tab")
+    tabs[0].classList.add("selected");
     this.setSelected(this.selected);
+
   }
 
   this.createTabList = function() {

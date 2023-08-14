@@ -189,11 +189,12 @@ class UserController extends AbstractController{
     }
 
     #[Route('/requesttransaction', name: 'app_request_transaction')]
-    public function addCredit(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response
+    public function addCredit(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager, OperationRepository $operationRepository): Response
     {
         $form = $this->createForm(OperationUserFormType::class);
         $form->handleRequest($request);
-
+        $user = $this->getUser();
+        $operations = $operationRepository->findOperationsPendingForUser($user);
         if ($form->isSubmitted() && $form->isValid()) {
             $retrait = $form->get('retrait')->getData();
             $credit = $form->get('credit')->getData();
@@ -222,6 +223,7 @@ class UserController extends AbstractController{
 
         return $this->render('operation/request_transaction.html.twig', [
             'form' => $form,
+            'operations' => $operations
         ]);
     }
 
