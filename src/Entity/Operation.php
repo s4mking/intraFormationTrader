@@ -51,6 +51,9 @@ class Operation
     #[ORM\Column(type: 'boolean', options: ["default" => true])]
     private $isVerified = true;
 
+    #[ORM\Column(type: 'boolean', options: ["default" => true])]
+    private $isApproved = true;
+
     /**
      * @param string|null $symbol
      * @param int|null $position
@@ -234,5 +237,21 @@ class Operation
     public function setIsVerified(bool $isVerified): void
     {
         $this->isVerified = $isVerified;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isApproved(): bool
+    {
+        return $this->isApproved;
+    }
+
+    /**
+     * @param bool $isApproved
+     */
+    public function setIsApproved(bool $isApproved): void
+    {
+        $this->isApproved = $isApproved;
     }
 }

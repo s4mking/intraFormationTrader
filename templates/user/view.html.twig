@@ -7,7 +7,8 @@
 {% block body %}
 
     <h3>Votre compte</h3>
-    {{ user.email }}
+    <label>Votre adresse mail : </label><b>{{ user.email }}</b>
+    <br>
     <a href="{{ path('edit_profile') }}">Modifier votre mot de passe</a>
 
 {% endblock %}

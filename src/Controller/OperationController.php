@@ -68,7 +68,7 @@ class OperationController extends AbstractController
             }
         }
 
-        return $this->render('operation/new.html.twig', [
+        return $this->render('operation/newcsv.html.twig', [
             'form' => $form,
         ]);
     }
@@ -111,6 +111,35 @@ class OperationController extends AbstractController
         ]);
     }
 
+    #[Route('/{id}/approve', name: 'app_operation_approve', methods: ['GET','POST'])]
+    public function approveOperation(Request $request, Operation $operation, EntityManagerInterface $entityManager): Response
+    {
+        $operation->setIsApproved(false);
+        $operation->setIsVerified(true);
+        $entityManager->persist($operation);
+        $entityManager->flush();
+        return $this->redirectToRoute('app_operations_approval');
+    }
+
+    #[Route('/{id}/refus', name: 'app_operation_refus', methods: ['GET','POST'])]
+    public function refusOperation(Request $request, Operation $operation, EntityManagerInterface $entityManager): Response
+    {
+        $operation->setIsApproved(true);
+        $operation->setIsVerified(true);
+        $entityManager->persist($operation);
+        $entityManager->flush();
+        return $this->redirectToRoute('app_operations_approval');
+    }
+
+    #[Route('/demandes', name: 'app_operations_approval')]
+    public function approvesOperations(Request $request, OperationRepository $operationRepository): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        return $this->render('operation/indexVerified.html.twig', [
+            'operations' => $operationRepository->findBy(array('isVerified' => 0)),
+        ]);
+    }
+
     #[Route('/{id}', name: 'app_operation_show', methods: ['GET'])]
     public function show(Operation $operation): Response
     {
@@ -118,7 +147,6 @@ class OperationController extends AbstractController
             'operation' => $operation,
         ]);
     }
-
 
 #[Route('/', name: 'app_operation_index', methods: ['GET'])]
     public function index(OperationRepository $operationRepository): Response

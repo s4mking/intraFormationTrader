@@ -294,10 +294,12 @@ span.validate-tooltip {
     display: block;
     padding: 16px;
     cursor: pointer;
+    width: 50%;
+    text-align: center;
 }
 .nav-item.selected {
     font-weight: bold;
-    background: #fff;
+    background: #d3e3fd;
 }
 .tab {
     display: none;
@@ -337,6 +339,11 @@ span.validate-tooltip {
     max-height: 100vh;
     max-width: 100vw;
     padding: 0;
+}
+
+.containermesdemandes{
+    position: relative;
+    left: 12%;
 }
 
 @media (max-width: 480px) {

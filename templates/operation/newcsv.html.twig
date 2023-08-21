@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Operation{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('login') }}
+{% endblock %}
+{% block body %}
+
+
+    {{ form_start(form, {'attr': {'class': 'form-signin'}}) }}
+    <h3>Créditer les comptes</h3>
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+{% endblock %}

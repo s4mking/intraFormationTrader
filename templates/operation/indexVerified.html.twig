@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Operations{% endblock %}
+
+{% block body %}
+    <h1>Liste de toutes les opérations</h1>
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Profit</th>
+                <th>Utilisateur</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for operation in operations %}
+            <tr>
+                <td>{{ operation.type }}</td>
+                <td>{{ operation.profit }}</td>
+                <td>{{ operation.transmitter }}</td>
+                <td><a href="{{ path('app_operation_approve', {'id': operation.id}) }}" class="buttonValidation" type="submit">Approuver</a></td>
+                <td><a href="{{ path('app_operation_refus', {'id': operation.id}) }}" class="buttonRefus" type="submit">Refuser</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

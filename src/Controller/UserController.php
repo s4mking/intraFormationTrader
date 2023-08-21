@@ -215,6 +215,7 @@ class UserController extends AbstractController{
                     $user
                 );
                 $operation->setIsVerified(false);
+                $operation->setIsApproved(false);
                 $entityManager->persist($operation);
                 $entityManager->flush();
             }
