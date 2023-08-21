@@ -13,10 +13,10 @@
 
     {{ form_errors(registrationForm) }}
 
-<div class="container_login py-10">
-        <div class="wrapper titlelogin">
+<div class="container_login py-10" style="background-image:url('{{asset('images/imageville.jpeg')}}')">
+        <div class="wrapper titlelogin rounded-top">
             <h3 class="text-center text-white py-3 rounded-top">Création compte</h3>
-            <div class="inner-warpper text-center loginbackground" style="background-image:url('{{asset('images/imageville.jpeg')}}')">
+            <div class="inner-warpper text-center loginbackground" >
                 {{ form_start(registrationForm, {'attr': {'id': 'formvalidate', 'class': 'rounded'},}) }}
                 <div class="input-group">
                     {{ form_widget(registrationForm.email, {'attr': {'id': 'username'}}) }}
