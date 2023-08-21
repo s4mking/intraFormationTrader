@@ -7,9 +7,24 @@
 {% block title %}Renvoyer le lien d'activation{% endblock %}
 
 {% block body %}
-    {{ form_start(requestForm, {'attr': {'class': 'form-signin'}}) }}
-    <h1 class="h3 mb-3 font-weight-normal">Renvoyer le lien d'activation</h1>
-    {{ form_row(requestForm.email) }}
-    <button class="btn btn-lg btn-primary btn-block" type="submit" >Envoi</button>
-    {{ form_end(requestForm) }}
+
+<div class="container_login py-10" style="background-image:url('{{asset('images/imageville.jpeg')}}')">
+    <div class="wrapper titlelogin rounded-top">
+        <h3 class="text-center text-white py-3 rounded-top">Renvoyer le lien d'activation</h3>
+        <div class="inner-warpper text-center loginbackground" >
+            {{ form_start(requestForm, {'attr': {'id': 'formvalidate', 'class': 'rounded'},}) }}
+            <div class="input-group">
+                {{ form_widget(requestForm.email, {'attr': {'id': 'username'}}) }}
+                <span class="lighting"></span>
+            </div>
+            <button type="submit" id="login">Envoi</button>
+            {{ form_end(requestForm) }}
+        </div>
+
+        <div class="signup-wrapper text-center">
+            <p> <a href="{{ path('app_login') }}"> Déjà un compte ? <span class="text-primary">Se connecter</span></a></p>
+        </div>
+    </div>
+
+</div>
 {% endblock %}
