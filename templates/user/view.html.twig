@@ -5,10 +5,17 @@
     {{ parent() }}
 {% endblock %}
 {% block body %}
+    <div class="containerAccount">
+        <img src="{{ asset('images/account.jpg') }}" id="accountimg">
+        <div class="accountRight">
+            <h3>Votre compte</h3>
+            <div>
+                <label>Adresse mail : </label><b>{{ user.email }}</b>
+            </div>
+            <a href="{{ path('edit_profile') }}">Modifier votre mot de passe</a>
+        </div>
 
-    <h3>Votre compte</h3>
-    <label>Votre adresse mail : </label><b>{{ user.email }}</b>
-    <br>
-    <a href="{{ path('edit_profile') }}">Modifier votre mot de passe</a>
+    </div>
+
 
 {% endblock %}

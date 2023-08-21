@@ -266,6 +266,18 @@ span.validate-tooltip {
     margin-bottom:0;
     padding-bottom: 10px;
 }
+
+#retaitimg{
+
+    margin: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:550px;
+    max-width:550px;
+    height:auto;
+}
+
 .container_login{
     padding:20px;
     height:100vh;
