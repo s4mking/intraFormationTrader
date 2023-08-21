@@ -108,7 +108,7 @@ class OperationRepository extends ServiceEntityRepository
     public function findOperationsPendingForUser(UserInterface $user):array
     {
         return $this->createQueryBuilder('o')
-            ->andWhere('o.isVerified = false')
+            ->andWhere('o.isVerified = false OR o.isApproved = false')
             ->andWhere('o.transmitter = :user')
             ->setParameter('user', $user)
             ->getQuery()

@@ -114,17 +114,22 @@ class OperationController extends AbstractController
     #[Route('/{id}/approve', name: 'app_operation_approve', methods: ['GET','POST'])]
     public function approveOperation(Request $request, Operation $operation, EntityManagerInterface $entityManager): Response
     {
-        $operation->setIsApproved(false);
+        $operation->setIsApproved(true);
         $operation->setIsVerified(true);
         $entityManager->persist($operation);
+        $user = $operation->getTransmitter();
+        $actualBalance = $user->getAccountBalance();
+        $user->setAccountBalance($actualBalance+ $operation->getProfit());
+        $entityManager->persist($user);
         $entityManager->flush();
+
         return $this->redirectToRoute('app_operations_approval');
     }
 
     #[Route('/{id}/refus', name: 'app_operation_refus', methods: ['GET','POST'])]
     public function refusOperation(Request $request, Operation $operation, EntityManagerInterface $entityManager): Response
     {
-        $operation->setIsApproved(true);
+        $operation->setIsApproved(false);
         $operation->setIsVerified(true);
         $entityManager->persist($operation);
         $entityManager->flush();

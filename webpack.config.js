@@ -24,6 +24,7 @@ Encore
     .addEntry('login', './assets/styles/login.css')
     .addEntry('sidebar', './assets/styles/sidebar.css')
     .addEntry('sidebarjs', './assets/script/sidebar.js')
+    .addEntry('selectall', './assets/script/selectAll.js')
     .addEntry('loginjs', './assets/script/login.js')
     .addEntry('index', './assets/styles/index.css')
 

@@ -35,11 +35,9 @@
                 <tr class="table-active">
                     <th>Type</th>
                     {#                            <th>Lots</th>#}
-                    <th>OpenTime</th>
-                    <th>OpenPrice</th>
-                    <th>CloseTime</th>
-                    <th>ClosePrice</th>
                     <th>Profit</th>
+                    <th>Vérifié?</th>
+                    <th>Approuvé?</th>
                     {#                            <th>NetProfit</th>#}
                 </tr>
                 </thead>
@@ -67,15 +65,13 @@
                     {#                            {% endif %}#}
                     <td><b>{{ operation.type }}</b></td>
                     {#    <td>{{ operation.lots }}</td>#}
-                    <td>{{ operation.openTime ? operation.openTime|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ operation.openPrice }}</td>
-                    <td>{{ operation.closeTime ? operation.closeTime|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ operation.closePrice }}</td>
                     {% if operation.profit < 0 %}
                         <td class="bg-danger">{{ operation.profit }}</td>
                     {% else %}
                         <td class="bg-success">{{ operation.profit }}</td>
                     {% endif %}
+                    <td>{{ operation.isVerified ? 'Oui' : 'Non' }}</td>
+                    <td>{{ operation.isApproved ? 'Oui' : 'Non' }}</td>
                     {#                                <td>{{ operation.netProfit }}</td>#}
                     </tr>
                 {% else %}

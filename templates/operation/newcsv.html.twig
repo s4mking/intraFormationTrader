@@ -5,12 +5,18 @@
     {{ parent() }}
     {{ encore_entry_link_tags('login') }}
 {% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('selectall') }}
+{% endblock %}
 {% block body %}
 
 
     {{ form_start(form, {'attr': {'class': 'form-signin'}}) }}
     <h3>Créditer les comptes</h3>
-    {{ form_widget(form) }}
+    {{ form_row(form.file) }}
+    {{ form_row(form.utilisateur) }}
+    <input type="checkbox" name="select-all" id="select-all" />
+    <label for="select-all">Tout sélectionner</label>
     {{ form_end(form) }}
 
 {% endblock %}

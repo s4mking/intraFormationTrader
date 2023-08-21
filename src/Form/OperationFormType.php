@@ -19,11 +19,11 @@ class OperationFormType extends AbstractType
         $builder
             // ...
             ->add('credit', NumberType::class, [
-                'label' => 'Crédit',
+                'label' => False,
                 'required' => false,
             ])
             ->add('retrait', NumberType::class, [
-                'label' => 'Retrait',
+                'label' => False,
                 'required' => false,
             ])
             ->add('utilisateur', EntityType::class, [

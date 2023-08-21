@@ -198,25 +198,47 @@ class UserController extends AbstractController{
         if ($form->isSubmitted() && $form->isValid()) {
             $retrait = $form->get('retrait')->getData();
             $credit = $form->get('credit')->getData();
-            if(isset($retrait) || isset($credit)){
+            if(isset($retrait)){
                 $user = $this->getUser();
                 $now = new DateTime();
                 $operation = new Operation(
                     '',
                     0,
-                     'Credit',
+                     'Retrait',
                     0,
                     $now,
                     0,
                     $now,
                     0,
-                    $retrait,
+                    -$retrait,
                     0,
                     $user
                 );
                 $operation->setIsVerified(false);
                 $operation->setIsApproved(false);
                 $entityManager->persist($operation);
+                $entityManager->flush();
+            }
+
+            if(isset($credit)){
+                $user = $this->getUser();
+                $now = new DateTime();
+                $operationCredit = new Operation(
+                    '',
+                    0,
+                    'Credit',
+                    0,
+                    $now,
+                    0,
+                    $now,
+                    0,
+                    $credit,
+                    0,
+                    $user
+                );
+                $operationCredit->setIsVerified(false);
+                $operationCredit->setIsApproved(false);
+                $entityManager->persist($operationCredit);
                 $entityManager->flush();
             }
 

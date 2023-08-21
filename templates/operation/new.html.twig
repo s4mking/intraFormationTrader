@@ -7,6 +7,7 @@
 {% endblock %}
 {% block javascripts %}
     {{ encore_entry_script_tags('loginjs') }}
+    {{ encore_entry_script_tags('selectall') }}
 {% endblock %}
 
 {% block body %}
@@ -24,6 +25,9 @@
                 {{ form_row(form.credit) }}
             </div>
             {{ form_row(form.utilisateur) }}
+            <input type="checkbox" name="select-all" id="select-all" />
+            <label for="select-all">Tout sélectionner</label>
+
         </div>
         {{ form_end(form) }}
 {% endblock %}
