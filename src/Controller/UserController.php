@@ -7,6 +7,7 @@ use App\Form\AccountType;
 use App\Form\AccountTypeFormType;
 use App\Form\OperationFormType;
 use App\Form\OperationUserFormType;
+use App\Helper\OperationHelper;
 use App\Repository\OperationRepository;
 use DateTime;
 use Doctrine\ORM\EntityManager;
@@ -24,7 +25,8 @@ use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 class UserController extends AbstractController{
 
     public function __construct(
-        private EntityManagerInterface $entityManager
+        private EntityManagerInterface $entityManager,
+        public OperationHelper $operationHelper
     ) {
     }
     #[Route('/home', name: 'app_home')]
@@ -189,7 +191,7 @@ class UserController extends AbstractController{
     }
 
     #[Route('/requesttransaction', name: 'app_request_transaction')]
-    public function addCredit(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager, OperationRepository $operationRepository): Response
+    public function addCredit(Request $request, SluggerInterface $slugger, OperationRepository $operationRepository): Response
     {
         $form = $this->createForm(OperationUserFormType::class);
         $form->handleRequest($request);
@@ -198,50 +200,8 @@ class UserController extends AbstractController{
         if ($form->isSubmitted() && $form->isValid()) {
             $retrait = $form->get('retrait')->getData();
             $credit = $form->get('credit')->getData();
-            if(isset($retrait)){
-                $user = $this->getUser();
-                $now = new DateTime();
-                $operation = new Operation(
-                    '',
-                    0,
-                     'Retrait',
-                    0,
-                    $now,
-                    0,
-                    $now,
-                    0,
-                    -$retrait,
-                    0,
-                    $user
-                );
-                $operation->setIsVerified(false);
-                $operation->setIsApproved(false);
-                $entityManager->persist($operation);
-                $entityManager->flush();
-            }
-
-            if(isset($credit)){
-                $user = $this->getUser();
-                $now = new DateTime();
-                $operationCredit = new Operation(
-                    '',
-                    0,
-                    'Credit',
-                    0,
-                    $now,
-                    0,
-                    $now,
-                    0,
-                    $credit,
-                    0,
-                    $user
-                );
-                $operationCredit->setIsVerified(false);
-                $operationCredit->setIsApproved(false);
-                $entityManager->persist($operationCredit);
-                $entityManager->flush();
-            }
-
+            $this->operationHelper->addCredit($retrait,$user);
+            $this->operationHelper->addRetrait($credit,$user);
             }
 
         return $this->render('operation/request_transaction.html.twig', [

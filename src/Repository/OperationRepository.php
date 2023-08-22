@@ -99,6 +99,7 @@ class OperationRepository extends ServiceEntityRepository
             ->setParameter('user', $user)
             ->setParameter('buy', 'Buy')
             ->setParameter('sell', 'Sell')
+            ->orderBy('o.openTime', 'DESC')
             ->getQuery()
             ;
 
@@ -121,6 +122,7 @@ class OperationRepository extends ServiceEntityRepository
         $query = $this->createQueryBuilder('o')
             ->andWhere('o.transmitter = :user')
             ->setParameter('user', $user)
+            ->orderBy('o.openTime', 'DESC')
             ->getQuery()
         ;
 

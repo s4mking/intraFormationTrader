@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Helper\OperationHelper;
 use App\Model\OperationFromCSVDTO;
 use App\Entity\Operation;
 use App\Form\OperationFormType;
@@ -22,6 +23,11 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 #[Route('/operation')]
 class OperationController extends AbstractController
 {
+
+    public function __construct(
+        public OperationHelper $operationHelper
+    ) {
+    }
 
     #[Route('/importcsv', name: 'app_import_csv')]
     public function importCSV(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager, SerializerInterface $serializer): Response
@@ -87,45 +93,14 @@ class OperationController extends AbstractController
             $users = $form->get('utilisateur')->getData();
             foreach ($users as $user){
                 $actualBalance = $user->getAccountBalance();
+
                 if(isset($retrait)){
-                    $now = new DateTime();
-                    $operation = new Operation(
-                        '',
-                        0,
-                        'Retrait',
-                        0,
-                        $now,
-                        0,
-                        $now,
-                        0,
-                        -$retrait,
-                        0,
-                        $user
-                    );
-                    $operation->setIsVerified(false);
-                    $operation->setIsApproved(false);
-                    $entityManager->persist($operation);
+                    $this->operationHelper->addRetrait($credit,$user);
                     $user->setAccountBalance($actualBalance+ (-$retrait));
                 }
 
                 if(isset($credit)){
-                    $now = new DateTime();
-                    $operationCredit = new Operation(
-                        '',
-                        0,
-                        'Credit',
-                        0,
-                        $now,
-                        0,
-                        $now,
-                        0,
-                        $credit,
-                        0,
-                        $user
-                    );
-                    $operationCredit->setIsVerified(true);
-                    $operationCredit->setIsApproved(true);
-                    $entityManager->persist($operationCredit);
+                    $this->operationHelper->addCredit($retrait,$user);
                     $user->setAccountBalance($actualBalance+ $credit);
                 }
                 $entityManager->persist($user);
