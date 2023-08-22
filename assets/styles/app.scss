@@ -40,17 +40,25 @@ z-index: 190;
     text-align: center;
     text-decoration: none;
     color: #ffffff;
-    background-color: #7aa8b7;
+    background-color: #991b1b;
     border-radius: 6px;
     outline: none;
     transition: 0.3s;
 }
 .buttonRefus:hover {
-    background-color: #c2c7c7;
+    background-color: #ff7b72;
 }
 
 #accountimg{
     width:550px;
+}
+
+#walletimg{
+    width:350px;
+    height:auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .accountRight{

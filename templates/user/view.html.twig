@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Votre compte{% endblock %}
+{% block title %}Mon compte{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
 {% endblock %}
 {% block body %}
     <div class="containerAccount">
-        <img src="{{ asset('images/account.jpg') }}" id="accountimg">
+        <img src="{{ asset('images/accountBg.png') }}" id="accountimg">
         <div class="accountRight">
-            <h3>Votre compte</h3>
+            <h3>Mon compte</h3>
             <div>
                 <label>Adresse mail : </label><b>{{ user.email }}</b>
             </div>

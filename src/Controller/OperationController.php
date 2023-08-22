@@ -81,29 +81,57 @@ class OperationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $number = $form->get('number')->getData();
+            $retrait = $form->get('retrait')->getData();
+            $credit = $form->get('credit')->getData();
+           /* $number = $form->get('number')->getData();*/
             $users = $form->get('utilisateur')->getData();
             foreach ($users as $user){
+                $actualBalance = $user->getAccountBalance();
+                if(isset($retrait)){
                     $now = new DateTime();
                     $operation = new Operation(
                         '',
                         0,
-                        $number > 0 ? 'Credit' : 'Retrait',
+                        'Retrait',
                         0,
                         $now,
                         0,
                         $now,
                         0,
-                        $number,
+                        -$retrait,
                         0,
                         $user
                     );
-                    $actualBalance = $user->getAccountBalance();
-                    $user->setAccountBalance($actualBalance+ $number);
-                    $entityManager->persist($user);
+                    $operation->setIsVerified(false);
+                    $operation->setIsApproved(false);
                     $entityManager->persist($operation);
-                    $entityManager->flush();
+                    $user->setAccountBalance($actualBalance+ (-$retrait));
                 }
+
+                if(isset($credit)){
+                    $now = new DateTime();
+                    $operationCredit = new Operation(
+                        '',
+                        0,
+                        'Credit',
+                        0,
+                        $now,
+                        0,
+                        $now,
+                        0,
+                        $credit,
+                        0,
+                        $user
+                    );
+                    $operationCredit->setIsVerified(true);
+                    $operationCredit->setIsApproved(true);
+                    $entityManager->persist($operationCredit);
+                    $user->setAccountBalance($actualBalance+ $credit);
+                }
+                $entityManager->persist($user);
+            }
+
+            $entityManager->flush();
             }
 
         return $this->render('operation/new.html.twig', [
