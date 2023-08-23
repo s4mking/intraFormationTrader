@@ -23,8 +23,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
+    #[ORM\Column(length: 180, nullable: 'true')]
+    private ?string $nom = null;
+
+    #[ORM\Column(length: 180, nullable: 'true')]
+    private ?string $prenom = null;
+
     #[ORM\Column(nullable: 'true')]
     private ?float $accountBalance = 0;
+
+    #[ORM\Column(type:"string", length:255, nullable: 'true')]
+    private ?string $adresse = null;
+
+
+
+    #[ORM\Column(type:"string", length:20, nullable: 'true')]
+    private ?string $telephone = null;
+
 
     #[ORM\Column]
     private array $roles = [];
@@ -49,6 +64,37 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getId(): ?int
     {
         return $this->id;
+    }
+    /**
+     * @return string|null
+     */
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    /**
+     * @param string|null $nom
+     */
+    public function setNom(?string $nom): void
+    {
+        $this->nom = $nom;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    /**
+     * @param string|null $prenom
+     */
+    public function setPrenom(?string $prenom): void
+    {
+        $this->prenom = $prenom;
     }
 
     public function getEmail(): ?string
@@ -177,5 +223,37 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString(): string
     {
         return $this->email;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAdresse(): ?string
+    {
+        return $this->adresse;
+    }
+
+    /**
+     * @param string|null $adresse
+     */
+    public function setAdresse(?string $adresse): void
+    {
+        $this->adresse = $adresse;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    /**
+     * @param string|null $telephone
+     */
+    public function setTelephone(?string $telephone): void
+    {
+        $this->telephone = $telephone;
     }
 }

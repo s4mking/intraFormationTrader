@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Operation;
 use App\Form\AccountType;
 use App\Form\AccountTypeFormType;
+use App\Form\ContactFormType;
+use App\Form\EditProfileFormType;
 use App\Form\OperationFormType;
 use App\Form\OperationUserFormType;
 use App\Helper\OperationHelper;
@@ -26,7 +28,7 @@ class UserController extends AbstractController{
 
     public function __construct(
         private EntityManagerInterface $entityManager,
-        public OperationHelper $operationHelper
+        public OperationHelper $operationHelper,
     ) {
     }
     #[Route('/home', name: 'app_home')]
@@ -138,8 +140,8 @@ class UserController extends AbstractController{
      * @param UserPasswordHasherInterface $passwordHasher
      * @return Response
      */
-    #[Route('/profile/edit', name: 'edit_profile')]
-    public function editProfile(Request $request, UserPasswordHasherInterface $passwordHasher): Response
+    #[Route('/profile/editpassword', name: 'edit_password')]
+    public function editPassword(Request $request, UserPasswordHasherInterface $passwordHasher): Response
     {
 
         $user = $this->getUser();
@@ -171,8 +173,39 @@ class UserController extends AbstractController{
             }
         }
 
-        return $this->render('user/edit.html.twig', [
+        return $this->render('user/editpassword.html.twig', [
             'accountForm' => $form->createView(),
+            'user' => $user
+        ]);
+
+    }
+
+    #[Route('/profile/edit', name: 'edit_profile')]
+    public function editProfile(Request $request): Response
+    {
+
+        $user = $this->getUser();
+
+        $form = $this->createForm(EditProfileFormType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setAdresse($form->getData()->getAdresse());
+            $user->setNom($form->getData()->getNom());
+            $user->setPrenom($form->getData()->getPrenom());
+            $user->setTelephone($form->getData()->getTelephone());
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
+
+
+            $this->addFlash('success', 'Votre compte a été modifié.');
+            return $this->redirectToRoute('app_default');
+            } else {
+                $form->addError(new FormError('Certaines entrées ne sont pas correctes'));
+            }
+        return $this->render('user/editprofile.html.twig', [
+            'profileForm' => $form->createView(),
             'user' => $user
         ]);
 
@@ -207,6 +240,24 @@ class UserController extends AbstractController{
         return $this->render('operation/request_transaction.html.twig', [
             'form' => $form,
             'operations' => $operations
+        ]);
+    }
+
+    #[Route('/help', name: 'app_help')]
+    public function helpController(Request $request): Response
+    {
+        $form = $this->createForm(ContactFormType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $contactFormData = $form->getData();
+            $subject = 'Demande de contact sur votre site de ' . $contactFormData['email'];
+            $content = $contactFormData['name'] . ' vous a envoyé le message suivant: ' . $contactFormData['message'];
+            /*$mailer->sendEmail(subject: $subject, content: $content);*/
+            $this->addFlash('success', 'Votre message a été envoyé');
+            return $this->redirectToRoute('homepage');
+        }
+        return $this->render('user/contact.html.twig', [
+            'contactForm' => $form->createView()
         ]);
     }
 

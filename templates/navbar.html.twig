@@ -76,6 +76,9 @@
             <li class="item">
                 <a class="nav-link" href="{{ path('get_profile') }}"><i class="fa fa-user-tie" aria-hidden="true"></i> Mon profil</a>
             </li>
+            <li class="item">
+                <a class="nav-link" href="{{ path('app_help') }}"><i class="fa fa-handshake-angle" aria-hidden="true"></i> Assistance</a>
+            </li>
             {% if is_granted('ROLE_ADMIN') %}
             <li class="item">
                 <a class="nav-link" href="{{ path('app_import_csv') }}"><i class="fa fa-cloud-upload" aria-hidden="true"></i>

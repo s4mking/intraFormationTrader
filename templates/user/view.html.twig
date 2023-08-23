@@ -12,7 +12,21 @@
             <div>
                 <label>Adresse mail : </label><b>{{ user.email }}</b>
             </div>
-            <a href="{{ path('edit_profile') }}">Modifier votre mot de passe</a>
+            <div>
+                <label>Nom : </label><b>{{ user.nom }}</b>
+            </div>
+            <div>
+                <label>Prénom : </label><b>{{ user.prenom }}</b>
+            </div>
+            <div>
+                <label>Adresse : </label><b>{{ user.adresse }}</b>
+            </div>
+            <div>
+                <label>Téléphone : </label><b>{{ user.telephone }}</b>
+            </div>
+
+            <a href="{{ path('edit_profile') }}">Modifier vos informations</a>
+            <a href="{{ path('edit_password') }}">Modifier votre mot de passe</a>
         </div>
 
     </div>

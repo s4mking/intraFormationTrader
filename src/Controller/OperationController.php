@@ -200,7 +200,7 @@ class OperationController extends AbstractController
             return $this->redirectToRoute('app_operation_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('operation/edit.html.twig', [
+        return $this->render('operation/editpassword.html.twig', [
             'operation' => $operation,
             'form' => $form,
         ]);

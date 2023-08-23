@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('login') }}
+{% endblock %}
+{% block body %}
+
+    {{ form_start(contactForm, {'attr': {'class': 'form-signin'}}) }}
+    <h3>Contact</h3>
+    {{ form_widget(contactForm) }}
+    {{ form_end(contactForm) }}
+
+{% endblock %}
