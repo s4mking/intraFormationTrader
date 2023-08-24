@@ -17,6 +17,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -201,8 +203,6 @@ class UserController extends AbstractController{
 
             $this->addFlash('success', 'Votre compte a été modifié.');
             return $this->redirectToRoute('app_default');
-            } else {
-                $form->addError(new FormError('Certaines entrées ne sont pas correctes'));
             }
         return $this->render('user/editprofile.html.twig', [
             'profileForm' => $form->createView(),
@@ -229,14 +229,14 @@ class UserController extends AbstractController{
         $form = $this->createForm(OperationUserFormType::class);
         $form->handleRequest($request);
         $user = $this->getUser();
-        $operations = $operationRepository->findOperationsPendingForUser($user);
         if ($form->isSubmitted() && $form->isValid()) {
             $retrait = $form->get('retrait')->getData();
             $credit = $form->get('credit')->getData();
             $this->operationHelper->addCredit($retrait,$user);
             $this->operationHelper->addRetrait($credit,$user);
+            $this->addFlash('success', 'Votre demande a été pris en compte');
             }
-
+        $operations = $operationRepository->findOperationsPendingForUser($user);
         return $this->render('operation/request_transaction.html.twig', [
             'form' => $form,
             'operations' => $operations
@@ -244,17 +244,23 @@ class UserController extends AbstractController{
     }
 
     #[Route('/help', name: 'app_help')]
-    public function helpController(Request $request): Response
+    public function helpController(Request $request, MailerInterface $mailer): Response
     {
         $form = $this->createForm(ContactFormType::class);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
             $contactFormData = $form->getData();
             $subject = 'Demande de contact sur votre site de ' . $contactFormData['email'];
-            $content = $contactFormData['name'] . ' vous a envoyé le message suivant: ' . $contactFormData['message'];
-            /*$mailer->sendEmail(subject: $subject, content: $content);*/
+            $content = $contactFormData['nom'] . ' vous a envoyé le message suivant: ' . $contactFormData['message'];
+            $email = (new Email())
+            ->text($content)
+            ->subject($subject)
+            ->sender($contactFormData['email'])
+                ->to('samuel.simonney@gmail.com')
+            ;
+            $mailer->send($email);
             $this->addFlash('success', 'Votre message a été envoyé');
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('app_default');
         }
         return $this->render('user/contact.html.twig', [
             'contactForm' => $form->createView()
