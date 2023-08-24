@@ -2,21 +2,18 @@
 
 namespace App\Controller;
 
-use App\Helper\OperationHelper;
-use App\Model\OperationFromCSVDTO;
 use App\Entity\Operation;
+use App\Form\CSVFormType;
 use App\Form\OperationFormType;
 use App\Form\OperationType;
+use App\Helper\OperationHelper;
+use App\Model\OperationFromCSVDTO;
 use App\Repository\OperationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Form\CSVFormType;
-use DateTime;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
@@ -26,7 +23,8 @@ class OperationController extends AbstractController
 
     public function __construct(
         public OperationHelper $operationHelper
-    ) {
+    )
+    {
     }
 
     #[Route('/importcsv', name: 'app_import_csv')]
@@ -43,11 +41,11 @@ class OperationController extends AbstractController
             $spreadsheet = $reader->load($form->get('file')->getData());
             $worksheet = $spreadsheet->getActiveSheet();
             $rows = $worksheet->toArray();
-            foreach ($users as $user){
-                $sum=0;
+            foreach ($users as $user) {
+                $sum = 0;
                 foreach ($rows as $row) {
 
-                    if ($row[0] == 'Symbol' || is_null($row[8]) || is_null($row[0]) ) {
+                    if ($row[0] == 'Symbol' || is_null($row[8]) || is_null($row[0])) {
                         continue;
                     }
                     $operationDto = new OperationFromCSVDTO($row);
@@ -64,11 +62,11 @@ class OperationController extends AbstractController
                         $operationDto->netProfit,
                         $user
                     );
-                    $sum+=floatval($operationDto->profit);
+                    $sum += floatval($operationDto->profit);
                     $entityManager->persist($operation);
                 }
                 $actualBalance = $user->getAccountBalance();
-                $user->setAccountBalance($actualBalance+ $sum);
+                $user->setAccountBalance($actualBalance + $sum);
                 $entityManager->persist($user);
                 $entityManager->flush();
             }
@@ -89,32 +87,32 @@ class OperationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $retrait = $form->get('retrait')->getData();
             $credit = $form->get('credit')->getData();
-           /* $number = $form->get('number')->getData();*/
+            /* $number = $form->get('number')->getData();*/
             $users = $form->get('utilisateur')->getData();
-            foreach ($users as $user){
+            foreach ($users as $user) {
                 $actualBalance = $user->getAccountBalance();
 
-                if(isset($retrait)){
-                    $this->operationHelper->addRetrait($credit,$user);
-                    $user->setAccountBalance($actualBalance+ (-$retrait));
+                if (isset($retrait)) {
+                    $this->operationHelper->addRetrait($credit, $user);
+                    $user->setAccountBalance($actualBalance + (-$retrait));
                 }
 
-                if(isset($credit)){
-                    $this->operationHelper->addCredit($retrait,$user);
-                    $user->setAccountBalance($actualBalance+ $credit);
+                if (isset($credit)) {
+                    $this->operationHelper->addCredit($retrait, $user);
+                    $user->setAccountBalance($actualBalance + $credit);
                 }
                 $entityManager->persist($user);
             }
 
             $entityManager->flush();
-            }
+        }
 
         return $this->render('operation/new.html.twig', [
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}/approve', name: 'app_operation_approve', methods: ['GET','POST'])]
+    #[Route('/{id}/approve', name: 'app_operation_approve', methods: ['GET', 'POST'])]
     public function approveOperation(Request $request, Operation $operation, EntityManagerInterface $entityManager): Response
     {
         $operation->setIsApproved(true);
@@ -122,14 +120,14 @@ class OperationController extends AbstractController
         $entityManager->persist($operation);
         $user = $operation->getTransmitter();
         $actualBalance = $user->getAccountBalance();
-        $user->setAccountBalance($actualBalance+ $operation->getProfit());
+        $user->setAccountBalance($actualBalance + $operation->getProfit());
         $entityManager->persist($user);
         $entityManager->flush();
 
         return $this->redirectToRoute('app_operations_approval');
     }
 
-    #[Route('/{id}/refus', name: 'app_operation_refus', methods: ['GET','POST'])]
+    #[Route('/{id}/refus', name: 'app_operation_refus', methods: ['GET', 'POST'])]
     public function refusOperation(Request $request, Operation $operation, EntityManagerInterface $entityManager): Response
     {
         $operation->setIsApproved(false);
@@ -156,7 +154,7 @@ class OperationController extends AbstractController
         ]);
     }
 
-#[Route('/', name: 'app_operation_index', methods: ['GET'])]
+    #[Route('/', name: 'app_operation_index', methods: ['GET'])]
     public function index(OperationRepository $operationRepository): Response
     {
         $user = $this->getUser();
@@ -186,8 +184,6 @@ class OperationController extends AbstractController
     }
 
 
-
-
     #[Route('/{id}/edit', name: 'app_operation_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Operation $operation, EntityManagerInterface $entityManager): Response
     {
@@ -209,7 +205,7 @@ class OperationController extends AbstractController
     #[Route('/{id}', name: 'app_operation_delete', methods: ['POST'])]
     public function delete(Request $request, Operation $operation, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$operation->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $operation->getId(), $request->request->get('_token'))) {
             $entityManager->remove($operation);
             $entityManager->flush();
         }

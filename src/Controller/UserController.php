@@ -2,17 +2,12 @@
 
 namespace App\Controller;
 
-use App\Entity\Operation;
-use App\Form\AccountType;
 use App\Form\AccountTypeFormType;
 use App\Form\ContactFormType;
 use App\Form\EditProfileFormType;
-use App\Form\OperationFormType;
 use App\Form\OperationUserFormType;
 use App\Helper\OperationHelper;
 use App\Repository\OperationRepository;
-use DateTime;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,17 +17,18 @@ use Symfony\Component\Mime\Email;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\String\Slugger\SluggerInterface;
-use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 
-class UserController extends AbstractController{
+class UserController extends AbstractController
+{
 
     public function __construct(
         private EntityManagerInterface $entityManager,
-        public OperationHelper $operationHelper,
-    ) {
+        public OperationHelper         $operationHelper,
+    )
+    {
     }
+
     #[Route('/home', name: 'app_home')]
     public function index(): Response
     {
@@ -45,7 +41,7 @@ class UserController extends AbstractController{
     public function indexGeneral(OperationRepository $operationRepository, Request $request): Response
     {
         $user = $this->getUser();
-/*        $operations = $operationRepository->findBy(['transmitter' => $user],['closeTime' => 'DESC']);*/
+        /*        $operations = $operationRepository->findBy(['transmitter' => $user],['closeTime' => 'DESC']);*/
 
         $page = $request->query->get('page') ? $request->query->get('page') : 1;
         $operations = $operationRepository->findOperationsForUser($user, $page);
@@ -109,7 +105,7 @@ class UserController extends AbstractController{
     public function userPortefeuille(OperationRepository $operationRepository, Request $request): Response
     {
         $user = $this->getUser();
-/*        $operations = $operationRepository->findBy(['transmitter' => $user],['closeTime' => 'DESC']);*/
+        /*        $operations = $operationRepository->findBy(['transmitter' => $user],['closeTime' => 'DESC']);*/
 
         $page = $request->query->get('page') ? $request->query->get('page') : 1;
         $operations = $operationRepository->findOperationsForUser($user, $page);
@@ -160,13 +156,9 @@ class UserController extends AbstractController{
             if ($passwordHasher->isPasswordValid($user, $oldPassword)) {
                 $newPassword = $form->get('password')->getData();
                 $newEncodedPassword = $passwordHasher->hashPassword($user, $newPassword);
-
                 $user->setPassword($newEncodedPassword);
                 $this->entityManager->persist($user);
                 $this->entityManager->flush();
-
-
-
                 $this->addFlash('notice', 'Votre mot de passe à bien été changé !');
 
                 return $this->redirectToRoute('app_default');
@@ -193,17 +185,13 @@ class UserController extends AbstractController{
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setAdresse($form->getData()->getAdresse());
-            $user->setNom($form->getData()->getNom());
-            $user->setPrenom($form->getData()->getPrenom());
-            $user->setTelephone($form->getData()->getTelephone());
             $this->entityManager->persist($user);
             $this->entityManager->flush();
 
 
             $this->addFlash('success', 'Votre compte a été modifié.');
             return $this->redirectToRoute('app_default');
-            }
+        }
         return $this->render('user/editprofile.html.twig', [
             'profileForm' => $form->createView(),
             'user' => $user
@@ -232,10 +220,10 @@ class UserController extends AbstractController{
         if ($form->isSubmitted() && $form->isValid()) {
             $retrait = $form->get('retrait')->getData();
             $credit = $form->get('credit')->getData();
-            $this->operationHelper->addCredit($retrait,$user);
-            $this->operationHelper->addRetrait($credit,$user);
+            $this->operationHelper->addCredit($retrait, $user);
+            $this->operationHelper->addRetrait($credit, $user);
             $this->addFlash('success', 'Votre demande a été pris en compte');
-            }
+        }
         $operations = $operationRepository->findOperationsPendingForUser($user);
         return $this->render('operation/request_transaction.html.twig', [
             'form' => $form,
@@ -248,16 +236,15 @@ class UserController extends AbstractController{
     {
         $form = $this->createForm(ContactFormType::class);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $contactFormData = $form->getData();
             $subject = 'Demande de contact sur votre site de ' . $contactFormData['email'];
             $content = $contactFormData['nom'] . ' vous a envoyé le message suivant: ' . $contactFormData['message'];
             $email = (new Email())
-            ->text($content)
-            ->subject($subject)
-            ->sender($contactFormData['email'])
-                ->to('intranetformation@gmail.com')
-            ;
+                ->text($content)
+                ->subject($subject)
+                ->sender($contactFormData['email'])
+                ->to('intranetformation@gmail.com');
             $mailer->send($email);
             $this->addFlash('success', 'Votre message a été envoyé');
             return $this->redirectToRoute('app_default');
