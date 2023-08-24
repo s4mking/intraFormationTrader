@@ -44,7 +44,9 @@ class CSVFormType extends AbstractType
             ])
             ->add('utilisateur', EntityType::class, [
                 'class' => User::class,
-                'choice_label' => 'email',
+                'choice_label' => function(User $user){
+                return $user->getFullName();
+                },
                 'multiple' => true,
                 'expanded' => true,
             ])
