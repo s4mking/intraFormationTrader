@@ -256,7 +256,7 @@ class UserController extends AbstractController{
             ->text($content)
             ->subject($subject)
             ->sender($contactFormData['email'])
-                ->to('samuel.simonney@gmail.com')
+                ->to('intranetformation@gmail.com')
             ;
             $mailer->send($email);
             $this->addFlash('success', 'Votre message a été envoyé');

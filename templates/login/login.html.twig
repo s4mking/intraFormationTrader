@@ -9,17 +9,17 @@
 {# ... #}
 
 {% block body %}
-    {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+
    {# <div class="logo text-center">#}
            {# <img src="{{ asset('images/logoconnect.png') }}" width="100" height="100">#}
   {#          <img src="{{ asset('images/logoconnect.png') }}" width="100" height="100">
     </div>#}
     <div class="container_login py-10" style="background-image:url('{{asset('images/imageville.jpeg')}}')">
         <div class="wrapper titlelogin rounded-top">
-            <h3 class="text-center text-white py-3 rounded-top">Connexion Utilisateur</h3>
-
+            <h3 class="text-center text-white py-3 rounded-top">Connexion</h3>
+            {% if error %}
+                <div class="loginfailure">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
             <div class="inner-warpper text-center loginbackground">
                     <form action="{{ path('app_login')}}" id="formvalidate" method="post" class="rounded">
                     <div class="input-group">

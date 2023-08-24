@@ -317,6 +317,18 @@ span.validate-tooltip {
     width:15vw;
     height:auto;
 }
+
+.loginfailure{
+    background-color:#ff7b72;
+    color:white;
+    text-align:center;
+    padding:3vh 0;
+    font-weight: bold;
+}
+
+.containermesdemandes h3{
+    text-align: center;
+}
 .nav-item {
     display: block;
     padding: 16px;
