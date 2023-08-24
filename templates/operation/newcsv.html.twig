@@ -9,14 +9,16 @@
     {{ encore_entry_script_tags('selectall') }}
 {% endblock %}
 {% block body %}
+    <div>
+        <img src="{{ asset('images/file.png') }}" id="walletimg">
+        {{ form_start(form, {'attr': {'class': 'form-signin'}}) }}
+        <h3>Créditer les comptes</h3>
+        {{ form_row(form.file) }}
+        {{ form_row(form.utilisateur) }}
+        <input type="checkbox" name="select-all" id="select-all" />
+        <label for="select-all">Tout sélectionner</label>
+        {{ form_end(form) }}
 
-    <img src="{{ asset('images/file.png') }}" id="walletimg">
-    {{ form_start(form, {'attr': {'class': 'form-signin'}}) }}
-    <h3>Créditer les comptes</h3>
-    {{ form_row(form.file) }}
-    {{ form_row(form.utilisateur) }}
-    <input type="checkbox" name="select-all" id="select-all" />
-    <label for="select-all">Tout sélectionner</label>
-    {{ form_end(form) }}
+    </div>
 
 {% endblock %}

@@ -7,7 +7,7 @@
 {% endblock %}
 {% block body %}
 
-        {{ form_start(contactForm, {'attr': {'class': 'form-signin'}}) }}
+        {{ form_start(contactForm, {'attr': {'class': 'form-contact'}}) }}
     <img src="{{ asset('uploads/mailmessage.png') }}" id="contactimg">
         {{ form_widget(contactForm) }}
         {{ form_end(contactForm) }}

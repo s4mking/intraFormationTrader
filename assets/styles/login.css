@@ -316,6 +316,9 @@ span.validate-tooltip {
 #contactimg{
     width:15vw;
     height:auto;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .loginfailure{
@@ -360,6 +363,15 @@ span.validate-tooltip {
     border-radius: 4px;
     margin-right: 8px;
 }
+
+.form-contact {
+    width: 40vw;
+
+    padding: 15px;
+    margin: auto;
+    margin-top: 10px;
+}
+
 .pag-item:last-child {
     margin-right: 0;
 }
@@ -396,7 +408,7 @@ span.validate-tooltip {
       height:100vh;
       display:flex;
       justify-content: center;
-      align-items: center;
+      /*align-items: center;*/
   }
 
     .container_login{
@@ -411,6 +423,14 @@ span.validate-tooltip {
         width:75vw;
     }
 
+    .form-contact {
+        width: 60vw;
+    }
+
+    .form-signin {
+        width: 100%;
+        max-width: 70vw;
+    }
 }
 
 

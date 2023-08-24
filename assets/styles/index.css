@@ -32,8 +32,18 @@
     }
 
     .tableauuser{
-        width:95%;
+        width:75vw;
     }
 
+    .containerAccount{
+        flex-direction:column;
+    }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    .containerAccount{
+        flex-direction:column;
+        align-items: center;
+    }
 
 }
