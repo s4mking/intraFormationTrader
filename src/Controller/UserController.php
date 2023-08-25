@@ -220,8 +220,8 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $retrait = $form->get('retrait')->getData();
             $credit = $form->get('credit')->getData();
-            $this->operationHelper->addCredit($retrait, $user);
-            $this->operationHelper->addRetrait($credit, $user);
+            $this->operationHelper->addCredit($retrait, $user, false, false);
+            $this->operationHelper->addRetrait($credit, $user, false, false);
             $this->addFlash('success', 'Votre demande a été pris en compte');
         }
         $operations = $operationRepository->findOperationsPendingForUser($user);

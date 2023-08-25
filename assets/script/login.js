@@ -129,6 +129,7 @@ var tabs = function(id) {
     }
 
     this.tab.list[this.selected].classList.remove('selected');
+    this.tab.list[this.selected].querySelector('input').value='';
     this.nav.list[this.selected].classList.remove('selected');
     this.selected = target;
     this.tab.list[this.selected].classList.add('selected');

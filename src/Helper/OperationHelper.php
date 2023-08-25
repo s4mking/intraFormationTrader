@@ -34,8 +34,8 @@ class OperationHelper
                 0,
                 $user
             );
-            $operation->setIsVerified(false);
-            $operation->setIsApproved(false);
+            $operation->setIsVerified($isVerified);
+            $operation->setIsApproved($isApproved);
             $this->entityManager->persist($operation);
             $this->entityManager->flush();
         }
@@ -58,8 +58,8 @@ class OperationHelper
                 0,
                 $user
             );
-            $operationCredit->setIsVerified(false);
-            $operationCredit->setIsApproved(false);
+            $operationCredit->setIsVerified($isVerified);
+            $operationCredit->setIsApproved($isApproved);
             $this->entityManager->persist($operationCredit);
             $this->entityManager->flush();
         }
