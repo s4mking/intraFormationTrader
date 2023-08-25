@@ -47,6 +47,10 @@ class UserCrudController extends AbstractCrudController
         $fields = [
             IdField::new('id')->hideOnForm(),
             EmailField::new('email'),
+            TextField::new('nom'),
+            EmailField::new('prenom'),
+            EmailField::new('adresse'),
+            EmailField::new('telephone'),
             CollectionField::new('roles'),
             BooleanField::new('isVerified')
         ];
