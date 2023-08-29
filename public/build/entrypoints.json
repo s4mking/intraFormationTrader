@@ -1,0 +1,63 @@
+{
+  "entrypoints": {
+    "app": {
+      "js": [
+        "/build/runtime.ec2b70cf.js",
+        "/build/832.ee949010.js",
+        "/build/app.51a9b116.js"
+      ],
+      "css": [
+        "/build/832.f648c0c3.css",
+        "/build/app.f9b3839c.css"
+      ]
+    },
+    "login": {
+      "js": [
+        "/build/runtime.ec2b70cf.js",
+        "/build/login.5529a63f.js"
+      ],
+      "css": [
+        "/build/login.497e99c4.css"
+      ]
+    },
+    "sidebar": {
+      "js": [
+        "/build/runtime.ec2b70cf.js",
+        "/build/sidebar.93ba663b.js"
+      ],
+      "css": [
+        "/build/sidebar.564f0afe.css"
+      ]
+    },
+    "sidebarjs": {
+      "js": [
+        "/build/runtime.ec2b70cf.js",
+        "/build/25.f54b437c.js",
+        "/build/sidebarjs.06238f54.js"
+      ]
+    },
+    "selectall": {
+      "js": [
+        "/build/runtime.ec2b70cf.js",
+        "/build/25.f54b437c.js",
+        "/build/selectall.fda636d5.js"
+      ]
+    },
+    "loginjs": {
+      "js": [
+        "/build/runtime.ec2b70cf.js",
+        "/build/25.f54b437c.js",
+        "/build/loginjs.37b4340d.js"
+      ]
+    },
+    "index": {
+      "js": [
+        "/build/runtime.ec2b70cf.js",
+        "/build/index.fd2f48c7.js"
+      ],
+      "css": [
+        "/build/index.84ce5e35.css"
+      ]
+    }
+  }
+}
