@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\CustomStyle;
 use App\Form\AccountTypeFormType;
 use App\Form\ContactFormType;
 use App\Form\EditProfileFormType;
 use App\Form\OperationUserFormType;
 use App\Helper\OperationHelper;
+use App\Repository\CustomStyleRepository;
 use App\Repository\OperationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormError;
@@ -232,11 +234,14 @@ class UserController extends AbstractController
     }
 
     #[Route('/help', name: 'app_help')]
-    public function helpController(Request $request, MailerInterface $mailer): Response
+    public function helpController(Request $request, MailerInterface $mailer, CustomStyleRepository $customStyleRepository): Response
     {
         $form = $this->createForm(ContactFormType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $lastCustom = $customStyleRepository->findOneBy([], ['id' => 'desc']);
+            $mail = $lastCustom !== null ? $lastCustom->getEmailAdmin() : 'intranetformation@gmail.com';
             $contactFormData = $form->getData();
             $subject = 'Demande de contact sur votre site de ' . $contactFormData['email'];
             $content = $contactFormData['nom'] . ' vous a envoyé le message suivant: ' . $contactFormData['message'];
@@ -244,7 +249,7 @@ class UserController extends AbstractController
                 ->text($content)
                 ->subject($subject)
                 ->sender($contactFormData['email'])
-                ->to('intranetformation@gmail.com');
+                ->to('$mail');
             $mailer->send($email);
             $this->addFlash('success', 'Votre message a été envoyé');
             return $this->redirectToRoute('app_default');

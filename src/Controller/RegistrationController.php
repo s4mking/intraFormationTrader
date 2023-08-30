@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Form\RequestVerifyUserEmailFormType;
+use App\Repository\CustomStyleRepository;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,7 +29,7 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/register/', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, CustomStyleRepository $customStyleRepository): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -47,9 +48,12 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
 
             // generate a signed url and email it to the user
+            $lastCustom = $customStyleRepository->findOneBy([], ['id' => 'desc']);
+            $mail = $lastCustom !== null ? $lastCustom->getEmailAdmin() : 'intranetformation@gmail.com';
+
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
-                    ->from(new Address('intranetformation@gmail.com', 'Mail d\'inscription '))
+                    ->from(new Address($mail, 'Mail d\'inscription '))
                     ->to($user->getEmail())
                     ->subject('Veuillez confirmer votre mail')
                     ->htmlTemplate('registration/confirmation_email.html.twig')

@@ -8,6 +8,7 @@ use App\Model\OperationFromCSVDTO;
 use App\Entity\Operation;
 use App\Form\OperationFormType;
 use App\Form\OperationType;
+use App\Repository\CustomStyleRepository;
 use App\Repository\OperationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,15 +27,25 @@ class CustomStyleController extends AbstractController
 {
 
     #[Route('/importimages', name: 'app_import_images')]
-    public function importCSV(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager, SerializerInterface $serializer): Response
+    public function importCSV(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager, CustomStyleRepository $customStyleRepository): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
-        $form = $this->createForm(CustomStyleFormType::class);
+        $lastCustom = $customStyleRepository->findOneBy([], ['id' => 'desc']);
+        if($lastCustom){
+            $form = $this->createForm(CustomStyleFormType::class, $lastCustom);
+        }else{
+            $form = $this->createForm(CustomStyleFormType::class);
+        }
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $customStyle = new CustomStyle();
-
+            $emailAdmin = $form->get('emailAdmin')->getData();
+            if($emailAdmin){
+                $customStyle->setEmailAdmin($emailAdmin);
+                $entityManager->persist($customStyle);
+                $entityManager->flush();
+            }
             $importedFile = $form->get('Logo')->getData();
             if ($importedFile) {
                 $originalFilename = pathinfo($importedFile->getClientOriginalName(), PATHINFO_FILENAME);

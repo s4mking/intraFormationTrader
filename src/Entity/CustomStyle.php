@@ -19,6 +19,9 @@ class CustomStyle
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $LogoFile = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $emailAdmin = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -46,5 +49,21 @@ class CustomStyle
         $this->LogoFile = $LogoFile;
 
         return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getEmailAdmin(): ?string
+    {
+        return $this->emailAdmin;
+    }
+
+    /**
+     * @param string|null $emailAdmin
+     */
+    public function setEmailAdmin(?string $emailAdmin): void
+    {
+        $this->emailAdmin = $emailAdmin;
     }
 }
