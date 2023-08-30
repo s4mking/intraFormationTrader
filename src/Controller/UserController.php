@@ -249,7 +249,7 @@ class UserController extends AbstractController
                 ->text($content)
                 ->subject($subject)
                 ->sender($contactFormData['email'])
-                ->to('$mail');
+                ->to($mail);
             $mailer->send($email);
             $this->addFlash('success', 'Votre message a été envoyé');
             return $this->redirectToRoute('app_default');
