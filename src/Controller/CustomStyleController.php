@@ -91,6 +91,9 @@ class CustomStyleController extends AbstractController
                 }
             }
 
+            $this->addFlash('success', 'Vos modifications ont été prises en compte');
+            return $this->redirectToRoute('app_default');
+
         }
 
         return $this->render('customstyles/new.html.twig', [

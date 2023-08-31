@@ -7,6 +7,7 @@ use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat\Wizard\DateTime;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -108,10 +109,16 @@ class OperationRepository extends ServiceEntityRepository
 
     public function findOperationsPendingForUser(UserInterface $user):array
     {
+        $currentDateTime = new \DateTime();
+        $currentDateTime->sub(new \DateInterval('P7D'));
+
+        $formattedDate = $currentDateTime->format('Y-m-d H:i:s');
         return $this->createQueryBuilder('o')
             ->andWhere('o.isVerified = false OR o.isApproved = false')
             ->andWhere('o.transmitter = :user')
+            ->andWhere('o.openTime > :datetime')
             ->setParameter('user', $user)
+            ->setParameter('datetime', $formattedDate)
             ->getQuery()
             ->execute()
         ;
