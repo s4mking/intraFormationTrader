@@ -103,7 +103,7 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/verify/resend', name: 'app_verify_resend_email')]
-    public function resendVerifyEmail(Request $request, UserRepository $userRepository): Response
+    public function resendVerifyEmail(Request $request, UserRepository $userRepository, CustomStyleRepository $customStyleRepository): Response
     {
         if ($this->getUser()) {
             return $this->redirectToRoute('app_default');
@@ -115,11 +115,13 @@ class RegistrationController extends AbstractController
             // generate a signed url and email it to the user
             $user = $userRepository->findOneByEmail($form->get('email')->getData());
             if ($user) {
+                $lastCustom = $customStyleRepository->findOneBy([], ['id' => 'desc']);
+                $mail = $lastCustom !== null ? $lastCustom->getEmailAdmin() : 'intranetformation@gmail.com';
                 $this->emailVerifier->sendEmailConfirmation(
                     'app_verify_email',
                     $user,
                     (new TemplatedEmail())
-                        ->from(new Address('email@example.com', 'Sender'))
+                        ->from(new Address($mail, 'Sender'))
                         ->to($user->getEmail())
                         ->subject('Validation Link')
                         ->htmlTemplate('registration/confirmation_email.html.twig')
