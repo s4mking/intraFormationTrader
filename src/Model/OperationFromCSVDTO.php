@@ -36,8 +36,14 @@ class OperationFromCSVDTO
         $this->openPrice=floatval($row[5]) ?? null;
         $this->closeTime=DateTime::createFromFormat('d.m.Y H:i:s', $row[6]) ?? null;
         $this->closePrice=floatval($row[7]) ?? null;
-        $this->profit=floatval($row[8]);
-        $this->netProfit=floatval($row[9]) ?? null;
+        $this->profit=$this->floatvalue($row[8]);
+        $this->netProfit=$this->floatvalue($row[9]) ?? null;
+    }
+
+    function floatvalue($val){
+        $val = str_replace(",",".",$val);
+        $val = preg_replace('/\.(?=.*\.)/', '', $val);
+        return floatval($val);
     }
 
 

@@ -44,7 +44,13 @@ class OperationController extends AbstractController
             foreach ($users as $user) {
                 $sum = 0;
                 foreach ($rows as $row) {
-
+                    if (count($row) == 1) {
+                        $pattern = '/,(?=(?:[^"]*"[^"]*")*[^"]*$)/';
+                        $rowArray = preg_split($pattern, $row[0]);
+                        $row = array_map(function($value) {
+                            return trim($value, '"');
+                        }, $rowArray);
+                    }
                     if ($row[0] == 'Symbol' || is_null($row[8]) || is_null($row[0])) {
                         continue;
                     }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\CustomStyle;
+use App\Entity\User;
 use App\Form\AccountTypeFormType;
 use App\Form\ContactFormType;
 use App\Form\EditProfileFormType;
@@ -10,6 +11,7 @@ use App\Form\OperationUserFormType;
 use App\Helper\OperationHelper;
 use App\Repository\CustomStyleRepository;
 use App\Repository\OperationRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,6 +49,8 @@ class UserController extends AbstractController
 
         $page = $request->query->get('page') ? $request->query->get('page') : 1;
         $operations = $operationRepository->findOperationsForUser($user, $page);
+        $sumOperationsBalance = $operationRepository->findCountForUser($user);
+
         $totalPosts = $operations->count();
         $limit = 25;
         $maxPages = ceil($totalPosts / $limit);
@@ -67,7 +71,8 @@ class UserController extends AbstractController
                 'totalSell' => $totalSell['weekly_total'],
                 'totalBuy' => $totalBuy['weekly_total'],
                 'maxPages' => $maxPages,
-                'thisPage' => $thisPage
+                'thisPage' => $thisPage,
+                'sumUser' => $sumOperationsBalance['weekly_total']
             ]);
     }
 
@@ -115,6 +120,7 @@ class UserController extends AbstractController
         $limit = 25;
         $maxPages = ceil($totalPosts / $limit);
         $thisPage = $page;
+        $sumOperationsBalance = $operationRepository->findCountForUser($user);
 
         $totalLastWeek = $operationRepository->findTotalLastWeek($user);
         $totalLastLast = $operationRepository->findTotalLastLastWeek($user);
@@ -131,7 +137,8 @@ class UserController extends AbstractController
                 'totalSell' => $totalSell['weekly_total'],
                 'totalBuy' => $totalBuy['weekly_total'],
                 'maxPages' => $maxPages,
-                'thisPage' => $thisPage
+                'thisPage' => $thisPage,
+                'sumUser' => $sumOperationsBalance['weekly_total']
             ]);
     }
 
@@ -258,6 +265,51 @@ class UserController extends AbstractController
         return $this->render('user/contact.html.twig', [
             'contactForm' => $form->createView()
         ]);
+    }
+
+    #[Route('/recapitulatif', name: 'app_dasshboard')]
+    public function indexRecapitulatif(OperationRepository $operationRepository, Request $request, UserRepository $userRepository): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+            $sumOperationsBalance = $operationRepository->findCountForUsers();
+
+        return $this->render('operation/recap.html.twig',
+            [
+                'users' => $sumOperationsBalance
+            ]);
+    }
+
+    #[Route('/recapitulatif/{id}', name: 'app_dasshboard_detail')]
+    public function detailRecapitulatif(User $user, OperationRepository $operationRepository, Request $request): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $page = $request->query->get('page') ? $request->query->get('page') : 1;
+        $operations = $operationRepository->findOperationsForUser($user, $page);
+        $sumOperationsBalance = $operationRepository->findCountForUser($user);
+
+        $totalPosts = $operations->count();
+        $limit = 25;
+        $maxPages = ceil($totalPosts / $limit);
+        $thisPage = $page;
+
+        $totalLastWeek = $operationRepository->findTotalLastWeek($user);
+        $totalLastLast = $operationRepository->findTotalLastLastWeek($user);
+        $sumOperations = $operationRepository->countOperations($user);
+        $totalSell = $operationRepository->findTotalSell($user);
+        $totalBuy = $operationRepository->findTotalBuy($user);
+        return $this->render('operation/recapDetail.html.twig',
+            [
+                'operations' => $operations,
+                'user' => $user,
+                'weeklySum' => round($totalLastWeek['weekly_total'], 2),
+                'lastWeeklySum' => round($totalLastLast['weekly_total'], 2),
+                'sumOperations' => $sumOperations,
+                'totalSell' => $totalSell['weekly_total'],
+                'totalBuy' => $totalBuy['weekly_total'],
+                'maxPages' => $maxPages,
+                'thisPage' => $thisPage,
+                'sumUser' => $sumOperationsBalance['weekly_total']
+            ]);
     }
 
 }

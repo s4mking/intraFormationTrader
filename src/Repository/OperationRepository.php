@@ -107,6 +107,27 @@ class OperationRepository extends ServiceEntityRepository
         return $this->paginate($query, $currentPage);
     }
 
+    public function findCountForUser(UserInterface $user):array
+    {
+        return $this->createQueryBuilder('o')
+            ->select('SUM(o.profit) AS weekly_total')
+            ->andWhere('o.transmitter = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    public function findCountForUsers()
+    {
+        return $this->createQueryBuilder("o")
+            ->select(['u.id', 'u.email','u.nom', 'SUM(o.profit) as total', 'COUNT(o) as number'])
+            ->leftJoin('o.transmitter', 'u')
+            ->groupBy('u.email', 'u.nom', 'u.id')
+            ->getQuery()
+            ->execute();
+    }
+
     public function findOperationsPendingForUser(UserInterface $user):array
     {
         $currentDateTime = new \DateTime();

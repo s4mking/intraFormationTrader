@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Intra
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('index') }}
+{% endblock %}
+
+{% block body %}
+{#
+    <div class="container" style="background-image:url('{{ asset('uploads/files/image-min-64c7c85b09c08.jpg') }}')">
+#}
+
+        <main>
+            <div class="py-4 text-center mt-1">
+            </div>
+            <div class="row g-4 mt-3 coursbourse">
+                <div class="col-md-9 col-lg-12 tableauuser">
+                    <div class="info-box card bg-aqua">
+
+                    <table class="table table-hover">
+                        <thead>
+                        <tr class="table-active">
+                            <th>Email</th>
+                            <th>Nom</th>
+{#                            <th>Lots</th>#}
+                            <th>Solde</th>
+                            <th>Nombre d'opérations</th>
+                            <th>Detail</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in users %}
+                                <td><b>{{ user.email }}</b></td>
+                            {#    <td>{{ operation.lots }}</td>#}
+                                <td>{{ user.nom }}</td>
+                                {% if user.total < 0 %}
+                                   <td class="bg-danger">{{ user.total }}</td>
+                                {% else %}
+                                     <td class="bg-success">{{ user.total }}</td>
+                                 {% endif %}
+                               <td>{{ user.number }}</td>
+                            <td><a href="{{ path('app_dasshboard_detail', {'id': user.id}) }}" >Detail</a></td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="12">Aucune opération trouvée</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </main>
+{% endblock %}
