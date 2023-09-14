@@ -24,13 +24,13 @@ class OperationHelper
             $operation = new Operation(
                 '',
                 0,
-                'Retrait',
+                'Credit',
                 0,
                 $now,
                 0,
                 $now,
                 0,
-                -$amount,
+                $amount,
                 0,
                 $user
             );
@@ -48,13 +48,13 @@ class OperationHelper
             $operationCredit = new Operation(
                 '',
                 0,
-                'Credit',
+                'Retrait',
                 0,
                 $now,
                 0,
                 $now,
                 0,
-                $amount,
+                -$amount,
                 0,
                 $user
             );

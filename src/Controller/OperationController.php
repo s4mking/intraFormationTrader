@@ -99,12 +99,12 @@ class OperationController extends AbstractController
                 $actualBalance = $user->getAccountBalance();
 
                 if (isset($retrait)) {
-                    $this->operationHelper->addRetrait($credit, $user);
+                    $this->operationHelper->addRetrait($retrait, $user);
                     $user->setAccountBalance($actualBalance + (-$retrait));
                 }
 
                 if (isset($credit)) {
-                    $this->operationHelper->addCredit($retrait, $user);
+                    $this->operationHelper->addCredit($credit, $user);
                     $user->setAccountBalance($actualBalance + $credit);
                 }
                 $entityManager->persist($user);
