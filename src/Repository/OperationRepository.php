@@ -107,6 +107,18 @@ class OperationRepository extends ServiceEntityRepository
         return $this->paginate($query, $currentPage);
     }
 
+    public function findAllOperationsForUser(UserInterface $user, $currentPage = 1):Paginator
+    {
+        $query = $this->createQueryBuilder('o')
+            ->andWhere('o.transmitter = :user')
+            ->setParameter('user', $user)
+            ->orderBy('o.openTime', 'DESC')
+            ->getQuery()
+        ;
+
+        return $this->paginate($query, $currentPage);
+    }
+
     public function findCountForUser(UserInterface $user):array
     {
         return $this->createQueryBuilder('o')
