@@ -284,7 +284,7 @@ class UserController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $page = $request->query->get('page') ? $request->query->get('page') : 1;
-        $operations = $operationRepository->findOperationsForUser($user, $page);
+        $operations = $operationRepository->findAllOperationsForUser($user, $page);
         $sumOperationsBalance = $operationRepository->findCountForUser($user);
 
         $totalPosts = $operations->count();
