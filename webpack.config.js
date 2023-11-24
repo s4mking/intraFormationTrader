@@ -25,11 +25,15 @@ Encore
     .addEntry('sidebar', './assets/styles/sidebar.css')
     .addEntry('sidebarjs', './assets/script/sidebar.js')
     .addEntry('selectall', './assets/script/selectAll.js')
+    .addEntry('operations', './assets/script/operations.js')
     .addEntry('loginjs', './assets/script/login.js')
     .addEntry('index', './assets/styles/index.css')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
+
+    // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
+    .enableStimulusBridge('./assets/controllers.json')
 
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app

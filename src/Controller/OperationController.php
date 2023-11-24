@@ -11,6 +11,7 @@ use App\Model\OperationFromCSVDTO;
 use App\Repository\OperationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -82,7 +83,18 @@ class OperationController extends AbstractController
             'form' => $form,
         ]);
     }
-
+    #[Route('/removeoperations', name: 'app_operation_remove', methods: ['POST'])]
+    public function removeOperations(Request $request, OperationRepository $operationRepository, EntityManagerInterface $entityManager): Response
+    {
+        $arrayIds = json_decode($request->getContent());
+        foreach ($arrayIds as $id){
+            $operation = $operationRepository->findOneBy(['id'=> $id]);
+            $entityManager->remove($operation);
+            $entityManager->flush();
+        }
+        $this->addFlash('success', 'Vos opérations ont été supprimé.');
+        return new JsonResponse(['statut'=> 'ok']);
+    }
     #[Route('/addcredit', name: 'app_credit')]
     public function addCredit(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response
     {
@@ -218,5 +230,7 @@ class OperationController extends AbstractController
 
         return $this->redirectToRoute('app_operation_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
 
 }

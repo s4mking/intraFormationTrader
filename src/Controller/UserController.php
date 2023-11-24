@@ -65,14 +65,14 @@ class UserController extends AbstractController
             [
                 'operations' => $operations,
                 'user' => $user,
-                'weeklySum' => round($totalLastWeek['weekly_total'], 2),
-                'lastWeeklySum' => round($totalLastLast['weekly_total'], 2),
+                'weeklySum' => round($totalLastWeek['weekly_total'], 3),
+                'lastWeeklySum' => round($totalLastLast['weekly_total'], 3),
                 'sumOperations' => $sumOperations,
-                'totalSell' => $totalSell['weekly_total'],
-                'totalBuy' => $totalBuy['weekly_total'],
+                'totalSell' => round($totalSell['weekly_total'], 3),
+                'totalBuy' => round($totalBuy['weekly_total'],3),
                 'maxPages' => $maxPages,
                 'thisPage' => $thisPage,
-                'sumUser' => $sumOperationsBalance['weekly_total']
+                'sumUser' => round($sumOperationsBalance['weekly_total'],3)
             ]);
     }
 
@@ -131,14 +131,14 @@ class UserController extends AbstractController
             [
                 'operations' => $operations,
                 'user' => $user,
-                'weeklySum' => round($totalLastWeek['weekly_total'], 2),
-                'lastWeeklySum' => round($totalLastLast['weekly_total'], 2),
+                'weeklySum' => round($totalLastWeek['weekly_total'], 3),
+                'lastWeeklySum' => round($totalLastLast['weekly_total'], 3),
                 'sumOperations' => $sumOperations,
-                'totalSell' => $totalSell['weekly_total'],
-                'totalBuy' => $totalBuy['weekly_total'],
+                'totalSell' => round($totalSell['weekly_total'], 3),
+                'totalBuy' => round($totalBuy['weekly_total'],3),
                 'maxPages' => $maxPages,
                 'thisPage' => $thisPage,
-                'sumUser' => $sumOperationsBalance['weekly_total']
+                'sumUser' => round($sumOperationsBalance['weekly_total'],3)
             ]);
     }
 
@@ -286,7 +286,6 @@ class UserController extends AbstractController
         $page = $request->query->get('page') ? $request->query->get('page') : 1;
         $operations = $operationRepository->findAllOperationsForUser($user, $page);
         $sumOperationsBalance = $operationRepository->findCountForUser($user);
-
         $totalPosts = $operations->count();
         $limit = 25;
         $maxPages = ceil($totalPosts / $limit);
@@ -301,14 +300,14 @@ class UserController extends AbstractController
             [
                 'operations' => $operations,
                 'user' => $user,
-                'weeklySum' => round($totalLastWeek['weekly_total'], 2),
-                'lastWeeklySum' => round($totalLastLast['weekly_total'], 2),
+                'weeklySum' => round($totalLastWeek['weekly_total'], 3),
+                'lastWeeklySum' => round($totalLastLast['weekly_total'], 3),
                 'sumOperations' => $sumOperations,
-                'totalSell' => $totalSell['weekly_total'],
-                'totalBuy' => $totalBuy['weekly_total'],
+                'totalSell' => round($totalSell['weekly_total'], 3),
+                'totalBuy' => round($totalBuy['weekly_total'],3),
                 'maxPages' => $maxPages,
                 'thisPage' => $thisPage,
-                'sumUser' => $sumOperationsBalance['weekly_total']
+                'sumUser' => round($sumOperationsBalance['weekly_total'],3)
             ]);
     }
 

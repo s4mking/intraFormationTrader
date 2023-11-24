@@ -8,6 +8,7 @@
     {{ encore_entry_link_tags('index') }}
 {% endblock %}
 
+
 {% block body %}
 {#
     <div class="container" style="background-image:url('{{ asset('uploads/files/image-min-64c7c85b09c08.jpg') }}')">
@@ -134,15 +135,15 @@
                     </div><!-- end card -->
                 </div><!-- end col -->
             </div>
-
-
             <div class="row g-4 mt-3 coursbourse">
+                <button type="button" id="removeOperations" class="btn btn-danger">Supprimer les opérations</button>
                 <div class="col-md-9 col-lg-12 tableauuser">
                     <div class="info-box card bg-aqua">
 
                     <table class="table table-hover">
                         <thead>
                         <tr class="table-active">
+                            <th>Id</th>
                             <th>Symbol</th>
                             <th>Type</th>
 {#                            <th>Lots</th>#}
@@ -175,6 +176,7 @@
 {#                            {% elseif operation.symbol == 'GBPJPY' %}#}
 {#                                <td><i class="fa-solid fa-yen-sign"></i></td>#}
 {#                            {% else%}#}
+                            <td>{{ operation.id }}</td>
                             <td>{{ operation.symbol }}</td>
 {#                            {% endif %}#}
                                 <td><b>{{ operation.type }}</b></td>
@@ -189,6 +191,7 @@
                                      <td class="bg-success">{{ operation.profit }}</td>
                                  {% endif %}
 {#                                <td>{{ operation.netProfit }}</td>#}
+                            <td><input class="operations_checkbox" type="checkbox" id="{{ operation.id }}" name="operation_{{ operation.id }}" /></td>
                             </tr>
                         {% else %}
                             <tr>
@@ -224,4 +227,8 @@
             </div>
             </div>
         </main>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('operations') }}
 {% endblock %}

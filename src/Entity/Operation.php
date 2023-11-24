@@ -45,7 +45,7 @@ class Operation
     private ?float $netProfit = null;
 
     #[ORM\ManyToOne(inversedBy: 'operations')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?User $transmitter = null;
 
     #[ORM\Column(type: 'boolean', options: ["default" => true])]

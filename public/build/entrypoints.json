@@ -2,18 +2,19 @@
   "entrypoints": {
     "app": {
       "js": [
-        "/build/runtime.ec2b70cf.js",
-        "/build/832.ee949010.js",
-        "/build/app.51a9b116.js"
+        "/build/runtime.9a71ee5d.js",
+        "/build/897.80ce37a1.js",
+        "/build/474.be335ae6.js",
+        "/build/app.0f0a45f3.js"
       ],
       "css": [
-        "/build/832.f648c0c3.css",
+        "/build/474.f648c0c3.css",
         "/build/app.f9b3839c.css"
       ]
     },
     "login": {
       "js": [
-        "/build/runtime.ec2b70cf.js",
+        "/build/runtime.9a71ee5d.js",
         "/build/login.5529a63f.js"
       ],
       "css": [
@@ -22,7 +23,7 @@
     },
     "sidebar": {
       "js": [
-        "/build/runtime.ec2b70cf.js",
+        "/build/runtime.9a71ee5d.js",
         "/build/sidebar.93ba663b.js"
       ],
       "css": [
@@ -31,28 +32,35 @@
     },
     "sidebarjs": {
       "js": [
-        "/build/runtime.ec2b70cf.js",
-        "/build/25.f54b437c.js",
-        "/build/sidebarjs.06238f54.js"
+        "/build/runtime.9a71ee5d.js",
+        "/build/897.80ce37a1.js",
+        "/build/sidebarjs.03e5390d.js"
       ]
     },
     "selectall": {
       "js": [
-        "/build/runtime.ec2b70cf.js",
-        "/build/25.f54b437c.js",
-        "/build/selectall.fda636d5.js"
+        "/build/runtime.9a71ee5d.js",
+        "/build/897.80ce37a1.js",
+        "/build/selectall.ac3f6664.js"
+      ]
+    },
+    "operations": {
+      "js": [
+        "/build/runtime.9a71ee5d.js",
+        "/build/897.80ce37a1.js",
+        "/build/operations.66071fb7.js"
       ]
     },
     "loginjs": {
       "js": [
-        "/build/runtime.ec2b70cf.js",
-        "/build/25.f54b437c.js",
-        "/build/loginjs.37b4340d.js"
+        "/build/runtime.9a71ee5d.js",
+        "/build/897.80ce37a1.js",
+        "/build/loginjs.f64a1ea4.js"
       ]
     },
     "index": {
       "js": [
-        "/build/runtime.ec2b70cf.js",
+        "/build/runtime.9a71ee5d.js",
         "/build/index.fd2f48c7.js"
       ],
       "css": [
