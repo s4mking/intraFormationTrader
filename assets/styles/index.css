@@ -10,6 +10,8 @@
 }
 .pagination li a{
     text-decoration: none;
+    padding-right: 1rem;
+    padding-left: 1rem;
 }
 
 .card .card-body{
