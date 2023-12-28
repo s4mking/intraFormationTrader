@@ -21,7 +21,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     final public const ROLE_USER = 'ROLE_USER';
     final public const ROLE_ADMIN = 'ROLE_ADMIN';
     #[ORM\Id]
-    #[ORM\GeneratedValue]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     #[ORM\Column]
     private ?int $id = null;
 
