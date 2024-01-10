@@ -54,37 +54,6 @@ class Operation
     #[ORM\Column(type: 'boolean', options: ["default" => true])]
     private $isApproved = true;
 
-    /**
-     * @param string|null $symbol
-     * @param int|null $position
-     * @param string|null $type
-     * @param float|null $lots
-     * @param \DateTimeInterface|null $openTime
-     * @param float|null $openPrice
-     * @param \DateTimeInterface|null $closeTime
-     * @param float|null $closePrice
-     * @param float|null $profit
-     * @param float|null $netProfit
-     * @param User|null $transmitter
-     */
-    public function __construct(?string $symbol, ?int $position,
-                                ?string $type, ?float $lots,
-                                ?\DateTimeInterface $openTime, ?float $openPrice,
-                                ?\DateTimeInterface $closeTime, ?float $closePrice,
-                                ?float $profit, ?float $netProfit, ?User $transmitter)
-    {
-        $this->symbol = $symbol;
-        $this->position = $position;
-        $this->type = $type;
-        $this->lots = $lots;
-        $this->openTime = $openTime;
-        $this->openPrice = $openPrice;
-        $this->closeTime = $closeTime;
-        $this->closePrice = $closePrice;
-        $this->profit = $profit;
-        $this->netProfit = $netProfit;
-        $this->transmitter = $transmitter;
-    }
 
     public function getId(): ?int
     {
