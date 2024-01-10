@@ -41,7 +41,7 @@ class OperationCrudController extends AbstractCrudController
             DateField::new('openTime'),
             DateField::new('closeTime'),
             AssociationField::new('transmitter'),
-            BooleanField::new('isVerified')
+            BooleanField::new('isVerified'),
             BooleanField::new('isApproved')
         ];
     }
