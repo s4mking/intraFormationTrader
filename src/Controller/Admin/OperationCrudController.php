@@ -12,6 +12,10 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class OperationCrudController extends AbstractCrudController
 {
+
+    public function __construct(
+
+    ) {}
     public static function getEntityFqcn(): string
     {
         return Operation::class;

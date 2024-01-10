@@ -57,18 +57,18 @@ class OperationController extends AbstractController
                     }
                     $operationDto = new OperationFromCSVDTO($row);
                     $operation = new Operation(
-                        $operationDto->symbol,
-                        $operationDto->position,
-                        $operationDto->type,
-                        $operationDto->lots,
-                        $operationDto->openTime,
-                        $operationDto->openPrice,
-                        $operationDto->closeTime,
-                        $operationDto->closePrice,
-                        $operationDto->profit,
-                        $operationDto->netProfit,
-                        $user
                     );
+                    $operation->setSymbol($operationDto->symbol);
+                    $operation->setPosition($operationDto->position);
+                    $operation->setType($operationDto->type);
+                    $operation->setLots($operationDto->lots);
+                    $operation->setOpenPrice($operationDto->openPrice);
+                    $operation->setOpenTime($operationDto->openTime);
+                    $operation->setClosePrice($operationDto->closePrice);
+                    $operation->setCloseTime($operationDto->closeTime);
+                    $operation->setProfit($operationDto->profit);
+                    $operation->setNetProfit($operationDto->netProfit);
+                    $operation->setTransmitter($user);
                     $sum += floatval($operationDto->profit);
                     $entityManager->persist($operation);
                 }

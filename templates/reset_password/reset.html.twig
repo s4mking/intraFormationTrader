@@ -1,33 +1,33 @@
+{% endblock %}
+
+
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('login') }}
 {% endblock %}
-{% block title %}Inscription{% endblock %}
+{% block title %}Réinitialisation{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
 
-    {{ form_errors(resetForm) }}
-
-    <div class="logo text-center">
-        <h3>Réinitialisation</h3>
-    </div>
-    <div class="wrapper">
-        <div class="inner-warpper text-center">
-            {{ form_start(resetForm, {'attr': {'id': 'formvalidate'}}) }}
-            <div class="input-group">
-                <label></label>
-                {{ form_widget(resetForm.plainPassword, {
-                    id: 'inputPassword',
-                    class: 'form-control mt-2'
-                }) }}
+    <div class="container_login py-10" style="background-image:url('{{asset('images/imageville.jpeg')}}')">
+        <div class="wrapper titlelogin rounded-top">
+            <h3 class="text-center text-white py-3 rounded-top">Réinitialisation</h3>
+            <div class="inner-warpper text-center loginbackground" >
+                {{ form_start(resetForm, {'attr': {'id': 'formvalidate', 'class': 'rounded'},}) }}
+                <div class="input-group">
+                    {{ form_widget(resetForm.plainPassword, {'attr': {'id': 'inputPassword'}}) }}
+                    <span class="lighting"></span>
+                </div>
+                <button type="submit" id="login">Réinitialiser votre mot de passe</button>
+                {{ form_end(resetForm) }}
             </div>
-            <button type="submit" id="login">Réinitialiser votre mot de passe</button>
-            {{ form_end(resetForm) }}
+
+            <div class="signup-wrapper text-center">
+                <p> <a href="{{ path('app_login') }}"> Déjà un compte ? <span class="text-primary">Se connecter</span></a></p>
+            </div>
         </div>
+
     </div>
 {% endblock %}
