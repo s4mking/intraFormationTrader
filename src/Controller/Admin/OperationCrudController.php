@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
@@ -44,6 +45,7 @@ class OperationCrudController extends AbstractCrudController
             NumberField::new('closePrice'),
             DateField::new('openTime'),
             DateField::new('closeTime'),
+            CollectionField::new('type'),
             AssociationField::new('transmitter'),
             BooleanField::new('isVerified'),
             BooleanField::new('isApproved')
