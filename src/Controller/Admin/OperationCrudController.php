@@ -21,11 +21,19 @@ class OperationCrudController extends AbstractCrudController
         return Operation::class;
     }
 
+     public function configureActions(Actions $actions): Actions
+    {
+        return $actions
+            ->add(Crud::PAGE_EDIT, Action::INDEX)
+            ->add(Crud::PAGE_INDEX, Action::DETAIL)
+            ->add(Crud::PAGE_EDIT, Action::DETAIL)
+            ;
+    }
 
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
+            IdField::new('id')->hideOnForm(),
             TextField::new('symbol'),
             NumberField::new('profit'),
             NumberField::new('openPrice'),
@@ -33,6 +41,8 @@ class OperationCrudController extends AbstractCrudController
             DateField::new('openTime'),
             DateField::new('closeTime'),
             AssociationField::new('transmitter'),
+            BooleanField::new('isVerified')
+            BooleanField::new('isApproved')
         ];
     }
 
