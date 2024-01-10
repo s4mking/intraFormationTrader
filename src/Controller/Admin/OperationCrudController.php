@@ -45,7 +45,7 @@ class OperationCrudController extends AbstractCrudController
             NumberField::new('closePrice'),
             DateField::new('openTime'),
             DateField::new('closeTime'),
-            CollectionField::new('type'),
+            TextField::new('type'),
             AssociationField::new('transmitter'),
             BooleanField::new('isVerified'),
             BooleanField::new('isApproved')
