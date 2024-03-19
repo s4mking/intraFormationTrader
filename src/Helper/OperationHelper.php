@@ -21,19 +21,18 @@ class OperationHelper
     {
         if (isset($amount)) {
             $now = new DateTime();
-            $operation = new Operation(
-                '',
-                0,
-                'Credit',
-                0,
-                $now,
-                0,
-                $now,
-                0,
-                $amount,
-                0,
-                $user
-            );
+            $operation = new Operation();
+            $operation->setSymbol('');
+            $operation->setPosition(0);
+            $operation->setType('Credit');
+            $operation->setLots(0);
+            $operation->setOpenPrice(0);
+            $operation->setOpenTime($now);
+            $operation->setClosePrice(0);
+            $operation->setCloseTime($now);
+            $operation->setProfit($amount);
+            $operation->setNetProfit(0);
+            $operation->setTransmitter($user);
             $operation->setIsVerified($isVerified);
             $operation->setIsApproved($isApproved);
             $this->entityManager->persist($operation);
@@ -45,19 +44,18 @@ class OperationHelper
     {
         if (isset($amount)) {
             $now = new DateTime();
-            $operationCredit = new Operation(
-                '',
-                0,
-                'Retrait',
-                0,
-                $now,
-                0,
-                $now,
-                0,
-                -$amount,
-                0,
-                $user
-            );
+            $operationCredit = new Operation();
+            $operationCredit->setSymbol('');
+            $operationCredit->setPosition(0);
+            $operationCredit->setType('Retrait');
+            $operationCredit->setLots(0);
+            $operationCredit->setOpenPrice(0);
+            $operationCredit->setOpenTime($now);
+            $operationCredit->setClosePrice(0);
+            $operationCredit->setCloseTime($now);
+            $operationCredit->setProfit(-$amount);
+            $operationCredit->setNetProfit(0);
+            $operationCredit->setTransmitter($user);
             $operationCredit->setIsVerified($isVerified);
             $operationCredit->setIsApproved($isApproved);
             $this->entityManager->persist($operationCredit);
