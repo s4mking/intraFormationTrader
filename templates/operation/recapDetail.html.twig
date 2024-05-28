@@ -205,7 +205,7 @@
                             <ul class="pagination pagination-sm d-flex justify-content-around">
                                 {# `«` arrow  #}
                                 <li {{ thisPage == 1 ? 'class="disabled"' }}>
-                                    <a href="{{ path('app_dasshboard_detail', {page: thisPage-1 < 1 ? 1 : thisPage-1}) }}">«</a>
+                                    <a href="{{ path('app_dasshboard_detail', {id: thisPage-1 < 1 ? 1 : thisPage-1}) }}">«</a>
                                 </li>
 
                                 {# Render each page number #}
@@ -220,7 +220,7 @@
                                         {% elseif 0 > (thisPage + nearbyPagesLimit) - loop.index %} {# hide all after #}
                                         {% else %}
                                             <li {% if thisPage == loop.index  %} class="active"{% endif %}>
-                                                <a href="{{ path('app_dasshboard_detail', {page: loop.index}) }}">{{ loop.index }}</a>
+                                                <a href="{{ path('app_dasshboard_detail', {id: loop.index}) }}">{{ loop.index }}</a>
                                             </li>
                                         {% endif %}
                                     {% endfor %}
@@ -229,7 +229,7 @@
 
                                 {# `»` arrow #}
                                 <li {{ thisPage == maxPages ? 'class="disabled"' }}>
-                                    <a href="{{ path('app_dasshboard_detail', {page: thisPage+1 <= maxPages ? thisPage+1 : thisPage}) }}">»</a>
+                                    <a href="{{ path('app_dasshboard_detail', {id: thisPage+1 <= maxPages ? thisPage+1 : thisPage}) }}">»</a>
                                 </li>
                             </ul>
                         {% endif %}
