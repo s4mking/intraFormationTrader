@@ -59,7 +59,7 @@ class RegistrationController extends AbstractController
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
             // do anything else you need here, like send an email
-            $this->addFlash('success', 'Votre compté a été créé veuillez vérifier vos mails.');
+            $this->addFlash('success', 'Votre compte a été créé veuillez vérifier vos mails.');
             return $this->redirectToRoute('app_default');
         }
 
@@ -71,8 +71,6 @@ class RegistrationController extends AbstractController
     #[Route('/verify/email', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator, UserRepository $userRepository): Response
     {
-
-        $id = $request->query->get('id');
 
         $id = $request->query->get('id'); // retrieve the user id from the url
 
