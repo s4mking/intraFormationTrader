@@ -1,3 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Email envoyé{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('login') }}
+{% endblock %}
+
+{% block body %}
+<div class="login-container">
+    <div class="login-card">
 <h1>Bonjour!</h1>
 
 <p>Pour réinitialiser votre mot de passe, veuillez suivre le lien suivant</p>
@@ -7,3 +19,6 @@
 <p>Ce lien expirera dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
 
 <p>Au revoir!</p>
+    </div>
+</div>
+{% endblock %}

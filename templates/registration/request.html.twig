@@ -8,23 +8,23 @@
 
 {% block body %}
 
-<div class="container_login py-10" style="background-image:url('{{asset('images/imageville.jpeg')}}')">
-    <div class="wrapper titlelogin rounded-top">
-        <h3 class="text-center text-white py-3 rounded-top">Renvoyer le lien d'activation</h3>
+    <div class="login-container">
+        <div class="login-card">
+        <h2 class="login-title">Renvoyer le lien d'activation</h2>
         <div class="inner-warpper text-center loginbackground" >
             {{ form_start(requestForm, {'attr': {'id': 'formvalidate', 'class': 'rounded'},}) }}
-            <div class="input-group">
-                {{ form_widget(requestForm.email, {'attr': {'id': 'username'}}) }}
-                <span class="lighting"></span>
+            <div class="form-group">
+                <label for="email" class="sr-only">Email</label>
+                {{ form_widget(requestForm.email, {'attr': {'placeholder': 'Email'}}) }}
             </div>
-            <button type="submit" id="login">Envoi</button>
+            <button type="submit" class="login-btn">Envoi</button>
             {{ form_end(requestForm) }}
         </div>
 
-        <div class="signup-wrapper text-center">
-            <p> <a href="{{ path('app_login') }}"> Déjà un compte ? <span class="text-primary">Se connecter</span></a></p>
-        </div>
+            <p class="signup-text">Déjà un compte ? <a href="{{ path('app_login') }}">Se connecter</a></p>
     </div>
 
 </div>
 {% endblock %}
+
+

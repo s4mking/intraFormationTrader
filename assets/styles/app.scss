@@ -15,6 +15,9 @@ $body-bg: #f8fafc;
 @import "~bootstrap/scss/bootstrap";
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
+.container{
+    width: 50rem;
+}
 .alert-success{
 z-index: 190;
 }
@@ -68,6 +71,7 @@ z-index: 190;
     align-items: center;
     margin-left: 2vw;
 }
+
 
 
 

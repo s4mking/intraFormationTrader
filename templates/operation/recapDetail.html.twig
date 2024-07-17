@@ -10,135 +10,135 @@
 
 
 {% block body %}
-{#
+    {#
     <div class="container" style="background-image:url('{{ asset('uploads/files/image-min-64c7c85b09c08.jpg') }}')">
-#}
+    #}
 
-        <main>
-            <div class="row mb-5">
-                <div class="col-xl-6 col-md-6">
-                    <!-- card -->
-                    <div class="card card-animate ">
-                        <div class="d-flex align-items-center card-header">
-                            <div class="flex-grow-1 overflow-hidden">
-                                <p class="text-uppercase fw-medium text-center text-muted text-truncate mb-0">Utilisateur</p>
-                            </div>
+    <main>
+        <div class="row mb-5">
+            <div class="col-xl-6 col-md-6">
+                <!-- card -->
+                <div class="card card-animate ">
+                    <div class="d-flex align-items-center card-header">
+                        <div class="flex-grow-1 overflow-hidden">
+                            <p class="text-uppercase fw-medium text-center text-muted text-truncate mb-0">Utilisateur</p>
                         </div>
-                        <div class="text-center">
+                    </div>
+                    <div class="text-center">
 
-                            <div class="mt-4">
-                                <div>
-                                    <p> <b>Email</b> : {{ user.email }}</p>
-                                    <p> <b>Nom</b> : {{ user.nom }}</p>
-                                    <p> <b>Prénom</b> :  {{ user.prenom }}</p>
-                                </div>
-                                <div class="avatar-sm flex-shrink-0">
+                        <div class="mt-4">
+                            <div>
+                                <p> <b>Email</b> : {{ user.email }}</p>
+                                <p> <b>Nom</b> : {{ user.nom }}</p>
+                                <p> <b>Prénom</b> :  {{ user.prenom }}</p>
+                            </div>
+                            <div class="avatar-sm flex-shrink-0">
                                                         <span class="avatar-title bg-warning-subtle rounded fs-3">
                                                             <i class="bx bx-user-circle text-warning"></i>
                                                         </span>
-                                </div>
-                            </div>
-                        </div><!-- end card body -->
-                    </div><!-- end card -->
-                </div><!-- end col -->
-            </div>
-            <div class="row">
-
-                <div class="col-xl-3 col-md-6">
-                    <!-- card -->
-                    <div class="card card-animate ">
-                        <div class="d-flex align-items-center card-header">
-                            <div class="flex-grow-1 overflow-hidden">
-                                <p class="text-uppercase fw-medium text-center text-muted text-truncate mb-0">Total Vente</p>
                             </div>
                         </div>
-                        <div class="card-body">
+                    </div><!-- end card body -->
+                </div><!-- end card -->
+            </div><!-- end col -->
+        </div>
+        <div class="row">
 
-                            <div class="mt-4">
-                                <div>
-                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4 text-center"><span class="counter-value"> {{ totalSell }}</span></h4>
-                                </div>
-                                <div class="avatar-sm flex-shrink-0">
+            <div class="col-xl-3 col-md-6">
+                <!-- card -->
+                <div class="card card-animate ">
+                    <div class="d-flex align-items-center card-header">
+                        <div class="flex-grow-1 overflow-hidden">
+                            <p class="text-uppercase fw-medium text-center text-muted text-truncate mb-0">Total Vente</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="mt-4">
+                            <div>
+                                <h4 class="fs-22 fw-semibold ff-secondary mb-4 text-center"><span class="counter-value">{{ totalSell }}</span></h4>
+                            </div>
+                            <div class="avatar-sm flex-shrink-0">
                                                         <span class="avatar-title bg-warning-subtle rounded fs-3">
                                                             <i class="bx bx-user-circle text-warning"></i>
                                                         </span>
-                                </div>
-                            </div>
-                        </div><!-- end card body -->
-                    </div><!-- end card -->
-                </div><!-- end col -->
-                <div class="col-xl-3 col-md-6">
-                    <!-- card -->
-                    <div class="card card-animate">
-                        <div class="d-flex align-items-center card-header">
-                            <div class="flex-grow-1 overflow-hidden">
-                                <p class="text-uppercase fw-medium text-muted text-truncate text-center mb-0"> Gain Semaine dernière </p>
                             </div>
                         </div>
-                        <div class="card-body">
+                    </div><!-- end card body -->
+                </div><!-- end card -->
+            </div><!-- end col -->
+            <div class="col-xl-3 col-md-6">
+                <!-- card -->
+                <div class="card card-animate">
+                    <div class="d-flex align-items-center card-header">
+                        <div class="flex-grow-1 overflow-hidden">
+                            <p class="text-uppercase fw-medium text-muted text-truncate text-center mb-0"> Gain Semaine dernière </p>
+                        </div>
+                    </div>
+                    <div class="card-body">
 
-                            <div class="mt-4">
-                                <div>
-                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4 text-center"><span class="counter-value" data-target={{ weeklySum }}>{{ weeklySum }} €</span> </h4>
-                                </div>
-                                <div class="avatar-sm flex-shrink-0">
+                        <div class="mt-4">
+                            <div>
+                                <h4 class="fs-22 fw-semibold ff-secondary mb-4 text-center"><span class="counter-value" data-target={{ weeklySum }}>{{ weeklySum }} €</span> </h4>
+                            </div>
+                            <div class="avatar-sm flex-shrink-0">
                                                         <span class="avatar-title bg-success-subtle rounded fs-3">
                                                             <i class="bx bx-dollar-circle text-success"></i>
                                                         </span>
-                                </div>
                             </div>
-                        </div><!-- end card body -->
-                    </div><!-- end card -->
-                </div><!-- end col -->
-
-                <div class="col-xl-3 col-md-6">
-                    <!-- card -->
-                    <div class="card card-animate">
-                        <div class="d-flex align-items-center card-header">
-                            <div class="flex-grow-1 overflow-hidden">
-                                <p class="text-uppercase fw-medium text-muted text-center text-truncate mb-0">Total Achat</p>
-                            </div>
-
                         </div>
-                        <div class="card-body">
+                    </div><!-- end card body -->
+                </div><!-- end card -->
+            </div><!-- end col -->
 
-                            <div class="mt-4">
-                                <div>
-                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4 text-center"><span class="counter-value" data-target="{{ sumOperations }}">{{ totalBuy }}</span></h4>
-                                </div>
-                                <div class="avatar-sm flex-shrink-0">
+            <div class="col-xl-3 col-md-6">
+                <!-- card -->
+                <div class="card card-animate">
+                    <div class="d-flex align-items-center card-header">
+                        <div class="flex-grow-1 overflow-hidden">
+                            <p class="text-uppercase fw-medium text-muted text-center text-truncate mb-0">Total Achat</p>
+                        </div>
+
+                    </div>
+                    <div class="card-body">
+
+                        <div class="mt-4">
+                            <div>
+                                <h4 class="fs-22 fw-semibold ff-secondary mb-4 text-center"><span class="counter-value" data-target="{{ sumOperations }}">{{ totalBuy }}</span></h4>
+                            </div>
+                            <div class="avatar-sm flex-shrink-0">
                                                         <span class="avatar-title bg-info-subtle rounded fs-3">
                                                             <i class="bx bx-shopping-bag text-info"></i>
                                                         </span>
-                                </div>
-                            </div>
-                        </div><!-- end card body -->
-                    </div><!-- end card -->
-                </div><!-- end col -->
-
-
-
-                <div class="col-xl-3 col-md-6">
-                    <!-- card -->
-                    <div class="card card-animate">
-                        <div class="d-flex align-items-center card-header">
-                            <div class="flex-grow-1 overflow-hidden">
-                                <p class="text-uppercase fw-medium text-muted text-truncate mb-0 text-center"> Solde</p>
                             </div>
                         </div>
-                        <div class="card-body">
+                    </div><!-- end card body -->
+                </div><!-- end card -->
+            </div><!-- end col -->
 
-                            <div class="mt-4 align-items-center">
-                                    <h4 class="fs-22 fw-semibold text-center ff-secondary mb-4 "> {{ sumUser }} € </h4>
-                            </div>
-                        </div><!-- end card body -->
-                    </div><!-- end card -->
-                </div><!-- end col -->
-            </div>
-            <div class="row g-4 mt-3 coursbourse">
-                <button type="button" id="removeOperations" class="btn btn-danger">Supprimer les opérations</button>
-                <div class="col-md-9 col-lg-12 tableauuser">
-                    <div class="info-box card bg-aqua">
+
+
+            <div class="col-xl-3 col-md-6">
+                <!-- card -->
+                <div class="card card-animate">
+                    <div class="d-flex align-items-center card-header">
+                        <div class="flex-grow-1 overflow-hidden">
+                            <p class="text-uppercase fw-medium text-muted text-truncate mb-0 text-center"> Solde</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="mt-4 align-items-center">
+                            <h4 class="fs-22 fw-semibold text-center ff-secondary mb-4 "> {{ sumUser }} € </h4>
+                        </div>
+                    </div><!-- end card body -->
+                </div><!-- end card -->
+            </div><!-- end col -->
+        </div>
+        <div class="row g-4 mt-3 coursbourse">
+            <button type="button" id="removeOperations" class="btn btn-danger">Supprimer les opérations</button>
+            <div class="col-md-9 col-lg-12 tableauuser">
+                <div class="info-box card bg-aqua">
 
                     <table class="table table-hover">
                         <thead>
@@ -146,13 +146,13 @@
                             <th>Id</th>
                             <th>Symbol</th>
                             <th>Type</th>
-{#                            <th>Lots</th>#}
+                            {#                            <th>Lots</th>#}
                             <th>OpenTime</th>
                             <th>OpenPrice</th>
                             <th>CloseTime</th>
                             <th>ClosePrice</th>
                             <th>Profit</th>
-{#                            <th>NetProfit</th>#}
+                            {#                            <th>NetProfit</th>#}
                         </tr>
                         </thead>
                         <tbody>
@@ -167,30 +167,30 @@
                                 <tr class="table-danger">
                             {% endif %}
 
-{#                            {% if operation.symbol == 'USDJPY' %}#}
-{#                                <td><i class="fa-solid fa-dollar-sign"></i></td>#}
-{#                            {% elseif operation.symbol == 'EURUSD' %}#}
-{#                                <td><i class="fa-solid fa-euro-sign"></i></td>#}
-{#                            {% elseif operation.symbol == 'RIPPLE' %}#}
-{#                                <td><i class="fa-solid fa-ruble-sign"></i></td>#}
-{#                            {% elseif operation.symbol == 'GBPJPY' %}#}
-{#                                <td><i class="fa-solid fa-yen-sign"></i></td>#}
-{#                            {% else%}#}
+                            {#                            {% if operation.symbol == 'USDJPY' %}#}
+                            {#                                <td><i class="fa-solid fa-dollar-sign"></i></td>#}
+                            {#                            {% elseif operation.symbol == 'EURUSD' %}#}
+                            {#                                <td><i class="fa-solid fa-euro-sign"></i></td>#}
+                            {#                            {% elseif operation.symbol == 'RIPPLE' %}#}
+                            {#                                <td><i class="fa-solid fa-ruble-sign"></i></td>#}
+                            {#                            {% elseif operation.symbol == 'GBPJPY' %}#}
+                            {#                                <td><i class="fa-solid fa-yen-sign"></i></td>#}
+                            {#                            {% else%}#}
                             <td>{{ operation.id }}</td>
                             <td>{{ operation.symbol }}</td>
-{#                            {% endif %}#}
-                                <td><b>{{ operation.type }}</b></td>
+                            {#                            {% endif %}#}
+                            <td><b>{{ operation.type }}</b></td>
                             {#    <td>{{ operation.lots }}</td>#}
-                                <td>{{ operation.openTime ? operation.openTime|date('Y-m-d H:i:s') : '' }}</td>
-                                <td>{{ operation.openPrice }}</td>
-                                <td>{{ operation.closeTime ? operation.closeTime|date('Y-m-d H:i:s') : '' }}</td>
-                                <td>{{ operation.closePrice }}</td>
-                                {% if operation.profit < 0 %}
-                                   <td class="bg-danger">{{ operation.profit }}</td>
-                                {% else %}
-                                     <td class="bg-success">{{ operation.profit }}</td>
-                                 {% endif %}
-{#                                <td>{{ operation.netProfit }}</td>#}
+                            <td>{{ operation.openTime ? operation.openTime|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>{{ operation.openPrice }}</td>
+                            <td>{{ operation.closeTime ? operation.closeTime|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>{{ operation.closePrice }}</td>
+                            {% if operation.profit < 0 %}
+                                <td class="bg-danger">{{ operation.profit }}</td>
+                            {% else %}
+                                <td class="bg-success">{{ operation.profit }}</td>
+                            {% endif %}
+                            {#                                <td>{{ operation.netProfit }}</td>#}
                             <td><input class="operations_checkbox" type="checkbox" id="{{ operation.id }}" name="operation_{{ operation.id }}" /></td>
                             </tr>
                         {% else %}
@@ -200,39 +200,44 @@
                         {% endfor %}
                         </tbody>
                     </table>
-                        {% if maxPages > 1 %}
-                            {% set nearbyPagesLimit = 4 %}
-                            <ul class="pagination pagination-sm d-flex justify-content-around">
-                                {# `«` arrow  #}
-                                <li class="page-item {{ thisPage == 1 ? 'disabled' : '' }}">
-                                    <a class="page-link" href="{{ path('app_dasshboard_detail', {id: user.id, page: thisPage-1 < 1 ? 1 : thisPage-1}) }}">«</a>
-                                </li>
-                                {# Render each page number #}
-                                <div class="middle d-flex">
-                                    {% for i in 1..maxPages %}
-                                        {% if 0 == (thisPage - nearbyPagesLimit) - loop.index %} {# dot before #}
-                                            <li class="disabled"><a href="#">...</a></li>
-                                        {% elseif 0 == (thisPage + nearbyPagesLimit) - loop.index %} {# dot after #}
-                                            <li class="disabled"><a href="#">...</a></li>
-                                        {% elseif 0 < (thisPage - nearbyPagesLimit) - loop.index %} {# hide all before #}
-                                        {% elseif 0 > (thisPage + nearbyPagesLimit) - loop.index %} {# hide all after #}
-                                        {% else %}
-                                            <li class="page-item {% if thisPage == loop.index %} active{% endif %}">
-                                                <a class="page-link" href="{{ path('app_dasshboard_detail', {id: user.id, page: loop.index}) }}">{{ loop.index }}</a>
-                                            </li>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
-                                {# `»` arrow #}
-                                <li class="page-item {{ thisPage == maxPages ? 'disabled' : '' }}">
-                                    <a class="page-link" href="{{ path('app_dasshboard_detail', {id: user.id, page: thisPage+1 <= maxPages ? thisPage+1 : thisPage}) }}">»</a>
-                                </li>
-                            </ul>
-                        {% endif %}
-                    </div>
+                    {% if maxPages > 1 %}
+                        {% set nearbyPagesLimit = 4 %}
+                        <ul class="pagination pagination-sm d-flex justify-content-around">
+                            {# `«` arrow  #}
+                            <li {{ thisPage == 1 ? 'class="disabled"' }}>
+                                <a class="page-link" href="{{ path('app_dasshboard_detail', {id: user.id, page: thisPage-1 < 1 ? 1 : thisPage-1}) }}">«</a>
+
+                            </li>
+
+                            {# Render each page number #}
+                            <div class="middle d-flex">
+                                {% for i in 1..maxPages %}
+
+                                    {% if 0 == (thisPage - nearbyPagesLimit) - loop.index %} {# dot before #}
+                                        <li class="disabled"><a href="#">...</a></li>
+                                    {% elseif 0 == (thisPage + nearbyPagesLimit) - loop.index %} {# dot after #}
+                                        <li class="disabled"><a href="#">...</a></li>
+                                    {% elseif 0 < (thisPage - nearbyPagesLimit) - loop.index %} {# hide all before #}
+                                    {% elseif 0 > (thisPage + nearbyPagesLimit) - loop.index %} {# hide all after #}
+                                    {% else %}
+                                        <li class="page-item {% if thisPage == loop.index %} active{% endif %}">
+                                            <a class="page-link" href="{{ path('app_dasshboard_detail', {id: user.id, page: loop.index}) }}">{{ loop.index }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+
+
+                            {# `»` arrow #}
+                            <li {{ thisPage == maxPages ? 'class="disabled"' }}>
+                                <a href="{{ path('app_dasshboard_detail', {id: thisPage+1 <= maxPages ? thisPage+1 : thisPage}) }}">»</a>
+                            </li>
+                        </ul>
+                    {% endif %}
                 </div>
             </div>
-        </main>
+        </div>
+    </main>
 {% endblock %}
 
 {% block javascripts %}

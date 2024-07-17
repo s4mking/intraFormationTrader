@@ -1,3 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Email envoyé{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('login') }}
+{% endblock %}
+
+{% block body %}
+<div class="login-container">
+    <div class="login-card">
 <h1>Bonjour! Veuillez confirmer votre mail!</h1>
 
 <p>
@@ -6,6 +18,6 @@
     Ce lien expirera dans {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
 </p>
 
-<p>
-
-</p>
+    </div>
+</div>
+{% endblock %}

@@ -8,7 +8,7 @@
 {% block body %}
 
         {{ form_start(contactForm, {'attr': {'class': 'form-contact'}}) }}
-    <img src="{{ asset('uploads/mailmessage.png') }}" id="contactimg">
+    <img src="{{ asset('uploads/mailmessage.png') }}" class="w-25 bg-transparent" id="contactimg">
         {{ form_widget(contactForm) }}
         {{ form_end(contactForm) }}
 

@@ -8,23 +8,22 @@
 
 {% block body %}
 
-    <div class="container_login py-10" style="background-image:url('{{asset('images/imageville.jpeg')}}')">
-        <div class="wrapper titlelogin rounded-top">
-            <h3 class="text-center text-white py-3 rounded-top">Réinitialisation</h3>
-            <div class="inner-warpper text-center loginbackground" >
-                {{ form_start(resetForm, {'attr': {'id': 'formvalidate', 'class': 'rounded'},}) }}
-                <div class="input-group">
-                    {{ form_widget(resetForm.plainPassword, {'attr': {'id': 'inputPassword'}}) }}
-                    <span class="lighting"></span>
+    <div class="login-container">
+        <div class="login-card">
+            <h2 class="login-title">Réinitialisation</h2>
+            <div class="inner-wrapper text-center login-background">
+                {{ form_start(resetForm, {'attr': {'id': 'formvalidate', 'class': 'login-form rounded'}}) }}
+                <div class="form-group">
+                    {{ form_widget(resetForm.plainPassword.first, {'attr': {'id': 'inputPassword', 'class': 'form-control', 'placeholder': 'Votre mot de passe'}}) }}
                 </div>
-                <button type="submit" id="login">Réinitialiser votre mot de passe</button>
+                <div class="form-group">
+                    {{ form_widget(resetForm.plainPassword.second, {'attr': {'id': 'inputPasswordConfirm', 'class': 'form-control', 'placeholder': 'Retapez votre mot de passe'}}) }}
+                </div>
+                <button type="submit" class="login-btn">Réinitialiser votre mot de passe</button>
                 {{ form_end(resetForm) }}
             </div>
-
-            <div class="signup-wrapper text-center">
-                <p> <a href="{{ path('app_login') }}"> Déjà un compte ? <span class="text-primary">Se connecter</span></a></p>
-            </div>
+            <p class="signup-text">Déjà un compte? <a href="{{ path('app_login') }}">Se connecter</a></p>
         </div>
-
     </div>
+
 {% endblock %}

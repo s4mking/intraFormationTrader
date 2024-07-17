@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Operation{% endblock %}
+{% block title %}Nouvelle Operation{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('login') }}
@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block body %}
-<div>
+<div class="flex-column">
     <img src="{{ asset('uploads/retraitBg.png') }}" id="retaitimg">
     {{ form_start(form, {'attr': {'class': 'form-signin'}}) }}
 

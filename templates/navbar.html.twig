@@ -1,46 +1,3 @@
-{#<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Logo</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ path('app_default') }}">Accueil</a>
-                </li>
-                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_import_csv') }}">Importer CSV</a>
-                </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_import_images') }}">Importer Images</a>
-                    </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_credit') }}">Ajouter credit</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('admin') }}">Administration</a>
-                </li>
-              #}{#  <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_operation_index') }}">Operations</a>
-                </li>#}{#
-                {% endif %}
-                <li class="nav-item">
-                    {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                    <a class="nav-link" href="{{ path('app_login') }}">Se connecter</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_register') }}">S'enregistrer</a>
-                    {% endif %}
-                </li>
-            </ul>
-                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                    <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
-                    {% endif %}
-        </div>
-    </div>
-</nav>#}
 {% block stylesheets %}
     {{ encore_entry_link_tags('sidebar') }}
 {% endblock %}
@@ -49,79 +6,39 @@
 {% endblock %}
 
 <nav class="sidebar">
-    <div class="logoimg">
-        {#<img src="{{ asset('images/logo.png') }}" width="100" height="100">#}
-        <img src="{{ asset('images/logo.png') }}">
+    <button id="toggleSidebar" class="toggle-btn"><i class="fa fa-bars"></i></button>
+
+    <div class="sidebar-header">
+        <div class="logo-section">
+
+            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="logo-img">
+            <div class="logo-text">
+                <span class="company-name">Espace Membre</span>
+                <span class="tagline">HR Management</span>
+            </div>
+        </div>
     </div>
-
-    <div class="menu-content">
-        <a href="#" class="logo">Espace Membre</a>
-
-        <ul class="menu-items">
-
-            <li class="item">
-
-                <a aria-current="page" href="{{ path('app_default') }}"> <i class="fa fa-home" aria-hidden="true"></i> Accueil</a>
-            </li>
-            <li class="item">
-                <a class="nav-link" href="{{ path('app_user_portefeuille') }}"><i class="fa fa-file-invoice" aria-hidden="true"></i>
-                    Mon portefeuille</a>
-            </li>
-            <li class="item">
-                <a class="nav-link" href="{{ path('app_user_trading') }}"><i class="fa fa-money-bill-trend-up" aria-hidden="true"></i> Trading</a>
-            </li>
-            <li class="item">
-                <a class="nav-link" href="{{ path('app_request_transaction') }}"><i class="fa fa-handshake" aria-hidden="true"></i> Demande de transaction</a>
-            </li>
-            <li class="item">
-                <a class="nav-link" href="{{ path('get_profile') }}"><i class="fa fa-user-tie" aria-hidden="true"></i> Mon profil</a>
-            </li>
-            <li class="item">
-                <a class="nav-link" href="{{ path('app_help') }}"><i class="fa fa-handshake-angle" aria-hidden="true"></i> Assistance</a>
-            </li>
-            {% if is_granted('ROLE_ADMIN') %}
-            <li class="item">
-                <a class="nav-link" href="{{ path('app_dasshboard') }}"><i class="fa fa-people-line" aria-hidden="true"></i>
-                    Récapitulatif</a>
-            </li>
-            <li class="item">
-                <a class="nav-link" href="{{ path('app_import_csv') }}"><i class="fa fa-cloud-upload" aria-hidden="true"></i>
-                     Importer CSV</a>
-            </li>
-            <li class="item">
-                <a class="nav-link" href="{{ path('app_import_images') }}"><i class="fa fa-upload" aria-hidden="true"></i> Importer Images</a>
-            </li>
-            <li class="item">
-                <a class="nav-link" href="{{ path('app_credit') }}"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>
-                     Ajouter credit</a>
-            </li>
-            <li class="item">
-                <a class="nav-link" href="{{ path('admin') }}"><i class="fa fa-wrench" aria-hidden="true"></i>
-                     Administration</a>
-            </li>
-                <li class="item">
-                    <a class="nav-link" href="{{ path('app_operations_approval') }}"><i class="fa-solid fa-pause" aria-hidden="true"></i>
-                        Demandes en cours</a>
-                </li>
-            {% endif %}
-<li class="item">
-    {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-    <a class="nav-link" href="{{ path('app_login') }}">Se connecter</a>
-</li>
-<li class="item">
-    <a class="nav-link" href="{{ path('app_register') }}">S'enregistrer</a>
-    {% endif %}
-</li>
-            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <li class="item logout">
-                    <a class="nav-link" href="{{ path('app_logout') }}"> <i class="fa fa-sign-out" aria-hidden="true"></i>
-                        Déconnexion</a>
-
-                </li>
-            {% endif %}
-
-</ul>
-</div>
+    <ul class="menu-items">
+        <li class="item"><a href="{{ path('app_default') }}"><i class="fa fa-home"></i> <span class="item-text">Accueil</span></a></li>
+        <li class="item"><a href="{{ path('app_user_portefeuille') }}"><i class="fa fa-file-invoice"></i> <span class="item-text">Mon portefeuille</span></a></li>
+        <li class="item"><a href="{{ path('app_user_trading') }}"><i class="fa fa-money-bill-trend-up"></i> <span class="item-text">Trading</span></a></li>
+        <li class="item"><a href="{{ path('app_request_transaction') }}"><i class="fa fa-handshake"></i> <span class="item-text">Demande de transaction</span></a></li>
+        <li class="item"><a href="{{ path('get_profile') }}"><i class="fa fa-user-tie"></i> <span class="item-text">Mon profil</span></a></li>
+        <li class="item"><a href="{{ path('app_help') }}"><i class="fa fa-handshake-angle"></i> <span class="item-text">Assistance</span></a></li>
+        {% if is_granted('ROLE_ADMIN') %}
+            <li class="item"><a href="{{ path('app_dasshboard') }}"><i class="fa fa-people-line"></i> <span class="item-text">Récapitulatif</span></a></li>
+            <li class="item"><a href="{{ path('app_import_csv') }}"><i class="fa fa-cloud-upload"></i> <span class="item-text">Importer CSV</span></a></li>
+            <li class="item"><a href="{{ path('app_import_images') }}"><i class="fa fa-upload"></i> <span class="item-text">Importer Images</span></a></li>
+            <li class="item"><a href="{{ path('app_credit') }}"><i class="fa fa-credit-card-alt"></i> <span class="item-text">Ajouter credit</span></a></li>
+            <li class="item"><a href="{{ path('admin') }}"><i class="fa fa-wrench"></i> <span class="item-text">Administration</span></a></li>
+            <li class="item"><a href="{{ path('app_operations_approval') }}"><i class="fa-solid fa-pause"></i> <span class="item-text">Demandes en cours</span></a></li>
+        {% endif %}
+        {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <li class="item"><a href="{{ path('app_login') }}">Se connecter</a></li>
+            <li class="item"><a href="{{ path('app_register') }}">S'enregistrer</a></li>
+        {% endif %}
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <li class="item logout"><a href="{{ path('app_logout') }}"><i class="fa fa-sign-out"></i> <span class="item-text">Déconnexion</span></a></li>
+        {% endif %}
+    </ul>
 </nav>
-
-

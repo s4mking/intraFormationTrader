@@ -1,52 +1,34 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Inscription{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('login') }}
 {% endblock %}
-{% block title %}Inscription{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
-
-    {{ form_errors(registrationForm) }}
-
-<div class="container_login py-10" style="background-image:url('{{asset('images/imageville.jpeg')}}')">
-        <div class="wrapper titlelogin rounded-top">
-            <h3 class="text-center text-white py-3 rounded-top">Création compte</h3>
-            <div class="inner-warpper text-center loginbackground" >
-                {{ form_start(registrationForm, {'attr': {'id': 'formvalidate', 'class': 'rounded'},}) }}
-                <div class="input-group">
-                    {{ form_widget(registrationForm.email, {'attr': {'id': 'username'}}) }}
-                    <span class="lighting"></span>
-                </div>
-                <div class="input-group">
-                    {{ form_widget(registrationForm.nom, {'attr': {'id': 'username'}}) }}
-                    <span class="lighting"></span>
-                </div>
-                <div class="input-group">
-                    {{ form_widget(registrationForm.prenom, {'attr': {'id': 'username'}}) }}
-                    <span class="lighting"></span>
-                </div>
-                <div class="input-group">
-                   <label for="registration_form__token" class="sr-only palceholder">Mot de passe</label>
-                    {{ form_widget(registrationForm.plainPassword, {
-                        id: 'inputPassword',
-                        class: 'form-control mt-2'
-                    }) }}
-                    <span class="lighting"></span>
-                </div>
-                <button type="submit" id="login">Inscription</button>
-            {{ form_end(registrationForm) }}
-        </div>
-
-        <div class="signup-wrapper text-center">
-            <p> <a href="{{ path('app_login') }}"> Déjà un compte ? <span class="text-primary">Se connecter</span></a></p>
-        </div>
-        </div>
-
+    <div class="login-container">
+        <div class="login-card">
+            <h2 class="login-title">Création de compte</h2>
+            {% for flash_error in app.flashes('verify_email_error') %}
+                <div class="login-failure">{{ flash_error }}</div>
+            {% endfor %}
+            {{ form_start(registrationForm, {'attr': {'id': 'formvalidate'}}) }}
+            <div class="form-group">
+                {{ form_widget(registrationForm.email, {'attr': {'placeholder': 'Adresse Mail'}}) }}
             </div>
+            <div class="form-group">
+                {{ form_widget(registrationForm.nom, {'attr': {'placeholder': 'Nom'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_widget(registrationForm.prenom, {'attr': {'placeholder': 'Prénom'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_widget(registrationForm.plainPassword, {'attr': {'placeholder': 'Mot de passe'}}) }}
+            </div>
+            <button type="submit" class="login-btn">Inscription</button>
+            {{ form_end(registrationForm) }}
+            <p class="signup-text">Déjà un compte? <a href="{{ path('app_login') }}">Se connecter</a></p>
+        </div>
     </div>
 {% endblock %}

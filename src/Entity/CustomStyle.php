@@ -9,7 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 class CustomStyle
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
+    //#[ORM\GeneratedValue] Local
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     #[ORM\Column]
     private ?int $id = null;
 

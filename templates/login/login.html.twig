@@ -1,48 +1,37 @@
 {# templates/login/testSammmmmm.html.twig #}
 {% extends 'base.html.twig' %}
-{% block title %}Connexion
-{% endblock %}
+{% block title %}Connexion{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('login') }}
 {% endblock %}
-{# ... #}
-
 {% block body %}
-
-   {# <div class="logo text-center">#}
-           {# <img src="{{ asset('images/logoconnect.png') }}" width="100" height="100">#}
-  {#          <img src="{{ asset('images/logoconnect.png') }}" width="100" height="100">
-    </div>#}
-    <div class="container_login py-10" style="background-image:url('{{asset('images/imageville.jpeg')}}')">
-        <div class="wrapper titlelogin rounded-top">
-            <h3 class="text-center text-white py-3 rounded-top">Connexion</h3>
+    <div class="login-container">
+        <div class="login-card">
+            <h2 class="login-title">Bienvenue</h2>
+            <p class="login-subtitle">Entrez vos identifiants</p>
             {% if error %}
-                <div class="loginfailure">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                <div class="login-failure">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
-            <div class="inner-warpper text-center loginbackground">
-                    <form action="{{ path('app_login')}}" id="formvalidate" method="post" class="rounded">
-                    <div class="input-group">
-                        <label for="username" class="sr-only palceholder">Adresse email</label>
-                        <input type="email" name="_username" id="username" class="form-control" placeholder="Adresse email" value="{{ last_username }}" required autofocus>
-                        <span class="lighting"></span>
+            <form action="{{ path('app_login')}}" method="post" class="login-form">
+                <div class="form-group">
+                    <label for="username" class="sr-only">Votre adresse mail</label>
+                    <input type="email" name="_username" id="username" class="form-control" placeholder="Adresse Mail" value="{{ last_username }}" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword" class="sr-only">Mot de passe</label>
+                    <input type="password" name="_password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
+                </div>
+                <div class="form-options">
+                    <div>
+                        <input type="checkbox" name="_remember_me" id="rememberMe">
+                        <label for="rememberMe">Se souvenir de moi</label>
                     </div>
-                    <div class="input-group">
-                        <label for="inputPassword" class="sr-only palceholder">Mot de passe</label>
-                        <input type="password" name="_password" id="inputPassword" class="form-control mt-2" placeholder="Mot de passe" required>
-                        <span class="lighting"></span>
-                    </div>
-                    <button type="submit" id="login">Se connecter</button>
-                    <div class="clearfix supporter">
-                        <a class="forgot pull-right" href="{{ path('app_forgot_password_request') }}">Mot de passe oublié?</a>
-                    </div>
-                </form>
-            </div>
-            <div class="signup-wrapper text-center">
-                <p> <a href="{{ path('app_register') }}"> Pas de compte ? <span class="text-primary">Créer un compte</span></a></p>
-            </div>
+                    <a class="forgot-password" href="{{ path('app_forgot_password_request') }}">Mot de passe oublié?</a>
+                </div>
+                <button type="submit" class="login-btn">Connexion</button>
+            </form>
+            <p class="signup-text">Pas de compte? <a href="{{ path('app_register') }}">S'enregistrer</a></p>
         </div>
     </div>
-
-
 {% endblock %}

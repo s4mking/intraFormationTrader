@@ -13,7 +13,8 @@ class ResetPasswordRequest implements ResetPasswordRequestInterface
     use ResetPasswordRequestTrait;
 
     #[ORM\Id]
-    #[ORM\GeneratedValue]
+    //#[ORM\GeneratedValue] Local
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     #[ORM\Column]
     private ?int $id = null;
 

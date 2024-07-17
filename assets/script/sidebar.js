@@ -1,3 +1,5 @@
+import $ from "jquery";
+
 const sidebar = document.querySelector(".sidebar");
 const sidebarClose = document.querySelector("#sidebar-close");
 const menu = document.querySelector(".menu-content");
@@ -5,7 +7,9 @@ const menuItems = document.querySelectorAll(".submenu-item");
 const subMenuTitles = document.querySelectorAll(".submenu .menu-title");
 
 //sidebarClose.addEventListener("click", () => sidebar.classList.toggle("close"));
-
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
 menuItems.forEach((item, index) => {
   item.addEventListener("click", () => {
     menu.classList.add("submenu-active");
@@ -23,3 +27,13 @@ subMenuTitles.forEach((title) => {
     menu.classList.remove("submenu-active");
   });
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+  const toggleBtn = document.getElementById('toggleSidebar');
+  const sidebar = document.querySelector('.sidebar');
+
+  toggleBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('closed');
+  });
+});
+
