@@ -10,7 +10,6 @@
 
     <div class="sidebar-header">
         <div class="logo-section">
-
             <img src="{{ asset('images/logo.png') }}" alt="Logo" class="logo-img">
             <div class="logo-text">
                 <span class="company-name">Espace Membre</span>
@@ -19,26 +18,56 @@
         </div>
     </div>
     <ul class="menu-items">
-        <li class="item"><a href="{{ path('app_default') }}"><i class="fa fa-home"></i> <span class="item-text">Accueil</span></a></li>
-        <li class="item"><a href="{{ path('app_user_portefeuille') }}"><i class="fa fa-file-invoice"></i> <span class="item-text">Mon portefeuille</span></a></li>
-        <li class="item"><a href="{{ path('app_user_trading') }}"><i class="fa fa-money-bill-trend-up"></i> <span class="item-text">Trading</span></a></li>
-        <li class="item"><a href="{{ path('app_request_transaction') }}"><i class="fa fa-handshake"></i> <span class="item-text">Demande de transaction</span></a></li>
-        <li class="item"><a href="{{ path('get_profile') }}"><i class="fa fa-user-tie"></i> <span class="item-text">Mon profil</span></a></li>
-        <li class="item"><a href="{{ path('app_help') }}"><i class="fa fa-handshake-angle"></i> <span class="item-text">Assistance</span></a></li>
+        <li class="item {% if app.request.attributes.get('_route') == 'app_default' %}active{% endif %}">
+            <a href="{{ path('app_default') }}"><i class="fa fa-home"></i> <span class="item-text">Accueil</span></a>
+        </li>
+        <li class="item {% if app.request.attributes.get('_route') == 'app_user_portefeuille' %}active{% endif %}">
+            <a href="{{ path('app_user_portefeuille') }}"><i class="fa fa-file-invoice"></i> <span class="item-text">Mon portefeuille</span></a>
+        </li>
+        <li class="item {% if app.request.attributes.get('_route') == 'app_user_trading' %}active{% endif %}">
+            <a href="{{ path('app_user_trading') }}"><i class="fa fa-money-bill-trend-up"></i> <span class="item-text">Trading</span></a>
+        </li>
+        <li class="item {% if app.request.attributes.get('_route') == 'app_request_transaction' %}active{% endif %}">
+            <a href="{{ path('app_request_transaction') }}"><i class="fa fa-handshake"></i> <span class="item-text">Demande de transaction</span></a>
+        </li>
+        <li class="item {% if app.request.attributes.get('_route') == 'get_profile' %}active{% endif %}">
+            <a href="{{ path('get_profile') }}"><i class="fa fa-user-tie"></i> <span class="item-text">Mon profil</span></a>
+        </li>
+        <li class="item {% if app.request.attributes.get('_route') == 'app_help' %}active{% endif %}">
+            <a href="{{ path('app_help') }}"><i class="fa fa-handshake-angle"></i> <span class="item-text">Assistance</span></a>
+        </li>
         {% if is_granted('ROLE_ADMIN') %}
-            <li class="item"><a href="{{ path('app_dasshboard') }}"><i class="fa fa-people-line"></i> <span class="item-text">Récapitulatif</span></a></li>
-            <li class="item"><a href="{{ path('app_import_csv') }}"><i class="fa fa-cloud-upload"></i> <span class="item-text">Importer CSV</span></a></li>
-            <li class="item"><a href="{{ path('app_import_images') }}"><i class="fa fa-upload"></i> <span class="item-text">Importer Images</span></a></li>
-            <li class="item"><a href="{{ path('app_credit') }}"><i class="fa fa-credit-card-alt"></i> <span class="item-text">Ajouter credit</span></a></li>
-            <li class="item"><a href="{{ path('admin') }}"><i class="fa fa-wrench"></i> <span class="item-text">Administration</span></a></li>
-            <li class="item"><a href="{{ path('app_operations_approval') }}"><i class="fa-solid fa-pause"></i> <span class="item-text">Demandes en cours</span></a></li>
+            <li class="item {% if app.request.attributes.get('_route') == 'app_dasshboard' %}active{% endif %}">
+                <a href="{{ path('app_dasshboard') }}"><i class="fa fa-people-line"></i> <span class="item-text">Récapitulatif</span></a>
+            </li>
+            <li class="item {% if app.request.attributes.get('_route') == 'app_import_csv' %}active{% endif %}">
+                <a href="{{ path('app_import_csv') }}"><i class="fa fa-cloud-upload"></i> <span class="item-text">Importer CSV</span></a>
+            </li>
+            <li class="item {% if app.request.attributes.get('_route') == 'app_import_images' %}active{% endif %}">
+                <a href="{{ path('app_import_images') }}"><i class="fa fa-upload"></i> <span class="item-text">Importer Images</span></a>
+            </li>
+            <li class="item {% if app.request.attributes.get('_route') == 'app_credit' %}active{% endif %}">
+                <a href="{{ path('app_credit') }}"><i class="fa fa-credit-card-alt"></i> <span class="item-text">Ajouter credit</span></a>
+            </li>
+            <li class="item {% if app.request.attributes.get('_route') == 'admin' %}active{% endif %}">
+                <a href="{{ path('admin') }}"><i class="fa fa-wrench"></i> <span class="item-text">Administration</span></a>
+            </li>
+            <li class="item {% if app.request.attributes.get('_route') == 'app_operations_approval' %}active{% endif %}">
+                <a href="{{ path('app_operations_approval') }}"><i class="fa-solid fa-pause"></i> <span class="item-text">Demandes en cours</span></a>
+            </li>
         {% endif %}
         {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-            <li class="item"><a href="{{ path('app_login') }}">Se connecter</a></li>
-            <li class="item"><a href="{{ path('app_register') }}">S'enregistrer</a></li>
+            <li class="item {% if app.request.attributes.get('_route') == 'app_login' %}active{% endif %}">
+                <a href="{{ path('app_login') }}">Se connecter</a>
+            </li>
+            <li class="item {% if app.request.attributes.get('_route') == 'app_register' %}active{% endif %}">
+                <a href="{{ path('app_register') }}">S'enregistrer</a>
+            </li>
         {% endif %}
         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-            <li class="item logout"><a href="{{ path('app_logout') }}"><i class="fa fa-sign-out"></i> <span class="item-text">Déconnexion</span></a></li>
+            <li class="item logout {% if app.request.attributes.get('_route') == 'app_logout' %}active{% endif %}">
+                <a href="{{ path('app_logout') }}"><i class="fa fa-sign-out"></i> <span class="item-text">Déconnexion</span></a>
+            </li>
         {% endif %}
     </ul>
 </nav>

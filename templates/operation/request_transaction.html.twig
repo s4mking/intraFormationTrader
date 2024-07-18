@@ -10,80 +10,51 @@
 {% endblock %}
 
 {% block body %}
-<div class="flex-column">
-    <img src="{{ asset('uploads/retraitBg.png') }}" id="retaitimg">
-    {{ form_start(form, {'attr': {'class': 'form-signin'}}) }}
-
-
-    <div class="tabs" id="tabbedForm">
-        <nav class="tab-nav"></nav>
-        <div class="tab" data-name="Retrait">
-            {{ form_row(form.retrait) }}
+    <div class="operation-container">
+        <div class="image-container">
+            <img src="{{ asset('uploads/retraitBg.png') }}" id="retaitimg" alt="Retrait Image">
         </div>
-        <div class="tab" data-name="Crédit">
-            {{ form_row(form.credit) }}
+        <div class="form-container">
+            {{ form_start(form, {'attr': {'class': 'form-signin'}}) }}
+            <div class="tabs" id="tabbedForm">
+                <nav class="tab-nav"></nav>
+                <div class="tab" data-name="Retrait">
+                    {{ form_row(form.retrait) }}
+                </div>
+                <div class="tab" data-name="Crédit">
+                    {{ form_row(form.credit) }}
+                </div>
+            </div>
+            {{ form_end(form) }}
         </div>
-    </div>
-    {{ form_end(form) }}
-    <div class="containermesdemandes">
-        <h3 class="col-md-9 col-lg-8 tableauuser">Mes demandes</h3>
-        <div class="col-md-9 col-lg-8 tableauuser">
-            <div class="info-box card bg-aqua">
-
+        <div class="requests-container">
+            <h3>Mes demandes</h3>
+            <div class="info-box card">
                 <table class="table table-hover">
                     <thead>
                     <tr class="table-active">
                         <th>Type</th>
-                        {#                            <th>Lots</th>#}
                         <th>Profit</th>
                         <th>Vérifié?</th>
                         <th>Approuvé?</th>
-                        {#                            <th>NetProfit</th>#}
                     </tr>
                     </thead>
                     <tbody>
                     {% for operation in operations %}
-                        {% if operation.type == 'Sell' %}
-                            <tr class="table-info">
-                        {% elseif operation.type == 'Buy' %}
-                            <tr class="table-warning">
-                        {% elseif operation.type == 'Credit' %}
-                            <tr class="table-success">
-                        {% elseif operation.type == 'Retrait' %}
-                            <tr class="table-danger">
-                        {% endif %}
-
-                        {#                            {% if operation.symbol == 'USDJPY' %}#}
-                        {#                                <td><i class="fa-solid fa-dollar-sign"></i></td>#}
-                        {#                            {% elseif operation.symbol == 'EURUSD' %}#}
-                        {#                                <td><i class="fa-solid fa-euro-sign"></i></td>#}
-                        {#                            {% elseif operation.symbol == 'RIPPLE' %}#}
-                        {#                                <td><i class="fa-solid fa-ruble-sign"></i></td>#}
-                        {#                            {% elseif operation.symbol == 'GBPJPY' %}#}
-                        {#                                <td><i class="fa-solid fa-yen-sign"></i></td>#}
-                        {#                            {% else%}#}
-                        {#                            {% endif %}#}
-                        <td><b>{{ operation.type }}</b></td>
-                        {#    <td>{{ operation.lots }}</td>#}
-                        {% if operation.profit < 0 %}
-                            <td class="bg-danger">{{ operation.profit }}</td>
-                        {% else %}
-                            <td class="bg-success">{{ operation.profit }}</td>
-                        {% endif %}
-                        <td>{{ operation.isVerified ? 'Oui' : 'Non' }}</td>
-                        <td>{{ operation.isApproved ? 'Oui' : 'Non' }}</td>
-                        {#                                <td>{{ operation.netProfit }}</td>#}
+                        <tr class="{% if operation.type == 'Sell' %}table-info{% elseif operation.type == 'Buy' %}table-warning{% elseif operation.type == 'Credit' %}table-success{% elseif operation.type == 'Retrait' %}table-danger{% endif %}">
+                            <td><b>{{ operation.type }}</b></td>
+                            <td class="{% if operation.profit < 0 %}bg-danger{% else %}bg-success{% endif %}">{{ operation.profit }}</td>
+                            <td>{{ operation.isVerified ? 'Oui' : 'Non' }}</td>
+                            <td>{{ operation.isApproved ? 'Oui' : 'Non' }}</td>
                         </tr>
                     {% else %}
                         <tr>
-                            <td colspan="12">Aucune demande trouvée</td>
+                            <td colspan="4">Aucune demande trouvée</td>
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
-
             </div>
-</div>
-
-
+        </div>
+    </div>
 {% endblock %}

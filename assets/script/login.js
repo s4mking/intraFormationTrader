@@ -139,3 +139,21 @@ var tabs = function(id) {
 
 var tabbedForm = new tabs('tabbedForm');
 tabbedForm.init();
+document.addEventListener('DOMContentLoaded', function() {
+  const tabs = document.querySelectorAll('.tab-nav .nav-item');
+  const tabContents = document.querySelectorAll('.tab');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+      tabs.forEach(item => item.classList.remove('selected'));
+      tabContents.forEach(content => content.classList.remove('selected'));
+
+      this.classList.add('selected');
+      document.querySelector(`.tab[data-name="${this.textContent.trim()}"]`).classList.add('selected');
+    });
+  });
+
+  // Set the first tab as active by default
+  tabs[0].classList.add('selected');
+  tabContents[0].classList.add('selected');
+});

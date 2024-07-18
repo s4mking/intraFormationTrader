@@ -4,13 +4,12 @@
       "js": [
         "/build/runtime.9a71ee5d.js",
         "/build/897.80ce37a1.js",
-        "/build/995.e0d3c818.js",
-        "/build/637.4ca11980.js",
-        "/build/app.77435829.js"
+        "/build/637.0ad2e898.js",
+        "/build/app.46e1b66c.js"
       ],
       "css": [
         "/build/637.f00c31d6.css",
-        "/build/app.b84d5a32.css"
+        "/build/app.7eb9a268.css"
       ]
     },
     "login": {
@@ -19,7 +18,7 @@
         "/build/login.5529a63f.js"
       ],
       "css": [
-        "/build/login.d4fbbb1e.css"
+        "/build/login.496bb84a.css"
       ]
     },
     "sidebar": {
@@ -28,15 +27,15 @@
         "/build/sidebar.93ba663b.js"
       ],
       "css": [
-        "/build/sidebar.0c4b7929.css"
+        "/build/sidebar.bc34c7a4.css"
       ]
     },
     "sidebarjs": {
       "js": [
         "/build/runtime.9a71ee5d.js",
         "/build/897.80ce37a1.js",
-        "/build/995.e0d3c818.js",
-        "/build/sidebarjs.acafe198.js"
+        "/build/510.9b9af2ba.js",
+        "/build/sidebarjs.7da65a88.js"
       ]
     },
     "selectall": {
@@ -57,7 +56,7 @@
       "js": [
         "/build/runtime.9a71ee5d.js",
         "/build/897.80ce37a1.js",
-        "/build/loginjs.f64a1ea4.js"
+        "/build/loginjs.a0b8757b.js"
       ]
     },
     "index": {

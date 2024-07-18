@@ -96,6 +96,15 @@
     background: #f0f0f0;
 }
 
+.item.active a {
+    background-color: #617FA080;
+    color: white;
+}
+
+.item.active a i {
+    color: white;
+}
+
 .logout a {
     color: #e74c3c;
 }
