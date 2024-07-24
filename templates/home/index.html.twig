@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Intra
-{% endblock %}
+{% block title %}Intra{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -9,108 +8,90 @@
 {% endblock %}
 
 {% block body %}
-{#
-    <div class="container" style="background-image:url('{{ asset('uploads/files/image-min-64c7c85b09c08.jpg') }}')">
-#}
-        <main>
-            <div class="py-4 text-center mt-1">
+    <main>
+        <div class="row g-4 mt-3">
+            <div class="col containerDashboardChart p-2">
+                <div class="card card-site-career">
+                    <div class="legend d-flex align-items-center justify-content-between">
+                        <div class="left d-flex align-items-center">
+                            <div class="icon eye">
+                                <span class="icon-lay il-eye"></span>
+                            </div>
+                        </div>
+                        <div class="right {% if progressPercentage >= 0 %}up{% else %}down{% endif %}">
+                            <span class="icon-lay il-arrow-{{ progressPercentage >= 0 ? 'top' : 'bottom' }}"></span>
+                            {{ progressPercentage|number_format(2) }} % {{ progressPercentage >= 0 ? 'de plus' : 'de moins' }}
+                        </div>
+                    </div>
+                    <div class="canvas">
+                        {{ render_chart(chart) }}
+                    </div>
+
+                </div>
             </div>
-            <div class="row">
-
-                <div class="col-xl-3 col-md-6">
-                    <!-- card -->
-                    <div class="card card-animate ">
-                        <div class="d-flex align-items-center card-header">
-                            <div class="flex-grow-1 overflow-hidden">
-                                <p class="text-uppercase fw-medium text-center text-muted text-truncate mb-0">Total Vente</p>
+            <div class="col">
+                <div class="row">
+                    <div class="w-50 p-2">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <div class="icon-container">
+                                    <div class="icon-bg">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </div>
+                                </div>
+                                <p class="text-uppercase fw-medium text-muted mb-0">Total Vente</p>
+                                <h4 class="fs-22 fw-semibold">{{ totalSell }}</h4>
                             </div>
                         </div>
-                        <div class="card-body">
-
-                            <div class="mt-4">
-                                <div>
-                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4 text-center"><span class="counter-value"> {{ totalSell }}</span></h4>
+                    </div>
+                    <div class="w-50 p-2">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <div class="icon-container">
+                                    <div class="icon-bg">
+                                        <i class="fas fa-euro-sign"></i>
+                                    </div>
                                 </div>
-                                <div class="avatar-sm flex-shrink-0">
-                                                        <span class="avatar-title bg-warning-subtle rounded fs-3">
-                                                            <i class="bx bx-user-circle text-warning"></i>
-                                                        </span>
-                                </div>
-                            </div>
-                        </div><!-- end card body -->
-                    </div><!-- end card -->
-                </div><!-- end col -->
-                <div class="col-xl-3 col-md-6">
-                    <!-- card -->
-                    <div class="card card-animate">
-                        <div class="d-flex align-items-center card-header">
-                            <div class="flex-grow-1 overflow-hidden">
-                                <p class="text-uppercase fw-medium text-muted text-truncate text-center mb-0"> Gain Semaine dernière </p>
+                                <p class="text-uppercase fw-medium text-muted mb-0">Gain Semaine dernière</p>
+                                <h4 class="fs-22 fw-semibold">{{ weeklySum }} €</h4>
                             </div>
                         </div>
-                        <div class="card-body">
+                    </div>
+                </div>
+              <div class="row">
+                  <div class="w-50 p-2">
+                      <div class="card">
+                          <div class="card-body text-center">
+                              <div class="icon-container">
+                                  <div class="icon-bg">
+                                      <i class="fas fa-shopping-bag"></i>
+                                  </div>
+                              </div>
+                              <p class="text-uppercase fw-medium text-muted mb-0">Total Achat</p>
+                              <h4 class="fs-22 fw-semibold">{{ totalBuy }}</h4>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="w-50 p-2">
+                      <div class="card">
+                          <div class="card-body text-center">
+                              <div class="icon-container">
+                                  <div class="icon-bg">
+                                      <i class="fas fa-wallet"></i>
+                                  </div>
+                              </div>
+                              <p class="text-uppercase fw-medium text-muted mb-0">Solde</p>
+                              <h4 class="fs-22 fw-semibold">{{ sumUser }} €</h4>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              </div>
 
-                            <div class="mt-4">
-                                <div>
-                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4 text-center"><span class="counter-value" data-target={{ weeklySum }}>{{ weeklySum }} €</span> </h4>
-                                </div>
-                                <div class="avatar-sm flex-shrink-0">
-                                                        <span class="avatar-title bg-success-subtle rounded fs-3">
-                                                            <i class="bx bx-dollar-circle text-success"></i>
-                                                        </span>
-                                </div>
-                            </div>
-                        </div><!-- end card body -->
-                    </div><!-- end card -->
-                </div><!-- end col -->
-
-                <div class="col-xl-3 col-md-6">
-                    <!-- card -->
-                    <div class="card card-animate">
-                        <div class="d-flex align-items-center card-header">
-                            <div class="flex-grow-1 overflow-hidden">
-                                <p class="text-uppercase fw-medium text-muted text-center text-truncate mb-0">Total Achat</p>
-                            </div>
-
-                        </div>
-                        <div class="card-body">
-
-                            <div class="mt-4">
-                                <div>
-                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4 text-center"><span class="counter-value" data-target="{{ sumOperations }}">{{ totalBuy }}</span></h4>
-                                </div>
-                                <div class="avatar-sm flex-shrink-0">
-                                                        <span class="avatar-title bg-info-subtle rounded fs-3">
-                                                            <i class="bx bx-shopping-bag text-info"></i>
-                                                        </span>
-                                </div>
-                            </div>
-                        </div><!-- end card body -->
-                    </div><!-- end card -->
-                </div><!-- end col -->
-
-
-
-                <div class="col-xl-3 col-md-6">
-                    <!-- card -->
-                    <div class="card card-animate">
-                        <div class="d-flex align-items-center card-header">
-                            <div class="flex-grow-1 overflow-hidden">
-                                <p class="text-uppercase fw-medium text-muted text-truncate mb-0 text-center"> Solde</p>
-                            </div>
-                        </div>
-                        <div class="card-body">
-
-                            <div class="mt-4 align-items-center">
-                                    <h4 class="fs-22 fw-semibold text-center ff-secondary mb-4 "> {{ sumUser }} € </h4>
-                            </div>
-                        </div><!-- end card body -->
-                    </div><!-- end card -->
-                </div><!-- end col -->
             </div>
 
 
-            <div class="row g-4 mt-3 coursbourse">
+<div class="row g-4 mt-3 coursbourse">
                 <div class="col-md-5 col-lg-4 order-md-last tableaubourse">
                         <div class="vh-100 table">
                             <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
@@ -233,34 +214,32 @@
                     </table>
                         {% if maxPages > 1 %}
                             {% set nearbyPagesLimit = 4 %}
-                            <ul class="pagination pagination-sm d-flex justify-content-around">
-                                {# `«` arrow  #}
-                                <li {{ thisPage == 1 ? 'class="disabled"' }}>
-                                    <a href="{{ path('app_default', {page: thisPage-1 < 1 ? 1 : thisPage-1}) }}">«</a>
+                            <ul class="pagination pagination-sm">
+                                <!-- `«` arrow -->
+                                <li class="page-item {{ thisPage == 1 ? 'disabled' : '' }}">
+                                    <a class="page-link" href="{{ path('app_default', {page: thisPage-1 < 1 ? 1 : thisPage-1}) }}">«</a>
                                 </li>
 
-                                {# Render each page number #}
-                                <div class="middle d-flex">
+                                <!-- Render each page number -->
+                                <div class="middle">
                                     {% for i in 1..maxPages %}
-
                                         {% if 0 == (thisPage - nearbyPagesLimit) - loop.index %} {# dot before #}
-                                            <li class="disabled"><a href="#">...</a></li>
+                                            <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
                                         {% elseif 0 == (thisPage + nearbyPagesLimit) - loop.index %} {# dot after #}
-                                            <li class="disabled"><a href="#">...</a></li>
+                                            <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
                                         {% elseif 0 < (thisPage - nearbyPagesLimit) - loop.index %} {# hide all before #}
                                         {% elseif 0 > (thisPage + nearbyPagesLimit) - loop.index %} {# hide all after #}
                                         {% else %}
-                                            <li {% if thisPage == loop.index  %} class="active"{% endif %}>
-                                                <a href="{{ path('app_default', {page: loop.index}) }}">{{ loop.index }}</a>
+                                            <li class="page-item {{ thisPage == loop.index  ? 'active' : '' }}">
+                                                <a class="page-link" href="{{ path('app_default', {page: loop.index}) }}">{{ loop.index }}</a>
                                             </li>
                                         {% endif %}
                                     {% endfor %}
                                 </div>
 
-
-                                {# `»` arrow #}
-                                <li {{ thisPage == maxPages ? 'class="disabled"' }}>
-                                    <a href="{{ path('app_default', {page: thisPage+1 <= maxPages ? thisPage+1 : thisPage}) }}">»</a>
+                                <!-- `»` arrow -->
+                                <li class="page-item {{ thisPage == maxPages ? 'disabled' : '' }}">
+                                    <a class="page-link" href="{{ path('app_default', {page: thisPage+1 <= maxPages ? thisPage+1 : thisPage}) }}">»</a>
                                 </li>
                             </ul>
                         {% endif %}

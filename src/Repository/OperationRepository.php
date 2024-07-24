@@ -108,7 +108,7 @@ class OperationRepository extends ServiceEntityRepository
             ->getQuery()
             ;
 
-        return $this->paginate($query, $currentPage);
+        return $this->paginate($query, $currentPage, 15);
     }
 
     public function findAllOperationsForUser(UserInterface $user, $currentPage = 1):Paginator
@@ -135,6 +135,22 @@ class OperationRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+
+    public function findYearlyProfit(User $user)
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->select('o.closeTime as closeTime, SUM(o.profit) as profit')
+            ->where('o.transmitter = :user')
+            ->andWhere('o.closeTime >= :start')
+            ->groupBy('o.closeTime')
+            ->orderBy('o.closeTime', 'ASC')
+            ->setParameter('user', $user)
+            ->setParameter('start', new \DateTime('-1 year'));
+
+        return $qb->getQuery()->getResult();
+    }
+
+
 
     public function findCountForUsers()
     {

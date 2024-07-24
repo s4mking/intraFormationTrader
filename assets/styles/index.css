@@ -4,18 +4,101 @@
     vertical-align: middle;
     border-collapse: collapse;
 }
-.pagination li{
-    font-size:1.5rem;
-    font-weight: bold;
-}
-.pagination li a{
-    text-decoration: none;
-    padding-right: 1rem;
-    padding-left: 1rem;
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding-left: 0;
+    list-style: none;
+    border-radius: 0.25rem;
 }
 
+.pagination li {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.pagination li a {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.pagination li a:hover {
+    z-index: 2;
+    color: #0056b3;
+    text-decoration: none;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+}
+
+.pagination li.disabled a {
+    color: #6c757d;
+    pointer-events: none;
+    background-color: #fff;
+    border-color: #dee2e6;
+}
+
+.pagination li.active a {
+    z-index: 1;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.pagination li.disabled a:hover,
+.pagination li.disabled a:focus {
+    background-color: #fff;
+    border-color: #dee2e6;
+}
+
+.pagination .middle {
+    display: flex;
+    gap: 5px;
+}
+.card {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+.card:hover {
+    transform: translateY(-5px);
+}
 .card .card-body{
-    background-color: #a3c2e0;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 20px;
+}
+.card .card-body h4 {
+    font-size: 24px;
+    margin: 0;
+}
+.card .card-body p {
+    margin: 0;
+    color: #6c757d;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+.icon-container i {
+    font-size: 24px;
+    color: #6c757d;
+}
+.icon-container .icon-bg {
+    background-color: #e9ecef;
+    border-radius: 50%;
+    padding: 10px;
+    display: inline-flex;
 }
 
 .containerAccount{

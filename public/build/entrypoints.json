@@ -4,12 +4,12 @@
       "js": [
         "/build/runtime.9a71ee5d.js",
         "/build/897.80ce37a1.js",
-        "/build/637.0ad2e898.js",
-        "/build/app.46e1b66c.js"
+        "/build/918.c9fc018d.js",
+        "/build/app.0cbf010a.js"
       ],
       "css": [
-        "/build/637.f00c31d6.css",
-        "/build/app.7eb9a268.css"
+        "/build/918.f00c31d6.css",
+        "/build/app.c041569c.css"
       ]
     },
     "login": {
@@ -65,7 +65,7 @@
         "/build/index.fd2f48c7.js"
       ],
       "css": [
-        "/build/index.5d30f5c7.css"
+        "/build/index.bb39815e.css"
       ]
     }
   }

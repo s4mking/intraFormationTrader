@@ -22,6 +22,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
+use Symfony\UX\Chartjs\Model\Chart;
 
 class UserController extends AbstractController
 {
@@ -29,6 +31,7 @@ class UserController extends AbstractController
     public function __construct(
         private EntityManagerInterface $entityManager,
         public OperationHelper         $operationHelper,
+        private readonly CustomStyleRepository $customStyleRepository
     )
     {
     }
@@ -42,10 +45,9 @@ class UserController extends AbstractController
     }
 
     #[Route('/', name: 'app_default')]
-    public function indexGeneral(OperationRepository $operationRepository, Request $request): Response
+    public function indexGeneral(ChartBuilderInterface $chartBuilder, OperationRepository $operationRepository, Request $request): Response
     {
         $user = $this->getUser();
-        /*        $operations = $operationRepository->findBy(['transmitter' => $user],['closeTime' => 'DESC']);*/
 
         $page = $request->query->get('page') ? $request->query->get('page') : 1;
         $operations = $operationRepository->findOperationsForUser($user, $page);
@@ -61,19 +63,84 @@ class UserController extends AbstractController
         $sumOperations = $operationRepository->countOperations($user);
         $totalSell = $operationRepository->findTotalSell($user);
         $totalBuy = $operationRepository->findTotalBuy($user);
-        return $this->render('home/index.html.twig',
-            [
-                'operations' => $operations,
-                'user' => $user,
-                'weeklySum' => round($totalLastWeek['weekly_total'], 3),
-                'lastWeeklySum' => round($totalLastLast['weekly_total'], 3),
-                'sumOperations' => $sumOperations,
-                'totalSell' => round($totalSell['weekly_total'], 3),
-                'totalBuy' => round($totalBuy['weekly_total'],3),
-                'maxPages' => $maxPages,
-                'thisPage' => $thisPage,
-                'sumUser' => round($sumOperationsBalance['weekly_total'],3)
-            ]);
+
+        // Calcul du profit par mois pour la dernière année
+        $profitData = $operationRepository->findYearlyProfit($user);
+
+        // Format the date in PHP
+        $formattedProfitData = [];
+        foreach ($profitData as $data) {
+            $month = $data['closeTime']->format('Y-m');
+            if (!isset($formattedProfitData[$month])) {
+                $formattedProfitData[$month] = 0;
+            }
+            $formattedProfitData[$month] += $data['profit'];
+        }
+
+        // Préparez les données pour le graphique
+        $graphData = [];
+        $labels = [];
+        $currentDate = new \DateTime('-11 months');
+        $endDate = new \DateTime('now');
+
+        while ($currentDate <= $endDate) {
+            $month = $currentDate->format('Y-m');
+            $labels[] = $month;
+            $graphData[] = $formattedProfitData[$month] ?? 0;
+            $currentDate->modify('+1 month');
+        }
+
+        // Calcul de la progression du profit
+        $currentMonthProfit = end($graphData);
+        $lastMonthProfit = prev($graphData);
+        $progressPercentage = ($lastMonthProfit > 0) ? (($currentMonthProfit - $lastMonthProfit) / $lastMonthProfit) * 100 : 0;
+
+        // Create the chart
+        $chart = $chartBuilder->createChart(Chart::TYPE_LINE);
+        $chart->setData([
+            'labels' => $labels,
+            'datasets' => [
+                [
+                    'label' => 'Profit',
+                    'backgroundColor' => 'rgba(75, 192, 192, 0.2)',
+                    'borderColor' => 'rgba(125, 150, 236, 0.6)',
+                    'data' => $graphData,
+                ],
+            ],
+        ]);
+        $chart->setOptions([
+            'scales' => [
+                'x' => [
+                    'type' => 'time',
+                    'time' => [
+                        'unit' => 'month',
+                    ],
+                ],
+                'y' => [
+                    'beginAtZero' => true,
+                ],
+            ],
+        ]);
+
+        $customStyle = $this->customStyleRepository->findOneBy([], ['id' => 'DESC']);
+        $styleId = $customStyle->getStyleId();
+
+        return $this->render('/home/index.html.twig', [
+            'operations' => $operations,
+            'user' => $user,
+            'weeklySum' => round($totalLastWeek['weekly_total'], 3),
+            'lastWeeklySum' => round($totalLastLast['weekly_total'], 3),
+            'sumOperations' => $sumOperations,
+            'totalSell' => round($totalSell['weekly_total'], 3),
+            'totalBuy' => round($totalBuy['weekly_total'], 3),
+            'maxPages' => $maxPages,
+            'thisPage' => $thisPage,
+            'sumUser' => round($sumOperationsBalance['weekly_total'], 3),
+            'profitData' => $graphData,
+            'progressPercentage' => $progressPercentage,
+            'styleId' => $styleId,
+            'chart' => $chart, // Pass the chart to the template
+        ]);
     }
 
     #[Route('/trading', name: 'app_user_trading')]
@@ -183,6 +250,12 @@ class UserController extends AbstractController
 
     }
 
+    #[Route('/bourse', name: 'app_bourse_recap')]
+    public function bourse(): Response
+    {
+        return $this->render('user/bourse.html.twig', [
+        ]);
+    }
     #[Route('/profile/edit', name: 'edit_profile')]
     public function editProfile(Request $request): Response
     {

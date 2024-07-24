@@ -43,6 +43,9 @@
             <li class="item {% if app.request.attributes.get('_route') == 'app_import_csv' %}active{% endif %}">
                 <a href="{{ path('app_import_csv') }}"><i class="fa fa-cloud-upload"></i> <span class="item-text">Importer CSV</span></a>
             </li>
+            <li class="item {% if app.request.attributes.get('_route') == 'app_bourse_recap' %}active{% endif %}">
+                <a href="{{ path('app_bourse_recap') }}"><i class="fa-solid fa-sack-dollar"></i> <span class="item-text">Bourse</span></a>
+            </li>
             <li class="item {% if app.request.attributes.get('_route') == 'app_import_images' %}active{% endif %}">
                 <a href="{{ path('app_import_images') }}"><i class="fa fa-upload"></i> <span class="item-text">Importer Images</span></a>
             </li>

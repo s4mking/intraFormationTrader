@@ -9,7 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 class CustomStyle
 {
     #[ORM\Id]
-    //#[ORM\GeneratedValue] Local
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     #[ORM\Column]
     private ?int $id = null;
@@ -22,6 +21,9 @@ class CustomStyle
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $emailAdmin = null;
+
+    #[ORM\Column(type: 'integer', options: ['default' => 1])]
+    private ?int $styleId = 1;
 
     public function getId(): ?int
     {
@@ -66,5 +68,15 @@ class CustomStyle
     public function setEmailAdmin(?string $emailAdmin): void
     {
         $this->emailAdmin = $emailAdmin;
+    }
+
+    public function getStyleId(): ?int
+    {
+        return $this->styleId;
+    }
+
+    public function setStyleId(?int $styleId): void
+    {
+        $this->styleId = $styleId;
     }
 }

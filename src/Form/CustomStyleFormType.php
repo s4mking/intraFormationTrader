@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\CustomStyle;
+use Doctrine\DBAL\Types\IntegerType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,6 +23,10 @@ class CustomStyleFormType extends AbstractType
                 'label' => 'Email Admin',
                 'required' => false,
                 ])
+            ->add('styleId', NumberType::class, [
+                'label' => 'Id Style',
+                'required' => false,
+            ])
             ->add('Logo', FileType::class, [
                 'label' => 'Logo SideMenu',
 

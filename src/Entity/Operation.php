@@ -10,10 +10,12 @@ use Doctrine\ORM\Mapping as ORM;
 class Operation
 {
     #[ORM\Id]
-    //#[ORM\GeneratedValue] Local
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
     #[ORM\Column]
     private ?int $id = null;
+
+    #[ORM\Column(type: 'datetime_immutable')]
+    private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $symbol = null;
@@ -223,5 +225,15 @@ class Operation
     public function setIsApproved(bool $isApproved): void
     {
         $this->isApproved = $isApproved;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?\DateTimeImmutable $createdAt): void
+    {
+        $this->createdAt = $createdAt;
     }
 }

@@ -8,4 +8,10 @@ import './bootstrap.js';
 
 // any CSS you import will output into a single css file (app.scss in this case)
 import './styles/app.scss';
+import { startStimulusApp } from '@symfony/stimulus-bridge';
 
+
+import '@symfony/ux-chartjs';
+
+// Import the date adapter
+import 'chartjs-adapter-date-fns';

@@ -58,6 +58,7 @@ class OperationController extends AbstractController
                     $operationDto = new OperationFromCSVDTO($row);
                     $operation = new Operation(
                     );
+                    $operation->setCreatedAt(new \DateTimeImmutable());
                     $operation->setSymbol($operationDto->symbol);
                     $operation->setPosition($operationDto->position);
                     $operation->setType($operationDto->type);
@@ -189,6 +190,7 @@ class OperationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $operation->setCreatedAt(new \DateTimeImmutable());
             $entityManager->persist($operation);
             $entityManager->flush();
 
