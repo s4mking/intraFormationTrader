@@ -1,34 +1,61 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Intra{% endblock %}</title>
-        <link rel="icon" type="image/jpg" href="{{ asset('images/favicon.ico') }}">
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-            {{ encore_entry_link_tags('index') }}
-        {% endblock %}
-
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-
-        {% endblock %}
-    </head>
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
-            {{ message }}
-        </div>
-    {% endfor %}
-    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-            {% include 'navbar.html.twig' %}
-    {% endif %}
-    <div class="container">
-        {% block body %}
-
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Intra{% endblock %}</title>
+    <link rel="icon" type="image/jpg" href="{{ asset('images/favicon.ico') }}">
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+        {{ encore_entry_link_tags('index') }}
+    {% endblock %}
+</head>
+<body>
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
     </div>
-
-        {% endblock %}
-
-    </body>
+{% endfor %}
+{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+    <div class="container-profile d-flex">
+        <div class="bandeau">
+            <script src="https://public.bnbstatic.com/unpkg/growth-widget/cryptoCurrencyWidget@0.0.13.min.js" ></script><div class="binance-widget-marquee" data-cmc-ids="1,1027,1839,5426,52,3408,74,5805,3890,7083" data-theme="light" data-transparent="false" ></div>
+        </div>
+        <div class="action">
+            <div class="profile" onclick="menuToggle();">
+                <img src="{{ app.user | avatar(40) }}" alt="User Avatar" class="avatar">
+            </div>
+            <div class="menu">
+                <h3>{{ app.user.nom|capitalize }} {{ app.user.prenom|upper }}<br /></h3>
+                <ul>
+                    <li>
+                        <a href="{{ path('get_profile') }}"><img src="{{ asset('images/icons/user.png') }}" />Mon profil</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('edit_profile') }}"><img src="{{ asset('images/icons/edit.png') }}" />Editer</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_logout') }}"><img src="{{ asset('images/icons/log-out.png') }}" /><span class="item-text">Déconnexion</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+    {% include 'navbar.html.twig' %}
+{% endif %}
+<div class="container">
+    {% block body %}
+    {% endblock %}
+</div>
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+    <script>
+        function menuToggle() {
+            const toggleMenu = document.querySelector(".menu");
+            toggleMenu.classList.toggle("active");
+        }
+    </script>
+{% endblock %}
+</body>
 </html>
-

@@ -11,9 +11,10 @@
 {% endblock %}
 
 {% block body %}
+    <div class="d-flex justify-content-center">
+<div class="login-card">
 
-
-    {{ form_start(form, {'attr': {'class': 'form-signin'}}) }}
+    {{ form_start(form, {'attr': {'class': 'login-form'}}) }}
     <h3>Créditer les comptes</h3>
 
         <div class="tabs" id="tabbedForm">
@@ -29,5 +30,8 @@
             <label for="select-all">Tout sélectionner</label>
 
         </div>
-        {{ form_end(form) }}
+    {{ form_end(form) }}
+
+</div>
+    </div>
 {% endblock %}

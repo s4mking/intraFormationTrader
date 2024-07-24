@@ -190,7 +190,7 @@ class OperationRepository extends ServiceEntityRepository
             ->getQuery()
         ;
 
-        return $this->paginate($query, $currentPage);
+        return $this->paginate($query, $currentPage, 15);
     }
 
     public function findTotalBuy(UserInterface $user): array

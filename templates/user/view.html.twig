@@ -6,30 +6,30 @@
 {% endblock %}
 {% block body %}
     <div class="containerAccount">
-        <img src="{{ asset('uploads/accountBg.png') }}" id="accountimg">
+        <div class="accountLeft">
+            <img src="{{ asset('uploads/accountBg.png') }}" id="accountimg">
+        </div>
         <div class="accountRight">
             <h3>Mon compte</h3>
-            <div>
-                <label>Adresse mail : </label><b>{{ user.email }}</b>
+            <div class="info">
+                <i class="fas fa-envelope"></i> <span>Adresse mail : </span><b>{{ user.email }}</b>
             </div>
-            <div>
-                <label>Nom : </label><b>{{ user.nom }}</b>
+            <div class="info">
+                <i class="fas fa-user"></i> <span>Nom : </span><b>{{ user.nom }}</b>
             </div>
-            <div>
-                <label>Prénom : </label><b>{{ user.prenom }}</b>
+            <div class="info">
+                <i class="fas fa-user"></i> <span>Prénom : </span><b>{{ user.prenom }}</b>
             </div>
-            <div>
-                <label>Adresse : </label><b>{{ user.adresse }}</b>
+            <div class="info">
+                <i class="fas fa-map-marker-alt"></i> <span>Adresse : </span><b>{{ user.adresse }}</b>
             </div>
-            <div>
-                <label>Téléphone : </label><b>{{ user.telephone }}</b>
+            <div class="info">
+                <i class="fas fa-phone"></i> <span>Téléphone : </span><b>{{ user.telephone }}</b>
             </div>
-
-            <a href="{{ path('edit_profile') }}">Modifier vos informations</a>
-            <a href="{{ path('edit_password') }}">Modifier votre mot de passe</a>
+            <div class="actions">
+                <a class="btn btn-primary" href="{{ path('edit_profile') }}">Modifier vos informations</a>
+                <a class="btn btn-secondary" href="{{ path('edit_password') }}">Modifier votre mot de passe</a>
+            </div>
         </div>
-
     </div>
-
-
 {% endblock %}

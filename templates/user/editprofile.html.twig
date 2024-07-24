@@ -6,9 +6,13 @@
     {{ encore_entry_link_tags('login') }}
 {% endblock %}
 {% block body %}
-    {{ form_start(profileForm, {'attr': {'class': 'form-signin'}}) }}
-    <h3>Modifier vos informations</h3>
-    {{ form_widget(profileForm) }}
-    {{ form_end(profileForm) }}
+    <div class="d-flex justify-content-center">
+        <div class="login-card">
+            {{ form_start(profileForm, {'attr': {'class': 'login-form'}}) }}
+            <h3>Modifier vos informations</h3>
+            {{ form_widget(profileForm) }}
+            {{ form_end(profileForm) }}
+        </div>
+    </div>
 
 {% endblock %}
