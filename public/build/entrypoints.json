@@ -2,70 +2,75 @@
   "entrypoints": {
     "app": {
       "js": [
-        "/build/runtime.9a71ee5d.js",
-        "/build/897.80ce37a1.js",
-        "/build/918.c9fc018d.js",
-        "/build/app.0cbf010a.js"
+        "/build/runtime.js",
+        "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_function-bind-5e17a2.js",
+        "/build/vendors-node_modules_core-js_internals_array-iteration_js-node_modules_core-js_internals_arra-f33d69.js",
+        "/build/vendors-node_modules_core-js_internals_a-constructor_js-node_modules_core-js_internals_check--026e63.js",
+        "/build/vendors-node_modules_swup_fade-theme_lib_index_js-node_modules_swup_slide-theme_lib_index_js--bc493e.js",
+        "/build/app.js"
       ],
       "css": [
-        "/build/918.f00c31d6.css",
-        "/build/app.b37ee1c1.css"
+        "/build/vendors-node_modules_swup_fade-theme_lib_index_js-node_modules_swup_slide-theme_lib_index_js--bc493e.css",
+        "/build/app.css"
       ]
     },
     "login": {
       "js": [
-        "/build/runtime.9a71ee5d.js",
-        "/build/login.5529a63f.js"
+        "/build/runtime.js",
+        "/build/login.js"
       ],
       "css": [
-        "/build/login.496bb84a.css"
+        "/build/login.css"
       ]
     },
     "sidebar": {
       "js": [
-        "/build/runtime.9a71ee5d.js",
-        "/build/sidebar.93ba663b.js"
+        "/build/runtime.js",
+        "/build/sidebar.js"
       ],
       "css": [
-        "/build/sidebar.786a86e7.css"
+        "/build/sidebar.css"
       ]
     },
     "sidebarjs": {
       "js": [
-        "/build/runtime.9a71ee5d.js",
-        "/build/897.80ce37a1.js",
-        "/build/510.9b9af2ba.js",
-        "/build/sidebarjs.7da65a88.js"
+        "/build/runtime.js",
+        "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_function-bind-5e17a2.js",
+        "/build/vendors-node_modules_core-js_internals_array-iteration_js-node_modules_core-js_internals_arra-f33d69.js",
+        "/build/sidebarjs.js"
       ]
     },
     "selectall": {
       "js": [
-        "/build/runtime.9a71ee5d.js",
-        "/build/897.80ce37a1.js",
-        "/build/selectall.ac3f6664.js"
+        "/build/runtime.js",
+        "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_function-bind-5e17a2.js",
+        "/build/selectall.js"
       ]
     },
     "operations": {
       "js": [
-        "/build/runtime.9a71ee5d.js",
-        "/build/897.80ce37a1.js",
-        "/build/operations.498fed7d.js"
+        "/build/runtime.js",
+        "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_function-bind-5e17a2.js",
+        "/build/vendors-node_modules_core-js_internals_a-constructor_js-node_modules_core-js_internals_check--026e63.js",
+        "/build/vendors-node_modules_core-js_modules_es_promise_js.js",
+        "/build/operations.js"
       ]
     },
     "loginjs": {
       "js": [
-        "/build/runtime.9a71ee5d.js",
-        "/build/897.80ce37a1.js",
-        "/build/loginjs.a0b8757b.js"
+        "/build/runtime.js",
+        "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_function-bind-5e17a2.js",
+        "/build/vendors-node_modules_core-js_modules_es_array_for-each_js-node_modules_core-js_modules_es_fun-b97408.js",
+        "/build/loginjs.js"
       ]
     },
     "index": {
       "js": [
-        "/build/runtime.9a71ee5d.js",
-        "/build/index.fd2f48c7.js"
+        "/build/runtime.js",
+        "/build/index.js"
       ],
       "css": [
-        "/build/index.bb39815e.css"
+        "/build/index.css"
       ]
     }
   }

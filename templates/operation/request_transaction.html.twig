@@ -6,14 +6,12 @@
     {{ encore_entry_link_tags('login') }}
 {% endblock %}
 {% block javascripts %}
+    {{ parent() }}
     {{ encore_entry_script_tags('loginjs') }}
 {% endblock %}
 
 {% block body %}
     <div class="operation-container">
-        <div class="image-container">
-            <img src="{{ asset('uploads/retraitBg.png') }}" id="retaitimg" alt="Retrait Image">
-        </div>
         <div class="form-container">
             {{ form_start(form, {'attr': {'class': 'form-signin'}}) }}
             <div class="tabs" id="tabbedForm">

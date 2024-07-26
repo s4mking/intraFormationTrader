@@ -5,7 +5,6 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    {{ encore_entry_link_tags('index') }}
 {% endblock %}
 
 
@@ -241,5 +240,6 @@
 {% endblock %}
 
 {% block javascripts %}
+    {{ parent() }}
     {{ encore_entry_script_tags('operations') }}
 {% endblock %}

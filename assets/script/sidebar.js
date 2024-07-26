@@ -7,9 +7,7 @@ const menuItems = document.querySelectorAll(".submenu-item");
 const subMenuTitles = document.querySelectorAll(".submenu .menu-title");
 
 //sidebarClose.addEventListener("click", () => sidebar.classList.toggle("close"));
-$(document).ready(function(){
-  $('[data-toggle="tooltip"]').tooltip();
-});
+
 menuItems.forEach((item, index) => {
   item.addEventListener("click", () => {
     menu.classList.add("submenu-active");

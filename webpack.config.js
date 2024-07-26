@@ -21,13 +21,23 @@ Encore
      * and one CSS file (e.g. app.scss) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
-    .addEntry('login', './assets/styles/login.css')
-    .addEntry('sidebar', './assets/styles/sidebar.css')
     .addEntry('sidebarjs', './assets/script/sidebar.js')
     .addEntry('selectall', './assets/script/selectAll.js')
     .addEntry('operations', './assets/script/operations.js')
     .addEntry('loginjs', './assets/script/login.js')
+
+
     .addEntry('index', './assets/styles/index.css')
+    .addEntry('login', './assets/styles/login.css')
+    .addEntry('sidebar', './assets/styles/sidebar.css')
+
+    .addEntry('indexDark', './assets/styles/indexDark.css')
+    .addEntry('loginDark', './assets/styles/loginDark.css')
+    .addEntry('sidebarDark', './assets/styles/sidebarDark.css')
+
+    .addEntry('index', './assets/styles/index.css')
+    .addEntry('login', './assets/styles/login.css')
+    .addEntry('sidebar', './assets/styles/sidebar.css')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

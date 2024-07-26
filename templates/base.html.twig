@@ -5,8 +5,20 @@
     <title>{% block title %}Intra{% endblock %}</title>
     <link rel="icon" type="image/jpg" href="{{ asset('images/favicon.ico') }}">
     {% block stylesheets %}
-        {{ encore_entry_link_tags('app') }}
-        {{ encore_entry_link_tags('index') }}
+        {% if templateStyle == 'white' %}
+            {{ encore_entry_link_tags('app') }}
+            {{ encore_entry_link_tags('index') }}
+            {{ encore_entry_link_tags('login') }}
+
+            {% elseif templateStyle == 'dark' %}
+                {{ encore_entry_link_tags('app') }}
+                {{ encore_entry_link_tags('indexdark') }}
+                {{ encore_entry_link_tags('loginDark') }}
+            {% else %}
+                {{ encore_entry_link_tags('app') }}
+                {{ encore_entry_link_tags('index') }}
+        {% endif %}
+
     {% endblock %}
 </head>
 <body>
@@ -21,7 +33,7 @@
             <script src="https://public.bnbstatic.com/unpkg/growth-widget/cryptoCurrencyWidget@0.0.13.min.js" ></script><div class="binance-widget-marquee" data-cmc-ids="1,1027,1839,5426,52,3408,74,5805,3890,7083" data-theme="light" data-transparent="false" ></div>
         </div>
         <div class="action">
-            <div class="profile" onclick="menuToggle();">
+            <div class="profile">
                 <img src="{{ app.user | avatar(40) }}" alt="User Avatar" class="avatar">
             </div>
             <div class="menu">
@@ -51,10 +63,16 @@
 {% block javascripts %}
     {{ encore_entry_script_tags('app') }}
     <script>
-        function menuToggle() {
-            const toggleMenu = document.querySelector(".menu");
-            toggleMenu.classList.toggle("active");
-        }
+        document.addEventListener('DOMContentLoaded', function () {
+            const profileElement = document.querySelector('.profile');
+            const menuElement = document.querySelector('.menu');
+
+            function menuToggle() {
+                menuElement.classList.toggle('active');
+            }
+
+            profileElement.addEventListener('click', menuToggle);
+        });
     </script>
 {% endblock %}
 </body>
