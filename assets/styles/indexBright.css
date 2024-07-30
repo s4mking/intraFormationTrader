@@ -215,7 +215,7 @@
     flex-direction: column;
     justify-content: center;
     padding: 20px;
-    background-image: linear-gradient(45deg, #93a5cf 0%, #e4efe9 100%);
+    background-color: #F0F3F5;
     border-radius: 15px; /* Make the card corners rounded */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -235,11 +235,11 @@
 
 .info i {
     margin-right: 10px;
-    color: #a4c5fc;
+    color: #4E73DF;
 }
 
 .table thead th {
-    background: #6c7ae0;
+    background: rgba(31, 114, 124, 0.56);
     color: #ffffff;
     border-bottom: 0;
 }
@@ -359,7 +359,7 @@
 }
 
 .card .card-body {
-    background-image: linear-gradient(45deg, #93a5cf 0%, #e4efe9 100%);
+    background-color: #FFFFFF;
     padding: 20px;
     border-radius: 20px;
 }

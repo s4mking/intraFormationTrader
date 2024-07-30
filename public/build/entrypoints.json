@@ -75,7 +75,7 @@
         "/build/indexDark.c0c902d3.js"
       ],
       "css": [
-        "/build/indexDark.b2a68e00.css"
+        "/build/indexDark.2e1d2368.css"
       ]
     },
     "loginDark": {
@@ -102,7 +102,7 @@
         "/build/indexBright.e2d86f05.js"
       ],
       "css": [
-        "/build/indexBright.b2a68e00.css"
+        "/build/indexBright.de3eda45.css"
       ]
     },
     "loginBright": {
@@ -111,7 +111,7 @@
         "/build/loginBright.21474040.js"
       ],
       "css": [
-        "/build/loginBright.5e534656.css"
+        "/build/loginBright.02e4f58b.css"
       ]
     },
     "sidebarBright": {
@@ -120,7 +120,7 @@
         "/build/sidebarBright.dc250485.js"
       ],
       "css": [
-        "/build/sidebarBright.b755c685.css"
+        "/build/sidebarBright.76468470.css"
       ]
     }
   }
