@@ -35,9 +35,9 @@ Encore
     .addEntry('loginDark', './assets/styles/loginDark.css')
     .addEntry('sidebarDark', './assets/styles/sidebarDark.css')
 
-    .addEntry('index', './assets/styles/index.css')
-    .addEntry('login', './assets/styles/login.css')
-    .addEntry('sidebar', './assets/styles/sidebar.css')
+    .addEntry('indexBright', './assets/styles/indexBright.css')
+    .addEntry('loginBright', './assets/styles/loginBright.css')
+    .addEntry('sidebarBright', './assets/styles/sidebarBright.css')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

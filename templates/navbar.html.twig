@@ -1,5 +1,14 @@
 {% block stylesheets %}
-    {{ encore_entry_link_tags('sidebar') }}
+    {% if templateStyle == 'white' %}
+        {{ encore_entry_link_tags('sidebar') }}
+
+    {% elseif templateStyle == 'dark' %}
+        {{ encore_entry_link_tags('sidebarDark') }}
+    {% else %}
+        {{ encore_entry_link_tags('sidebarBright') }}
+    {% endif %}
+
+
 {% endblock %}
 {% block javascripts %}
     {{ encore_entry_script_tags('sidebarjs') }}

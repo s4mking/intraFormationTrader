@@ -4,14 +4,53 @@
       "js": [
         "/build/runtime.js",
         "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_function-bind-5e17a2.js",
-        "/build/vendors-node_modules_core-js_internals_array-iteration_js-node_modules_core-js_internals_arra-f33d69.js",
-        "/build/vendors-node_modules_core-js_internals_a-constructor_js-node_modules_core-js_internals_check--026e63.js",
-        "/build/vendors-node_modules_swup_fade-theme_lib_index_js-node_modules_swup_slide-theme_lib_index_js--bc493e.js",
+        "/build/vendors-node_modules_core-js_internals_array-iteration_js-node_modules_core-js_internals_dom--a748be.js",
+        "/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_symfony_ux-swup_dist_-6b8e89.js",
         "/build/app.js"
       ],
       "css": [
-        "/build/vendors-node_modules_swup_fade-theme_lib_index_js-node_modules_swup_slide-theme_lib_index_js--bc493e.css",
+        "/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_symfony_ux-swup_dist_-6b8e89.css",
         "/build/app.css"
+      ]
+    },
+    "sidebarjs": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_function-bind-5e17a2.js",
+        "/build/vendors-node_modules_core-js_internals_array-iteration_js-node_modules_core-js_internals_dom--a748be.js",
+        "/build/sidebarjs.js"
+      ]
+    },
+    "selectall": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_function-bind-5e17a2.js",
+        "/build/selectall.js"
+      ]
+    },
+    "operations": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_function-bind-5e17a2.js",
+        "/build/vendors-node_modules_core-js_modules_es_array_push_js-node_modules_core-js_modules_es_json_st-63d8f3.js",
+        "/build/operations.js"
+      ]
+    },
+    "loginjs": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_function-bind-5e17a2.js",
+        "/build/vendors-node_modules_core-js_modules_es_array_for-each_js-node_modules_core-js_modules_es_fun-b97408.js",
+        "/build/loginjs.js"
+      ]
+    },
+    "index": {
+      "js": [
+        "/build/runtime.js",
+        "/build/index.js"
+      ],
+      "css": [
+        "/build/index.css"
       ]
     },
     "login": {
@@ -32,45 +71,31 @@
         "/build/sidebar.css"
       ]
     },
-    "sidebarjs": {
+    "indexDark": {
       "js": [
         "/build/runtime.js",
-        "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_function-bind-5e17a2.js",
-        "/build/vendors-node_modules_core-js_internals_array-iteration_js-node_modules_core-js_internals_arra-f33d69.js",
-        "/build/sidebarjs.js"
-      ]
-    },
-    "selectall": {
-      "js": [
-        "/build/runtime.js",
-        "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_function-bind-5e17a2.js",
-        "/build/selectall.js"
-      ]
-    },
-    "operations": {
-      "js": [
-        "/build/runtime.js",
-        "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_function-bind-5e17a2.js",
-        "/build/vendors-node_modules_core-js_internals_a-constructor_js-node_modules_core-js_internals_check--026e63.js",
-        "/build/vendors-node_modules_core-js_modules_es_promise_js.js",
-        "/build/operations.js"
-      ]
-    },
-    "loginjs": {
-      "js": [
-        "/build/runtime.js",
-        "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_function-bind-5e17a2.js",
-        "/build/vendors-node_modules_core-js_modules_es_array_for-each_js-node_modules_core-js_modules_es_fun-b97408.js",
-        "/build/loginjs.js"
-      ]
-    },
-    "index": {
-      "js": [
-        "/build/runtime.js",
-        "/build/index.js"
+        "/build/indexDark.js"
       ],
       "css": [
-        "/build/index.css"
+        "/build/indexDark.css"
+      ]
+    },
+    "loginDark": {
+      "js": [
+        "/build/runtime.js",
+        "/build/loginDark.js"
+      ],
+      "css": [
+        "/build/loginDark.css"
+      ]
+    },
+    "sidebarDark": {
+      "js": [
+        "/build/runtime.js",
+        "/build/sidebarDark.js"
+      ],
+      "css": [
+        "/build/sidebarDark.css"
       ]
     }
   }

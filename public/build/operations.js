@@ -36,7 +36,7 @@ document.querySelector('#removeOperations').addEventListener("click", function (
 },
 /******/ __webpack_require__ => { // webpackRuntimeModules
 /******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-/******/ __webpack_require__.O(0, ["vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_function-bind-5e17a2","vendors-node_modules_core-js_internals_a-constructor_js-node_modules_core-js_internals_check--026e63","vendors-node_modules_core-js_modules_es_promise_js"], () => (__webpack_exec__("./assets/script/operations.js")));
+/******/ __webpack_require__.O(0, ["vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_function-bind-5e17a2","vendors-node_modules_core-js_modules_es_array_push_js-node_modules_core-js_modules_es_json_st-63d8f3"], () => (__webpack_exec__("./assets/script/operations.js")));
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

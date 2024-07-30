@@ -3,14 +3,15 @@
 {% block title %}Mon compte{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
-    {{ encore_entry_link_tags('login') }}
 {% endblock %}
 {% block body %}
-
-        {{ form_start(contactForm, {'attr': {'class': 'form-contact'}}) }}
+<div class="d-flex justify-content-center">
+    <div class="login-card">
+        {{ form_start(contactForm, {'attr': {'class': 'formcontact'}}) }}
     <img src="{{ asset('uploads/mailmessage.png') }}" class="w-25 bg-transparent" id="contactimg">
         {{ form_widget(contactForm) }}
         {{ form_end(contactForm) }}
-
+    </div>
+</div>
 
 {% endblock %}

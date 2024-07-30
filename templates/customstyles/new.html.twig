@@ -3,14 +3,15 @@
 {% block title %}Importer vos images{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
-    {{ encore_entry_link_tags('login') }}
 {% endblock %}
 {% block body %}
-
+<div class="d-flex justify-content-center">
+    <div class="login-card">
     {{ form_start(form, {'attr': {'class': 'form-signin'}}) }}
     <h3>Importer vos images</h3>
 
     {{ form_widget(form) }}
     {{ form_end(form) }}
-
+    </div>
+</div>
 {% endblock %}

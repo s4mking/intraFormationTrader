@@ -5,18 +5,17 @@
     <title>{% block title %}Intra{% endblock %}</title>
     <link rel="icon" type="image/jpg" href="{{ asset('images/favicon.ico') }}">
     {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
         {% if templateStyle == 'white' %}
-            {{ encore_entry_link_tags('app') }}
             {{ encore_entry_link_tags('index') }}
             {{ encore_entry_link_tags('login') }}
 
             {% elseif templateStyle == 'dark' %}
-                {{ encore_entry_link_tags('app') }}
-                {{ encore_entry_link_tags('indexdark') }}
+                {{ encore_entry_link_tags('indexDark') }}
                 {{ encore_entry_link_tags('loginDark') }}
             {% else %}
-                {{ encore_entry_link_tags('app') }}
-                {{ encore_entry_link_tags('index') }}
+                {{ encore_entry_link_tags('indexBright') }}
+                {{ encore_entry_link_tags('loginBright') }}
         {% endif %}
 
     {% endblock %}
