@@ -30,9 +30,7 @@ class UserController extends AbstractController
 
     public function __construct(
         private EntityManagerInterface $entityManager,
-        public OperationHelper         $operationHelper,
-        private readonly CustomStyleRepository $customStyleRepository
-    )
+        public OperationHelper         $operationHelper)
     {
     }
 
@@ -122,8 +120,6 @@ class UserController extends AbstractController
             ],
         ]);
 
-        $customStyle = $this->customStyleRepository->findOneBy([], ['id' => 'DESC']);
-        $styleId = $customStyle->getStyleId();
 
         return $this->render('/home/index.html.twig', [
             'operations' => $operations,
@@ -138,7 +134,6 @@ class UserController extends AbstractController
             'sumUser' => round($sumOperationsBalance['weekly_total'], 3),
             'profitData' => $graphData,
             'progressPercentage' => $progressPercentage,
-            'styleId' => $styleId,
             'chart' => $chart, // Pass the chart to the template
         ]);
     }
