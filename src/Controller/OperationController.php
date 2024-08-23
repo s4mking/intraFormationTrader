@@ -70,6 +70,8 @@ class OperationController extends AbstractController
                     $operation->setProfit($operationDto->profit);
                     $operation->setNetProfit($operationDto->netProfit);
                     $operation->setTransmitter($user);
+                    $operation->setIsVerified(true);
+                    $operation->setIsApproved(true);
                     $sum += floatval($operationDto->profit);
                     $entityManager->persist($operation);
                 }
