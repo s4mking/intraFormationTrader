@@ -55,6 +55,7 @@ class OperationController extends AbstractController
                     if ($row[0] == 'Symbol' || is_null($row[8]) || is_null($row[0])) {
                         continue;
                     }
+
                     $operationDto = new OperationFromCSVDTO($row);
                     $operation = new Operation(
                     );

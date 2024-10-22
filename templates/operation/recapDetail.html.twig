@@ -205,7 +205,6 @@
                             {# `«` arrow  #}
                             <li {{ thisPage == 1 ? 'class="disabled"' }}>
                                 <a class="page-link" href="{{ path('app_dasshboard_detail', {id: user.id, page: thisPage-1 < 1 ? 1 : thisPage-1}) }}">«</a>
-
                             </li>
 
                             {# Render each page number #}
@@ -229,7 +228,7 @@
 
                             {# `»` arrow #}
                             <li {{ thisPage == maxPages ? 'class="disabled"' }}>
-                                <a href="{{ path('app_dasshboard_detail', {id: thisPage+1 <= maxPages ? thisPage+1 : thisPage}) }}">»</a>
+                                <a href="{{ path('app_dasshboard_detail', {id: user.id, page: thisPage+1 <= maxPages ? thisPage+1 : thisPage}) }}">»</a>
                             </li>
                         </ul>
                     {% endif %}
