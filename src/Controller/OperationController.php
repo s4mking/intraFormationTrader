@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Operation;
 use App\Form\CSVFormType;
+use App\Form\CsvUserFormType;
 use App\Form\OperationFormType;
 use App\Form\OperationType;
 use App\Helper\OperationHelper;
@@ -84,6 +85,64 @@ class OperationController extends AbstractController
         }
 
         return $this->render('operation/newcsv.html.twig', [
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/importcsv/user', name: 'app_import_csv_user')]
+    public function importCSVUser(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(CsvUserFormType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+            $reader->setDelimiter(';');
+            $spreadsheet = $reader->load($form->get('file')->getData());
+            $worksheet = $spreadsheet->getActiveSheet();
+            $rows = $worksheet->toArray();
+
+            $sum = 0;
+            foreach ($rows as $row) {
+                if (count($row) == 1) {
+                    $pattern = '/,(?=(?:[^"]*"[^"]*")*[^"]*$)/';
+                    $rowArray = preg_split($pattern, $row[0]);
+                    $row = array_map(function($value) {
+                        return trim($value, '"');
+                    }, $rowArray);
+                }
+                if ($row[0] == 'Symbol' || is_null($row[8]) || is_null($row[0])) {
+                    continue;
+                }
+
+                $operationDto = new OperationFromCSVDTO($row);
+                $operation = new Operation();
+                $operation->setCreatedAt(new \DateTimeImmutable());
+                $operation->setSymbol($operationDto->symbol);
+                $operation->setPosition($operationDto->position);
+                $operation->setType($operationDto->type);
+                $operation->setLots($operationDto->lots);
+                $operation->setOpenPrice($operationDto->openPrice);
+                $operation->setOpenTime($operationDto->openTime);
+                $operation->setClosePrice($operationDto->closePrice);
+                $operation->setCloseTime($operationDto->closeTime);
+                $operation->setProfit($operationDto->profit);
+                $operation->setNetProfit($operationDto->netProfit);
+                $operation->setTransmitter($user);
+                $operation->setIsVerified(true);
+                $operation->setIsApproved(true);
+                $sum += floatval($operationDto->profit);
+                $entityManager->persist($operation);
+            }
+
+            $actualBalance = $user->getAccountBalance();
+            $user->setAccountBalance($actualBalance + $sum);
+            $entityManager->persist($user);
+            $entityManager->flush();
+        }
+
+        return $this->render('operation/newcsv_user.html.twig', [
             'form' => $form,
         ]);
     }

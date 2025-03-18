@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Import CSV{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div>
+        <img src="{{ asset('uploads/file.png') }}" class="mb-2" id="walletimg">
+        <div class="d-flex justify-content-center">
+            <div class="login-card">
+                {{ form_start(form, {'attr': {'class': 'login-form'}}) }}
+                <h3>Importer un fichier CSV</h3>
+                {{ form_row(form.file) }}
+                {{ form_row(form.save) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
