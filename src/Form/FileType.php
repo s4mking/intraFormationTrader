@@ -20,8 +20,13 @@ class FileType extends AbstractType
                 'required' => false,
                 'allow_delete' => false, // Permet de ne pas afficher la case de suppression
                 'download_uri' => false, // Empêche l'affichage du lien de téléchargement
-            ]
-            );
+                'constraints' => [
+                    new \Symfony\Component\Validator\Constraints\File([
+                        'maxSize' => '5M', // Limite à 5 Mo
+                        'maxSizeMessage' => 'Le fichier est trop volumineux. La taille maximale autorisée est de 5 Mo.',
+                    ]),
+                ],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
