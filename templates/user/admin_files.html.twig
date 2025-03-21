@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des fichiers - Admin{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .btn i {
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .btn:hover i {
+            transform: scale(1.2);
+        }
+
+        .btn-view {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-download {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-view:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-download:hover {
+            background-color: #218838;
+        }
+
+        .btn-delete:hover {
+            background-color: #c82333;
+        }
+
+        .file-preview {
+            max-width: 100px;
+            max-height: 100px;
+            object-fit: contain;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h2 class="mb-4 text-center"><i class="fas fa-folder-open"></i> Gestion des fichiers - Admin</h2>
+
+        {% if files is empty %}
+            <p class="text-center">Aucun fichier uploadé.</p>
+        {% else %}
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Utilisateur</th>
+                    <th>Fichier</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for file in files %}
+                    <tr>
+                        <td>{{ file.user.email }}</td>
+                        <td>{{ file.filename }}</td>
+                        <td>
+                            {% set fileUrl = vich_uploader_asset(file, 'file') %}
+                            {% set fileExtension = file.filename|split('.')|last|lower %}
+
+                            {# Visualisation #}
+                            {% if fileExtension in ['jpg', 'jpeg', 'png', 'gif', 'webp'] %}
+                                <a href="{{ fileUrl }}" class="btn btn-sm btn-view" target="_blank">
+                                    <i class="fas fa-eye"></i> Voir
+                                </a>
+                            {% elseif fileExtension == 'pdf' %}
+                                <a href="{{ fileUrl }}" class="btn btn-sm btn-view" target="_blank">
+                                    <i class="fas fa-file-pdf"></i> Voir
+                                </a>
+                            {% else %}
+                                <a href="#" class="btn btn-sm btn-view disabled" title="Visualisation non prise en charge">
+                                    <i class="fas fa-eye"></i> Voir
+                                </a>
+                            {% endif %}
+
+                            {# Téléchargement #}
+                            <a href="{{ fileUrl }}" class="btn btn-sm btn-download" download>
+                                <i class="fas fa-download"></i> Télécharger
+                            </a>
+
+                            {# Suppression #}
+                            <form action="{{ path('app_file_delete', { id: file.id }) }}" method="post" style="display:inline;">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ file.id) }}">
+                                <button type="submit" class="btn btn-sm btn-delete" onclick="return confirm('Voulez-vous vraiment supprimer {{ file.filename }} ?');">
+                                    <i class="fas fa-trash"></i> Supprimer
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+{% endblock %}

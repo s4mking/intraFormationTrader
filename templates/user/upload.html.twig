@@ -1,0 +1,157 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des fichiers{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .btn i {
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .btn:hover i {
+            transform: scale(1.2);
+        }
+
+        .btn-download {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-download:hover {
+            background-color: #218838;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background-color: #c82333;
+        }
+
+        .btn-rename {
+            background-color: #ffc107;
+            color: black;
+        }
+
+        .btn-rename:hover {
+            background-color: #e0a800;
+        }
+
+        .file-list {
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .list-group-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 15px;
+        }
+
+        .btn-action {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .file-preview {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .file-icon {
+            font-size: 30px;
+            color: #555;
+        }
+
+        .rename-input {
+            width: 200px;
+            margin-right: 5px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="text-center">
+        <img src="{{ asset('uploads/file.png') }}" class="mb-2" id="walletimg" style="max-width: 100px;">
+        <div class="d-flex justify-content-center">
+            <div class="login-card">
+                {{ form_start(form, {'attr': {'class': 'login-form'}}) }}
+                <h3>Transmettez vos documents</h3>
+                {{ form_row(form.file) }}
+                <button type="submit" class="btn btn-primary"><i class="fas fa-upload"></i> Envoyer</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success mt-3">{{ message }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="info-box card mt-3 mb-3 p-3 file-list">
+        <h4 class="mb-3 text-center"><i class="fas fa-folder-open"></i> Mes fichiers</h4>
+        {% if userFiles is empty %}
+            <p class="text-center">Aucun fichier uploadé.</p>
+        {% else %}
+            <ul class="list-group">
+                {% for file in userFiles %}
+                    <li class="list-group-item">
+                        <div class="d-flex align-items-center w-50 mr-2">
+                            {# Extraction du nom du fichier sans le chemin #}
+                            {% set filenameOnly = file.filename %}
+                            {% set fileExtension = filenameOnly|split('.')|last|lower %}
+
+                            {# Affichage de l'icône ou de l'aperçu #}
+                            {% if fileExtension in ['jpg', 'jpeg', 'png', 'gif', 'webp'] %}
+                                <img src="{{ vich_uploader_asset(file, 'file') }}" class="file-preview" alt="Aperçu de {{ filenameOnly }}" onerror="this.style.display='none';">
+                            {% elseif fileExtension == 'pdf' %}
+                                <i class="fas fa-file-pdf file-icon text-danger"></i>
+                            {% elseif fileExtension in ['doc', 'docx'] %}
+                                <i class="fas fa-file-word file-icon text-primary"></i>
+                            {% elseif fileExtension in ['xls', 'xlsx'] %}
+                                <i class="fas fa-file-excel file-icon text-success"></i>
+                            {% elseif fileExtension in ['txt'] %}
+                                <i class="fas fa-file-alt file-icon text-secondary"></i>
+                            {% else %}
+                                <i class="fas fa-file file-icon text-dark"></i>
+                            {% endif %}
+
+                            <span class="ms-2 file-name">{{ filenameOnly }}</span>
+                        </div>
+
+                        <div class="btn-action">
+                            {# Formulaire de renommage #}
+                            <form action="{{ path('app_file_rename', { id: file.id }) }}" method="post" class="d-flex align-items-center">
+                                <input type="hidden" name="_token" value="{{ csrf_token('rename' ~ file.id) }}">
+                                <input type="text" name="new_filename" class="form-control rename-input" placeholder="{{ filenameOnly }}" value="{{ filenameOnly|split('.')|first }}">
+                                <button type="submit" class="btn btn-sm btn-rename" title="Renommer">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </form>
+
+                            {# Téléchargement #}
+                            <a href="{{ vich_uploader_asset(file, 'file') }}" class="btn btn-sm btn-download" download="{{ filenameOnly }}" title="Télécharger">
+                                <i class="fas fa-download"></i>
+                            </a>
+
+                            {# Suppression #}
+                            <form action="{{ path('app_file_delete', { id: file.id }) }}" method="post" class="d-inline">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ file.id) }}">
+                                <button type="submit" class="btn btn-sm btn-delete" onclick="return confirm('Voulez-vous vraiment supprimer {{ filenameOnly }} ?');" title="Supprimer">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+{% endblock %}

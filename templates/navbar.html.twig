@@ -35,8 +35,8 @@
         <li class="item {% if app.request.attributes.get('_route') == 'app_request_transaction' %}active{% endif %}" data-toggle="tooltip" data-placement="right" title="Demande de transaction">
             <a href="{{ path('app_request_transaction') }}"><i class="fa fa-handshake"></i> <span class="item-text">Demande de transaction</span></a>
         </li>
-        <li class="item {% if app.request.attributes.get('_route') == 'app_import_csv' %}active{% endif %}" data-toggle="tooltip" data-placement="right" title="Importer CSV">
-            <a href="{{ path('app_import_csv_user') }}"><i class="fa fa-cloud-upload"></i> <span class="item-text">Importer CSV</span></a>
+        <li class="item {% if app.request.attributes.get('_route') == 'app_file_upload' %}active{% endif %}" data-toggle="tooltip" data-placement="right" title="Importer Fichier">
+            <a href="{{ path('app_file_upload') }}"><i class="fa fa-cloud-upload"></i> <span class="item-text">Importer Fichier</span></a>
         </li>
         <li class="item {% if app.request.attributes.get('_route') == 'app_bourse_recap' %}active{% endif %}" data-toggle="tooltip" data-placement="right" title="Bourse">
             <a href="{{ path('app_bourse_recap') }}"><i class="fa-solid fa-sack-dollar"></i> <span class="item-text">Bourse</span></a>
@@ -53,6 +53,9 @@
             </li>
             <li class="item {% if app.request.attributes.get('_route') == 'app_import_csv' %}active{% endif %}" data-toggle="tooltip" data-placement="right" title="Importer CSV">
                 <a href="{{ path('app_import_csv') }}"><i class="fa fa-cloud-upload"></i> <span class="item-text">Importer CSV</span></a>
+            </li>
+            <li class="item {% if app.request.attributes.get('_route') == 'admin_file_list' %}active{% endif %}" data-toggle="tooltip" data-placement="right" title="Demandes en cours">
+                <a href="{{ path('admin_file_list') }}"><i class="fa-solid fa-pause"></i> <span class="item-text">Gestion fichiers</span></a>
             </li>
             <li class="item {% if app.request.attributes.get('_route') == 'app_import_images' %}active{% endif %}" data-toggle="tooltip" data-placement="right" title="Importer Images">
                 <a href="{{ path('app_import_images') }}"><i class="fa fa-upload"></i> <span class="item-text">Importer Images</span></a>

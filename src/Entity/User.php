@@ -25,6 +25,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\OneToMany(targetEntity: File::class, mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private Collection $files;
+
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
@@ -266,6 +269,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setTelephone(?string $telephone): void
     {
         $this->telephone = $telephone;
+    }
+
+    public function getFiles(): Collection
+    {
+        return $this->files;
+    }
+
+    public function addFile(File $file): self
+    {
+        if (!$this->files->contains($file)) {
+            $this->files[] = $file;
+            $file->setUser($this);
+        }
+        return $this;
+    }
+
+    public function removeFile(File $file): self
+    {
+        if ($this->files->removeElement($file)) {
+            if ($file->getUser() === $this) {
+                $file->setUser(null);
+            }
+        }
+        return $this;
     }
 }
 /*#[ORM\GeneratedValue(strategy: 'IDENTITY')]*/

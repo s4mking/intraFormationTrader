@@ -3,13 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\CustomStyle;
+use App\Entity\File;
 use App\Entity\User;
 use App\Form\AccountTypeFormType;
 use App\Form\ContactFormType;
 use App\Form\EditProfileFormType;
+use App\Form\FileType;
 use App\Form\OperationUserFormType;
 use App\Helper\OperationHelper;
 use App\Repository\CustomStyleRepository;
+use App\Repository\FileRepository;
 use App\Repository\OperationRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,6 +27,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 use Symfony\UX\Chartjs\Model\Chart;
+use Vich\UploaderBundle\Storage\StorageInterface;
 
 class UserController extends AbstractController
 {
@@ -377,6 +381,95 @@ class UserController extends AbstractController
                 'thisPage' => $thisPage,
                 'sumUser' => round($sumOperationsBalance['weekly_total'],3)
             ]);
+    }
+
+    #[Route('/upload', name: 'app_file_upload')]
+    public function upload(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $file = new File();
+        $file->setUser($this->getUser());
+        $form = $this->createForm(FileType::class, $file);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($file);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Fichier uploadé avec succès !');
+            return $this->redirectToRoute('app_file_upload');
+        }
+
+        // Récupérer les fichiers de l'utilisateur connecté
+        $userFiles = $entityManager->getRepository(File::class)->findBy(['user' => $this->getUser()]);
+
+        return $this->render('user/upload.html.twig', [
+            'form' => $form->createView(),
+            'userFiles' => $userFiles,
+        ]);
+    }
+
+    #[Route('/delete/{id}', name: 'app_file_delete', methods: ['POST'])]
+    public function delete(File $file, EntityManagerInterface $entityManager, Request $request): Response
+    {
+        if (!$file || $file->getUser() !== $this->getUser()) {
+            throw $this->createNotFoundException('Fichier introuvable ou accès refusé.');
+        }
+
+        if ($this->isCsrfTokenValid('delete' . $file->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($file);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Fichier supprimé avec succès.');
+        }
+
+        return $this->redirectToRoute('app_file_upload');
+    }
+
+    #[Route('/admin/files', name: 'admin_file_list')]
+    public function listFiles(FileRepository $fileRepository): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $files = $fileRepository->findAll();
+        return $this->render('user/admin_files.html.twig', [
+            'files' => $files,
+        ]);
+    }
+
+    #[Route('/file/rename/{id}', name: 'app_file_rename', methods: ['POST'])]
+    public function rename(File $file, Request $request, EntityManagerInterface $entityManager, StorageInterface $storage): Response
+    {
+        if (!$file || $file->getUser() !== $this->getUser()) {
+            throw $this->createNotFoundException('Fichier introuvable ou accès refusé.');
+        }
+
+        $newFilename = $request->request->get('new_filename');
+        if (!empty($newFilename)) {
+            $extension = pathinfo($file->getFilename(), PATHINFO_EXTENSION);
+            $newFilename = preg_replace('/[^a-zA-Z0-9-_]/', '_', $newFilename) . '.' . $extension;
+            $currentFilePath = $storage->resolvePath($file, 'file');
+            $userDirectory = $file->getUserDirectory();
+            if (!$userDirectory) {
+                throw new \RuntimeException('Le dossier utilisateur n\'est pas défini pour ce fichier.');
+            }
+            $basePath = $this->getParameter('kernel.project_dir') . '/public/uploads/files/';
+            $newFilePath = $basePath . $userDirectory . '/' . $newFilename;
+
+            // Vérifier que le fichier existe et que le nouveau chemin n'existe pas encore
+            if (file_exists($currentFilePath) && !file_exists($newFilePath)) {
+                rename($currentFilePath, $newFilePath);
+                $file->setFilename($newFilename);
+                $entityManager->persist($file);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Fichier renommé avec succès.');
+            } else {
+                $this->addFlash('danger', 'Erreur lors du renommage : le fichier n\'existe pas ou le nouveau nom est déjà pris.');
+            }
+        } else {
+            $this->addFlash('danger', 'Le nouveau nom du fichier ne peut pas être vide.');
+        }
+
+        return $this->redirectToRoute('app_file_upload');
     }
 
 }
